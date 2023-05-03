@@ -139,6 +139,12 @@ import ZwaveJSUIEditPage from '../routes/integration/all/zwave-js-ui/edit-page';
 // OpenAI integration
 import OpenAIPage from '../routes/integration/all/openai/index';
 
+// Overkiz
+import OverkizPage from '../routes/integration/all/overkiz/device-page';
+import OverkizEditPage from '../routes/integration/all/overkiz/edit-page';
+import OverkizDiscoverPage from '../routes/integration/all/overkiz/discover-page';
+import OverkizSetupPage from '../routes/integration/all/overkiz/settings-page';
+
 const defaultState = getDefaultState();
 const store = createStore(defaultState);
 
