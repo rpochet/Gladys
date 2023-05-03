@@ -58,9 +58,5 @@
     "key": "lanManager",
     "link": "lan-manager",
     "img": "/assets/integrations/cover/lan-manager.jpg"
-  },
-  {
-    "key": "overkiz",
-    "img": "/assets/integrations/cover/overkiz.jpg"
   }
 ]
