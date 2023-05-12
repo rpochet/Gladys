@@ -66,5 +66,9 @@
   {
     "key": "overkiz",
     "img": "/assets/integrations/cover/overkiz.jpg"
+  },
+  {
+    "key": "sunspec",
+    "img": "/assets/integrations/cover/sunspec.png"
   }
 ]

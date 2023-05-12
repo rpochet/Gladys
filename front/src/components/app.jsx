@@ -145,6 +145,11 @@ import OverkizEditPage from '../routes/integration/all/overkiz/edit-page';
 import OverkizDiscoverPage from '../routes/integration/all/overkiz/discover-page';
 import OverkizSetupPage from '../routes/integration/all/overkiz/settings-page';
 
+// SunSpec integration
+import SunSpecDevicePage from '../routes/integration/all/sunspec/device-page';
+import SunSpecDiscoverPage from '../routes/integration/all/sunspec/discover-page';
+import SunSpecSettingsPage from '../routes/integration/all/sunspec/settings-page';
+
 const defaultState = getDefaultState();
 const store = createStore(defaultState);
 
@@ -280,6 +285,10 @@ const AppRouter = connect(
         <LANManagerDevicePage path="/dashboard/integration/device/lan-manager" />
         <LANManagerDiscoverPage path="/dashboard/integration/device/lan-manager/discover" />
         <LANManagerSettingsPage path="/dashboard/integration/device/lan-manager/config" />
+
+        <SunSpecDevicePage path="/dashboard/integration/device/sunspec" />
+        <SunSpecDiscoverPage path="/dashboard/integration/device/sunspec/discover" />
+        <SunSpecSettingsPage path="/dashboard/integration/device/sunspec/config" />
 
         <GoogleHomeWelcomePage path="/dashboard/integration/communication/googlehome" />
         <GoogleHomeGateway path="/dashboard/integration/device/google-home/authorize" />
