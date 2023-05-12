@@ -8,12 +8,18 @@ const { executeActions } = require('../../../lib/scene/scene.executeActions');
 
 const StateManager = require('../../../lib/state');
 
-const event = new EventEmitter();
-
 // WE ARE SLOWLY MOVING ALL TESTS FROM THIS BIG FILE
 // TO A SMALLER SET OF FILE IN THE "ACTIONS" FOLDER.
 
 describe('scene.executeActions', () => {
+  let event;
+  let stateManager;
+
+  beforeEach(() => {
+    event = new EventEmitter();
+    stateManager = new StateManager(event);
+  });
+
   it('should execute light turn on', async () => {
     const deviceFeature = {
       category: DEVICE_FEATURE_CATEGORIES.LIGHT,
@@ -27,7 +33,6 @@ describe('scene.executeActions', () => {
         type: DEVICE_FEATURE_TYPES.LIGHT.BINARY,
       },
     };
-    const stateManager = new StateManager(event);
     stateManager.setState('deviceById', 'light-1', device);
     stateManager.setState('deviceFeature', 'light-1-binary', deviceFeature);
     await executeActions(
@@ -57,7 +62,6 @@ describe('scene.executeActions', () => {
         type: DEVICE_FEATURE_TYPES.LIGHT.BINARY,
       },
     };
-    const stateManager = new StateManager(event);
     stateManager.setState('deviceById', 'light-1', device);
     stateManager.setState('deviceFeature', 'light-1-binary', deviceFeature);
     await executeActions(
@@ -88,7 +92,6 @@ describe('scene.executeActions', () => {
         type: DEVICE_FEATURE_TYPES.LIGHT.BINARY,
       },
     };
-    const stateManager = new StateManager(event);
     stateManager.setState('deviceById', 'light-1', device);
     stateManager.setState('deviceFeature', 'light-1-binary', deviceFeature);
     await executeActions(
@@ -119,7 +122,6 @@ describe('scene.executeActions', () => {
         type: DEVICE_FEATURE_TYPES.LIGHT.BINARY,
       },
     };
-    const stateManager = new StateManager(event);
     stateManager.setState('deviceById', 'light-1', device);
     stateManager.setState('deviceFeature', 'light-1-binary', deviceFeature);
     await executeActions(
@@ -149,7 +151,6 @@ describe('scene.executeActions', () => {
         type: DEVICE_FEATURE_TYPES.SWITCH.BINARY,
       },
     };
-    const stateManager = new StateManager(event);
     stateManager.setState('deviceById', 'switch-1', device);
     stateManager.setState('deviceFeature', 'switch-1-binary', deviceFeature);
     await executeActions(
@@ -179,7 +180,6 @@ describe('scene.executeActions', () => {
         type: DEVICE_FEATURE_TYPES.SWITCH.BINARY,
       },
     };
-    const stateManager = new StateManager(event);
     stateManager.setState('deviceById', 'switch-1', device);
     stateManager.setState('deviceFeature', 'switch-1-binary', deviceFeature);
     await executeActions(
@@ -210,9 +210,8 @@ describe('scene.executeActions', () => {
         type: DEVICE_FEATURE_TYPES.SWITCH.BINARY,
       },
     };
-    const stateManager = new StateManager(event);
     stateManager.setState('deviceById', 'switch-1', device);
-    stateManager.setState('deviceFeature', 'switch-1-binary', deviceFeature);
+    stateManager.setState('deviceFeature', 'switch-1-binary', deviceFeature)
     await executeActions(
       { stateManager, event, device },
       [
@@ -241,7 +240,6 @@ describe('scene.executeActions', () => {
         type: DEVICE_FEATURE_TYPES.SWITCH.BINARY,
       },
     };
-    const stateManager = new StateManager(event);
     stateManager.setState('deviceById', 'switch-1', device);
     stateManager.setState('deviceFeature', 'switch-1-binary', deviceFeature);
     await executeActions(
@@ -257,6 +255,31 @@ describe('scene.executeActions', () => {
       {},
     );
     assert.calledOnceWithExactly(device.setValue, device, deviceFeature, 0);
+  });
+  it('should execute switch toggle error', async () => {
+    const device = {
+      setValue: fake.resolves(null),
+      features: {
+        category: DEVICE_FEATURE_CATEGORIES.SWITCH,
+        type: DEVICE_FEATURE_TYPES.SWITCH.BINARY,
+        find: fake.throws('An error occured'),
+      },
+    };
+
+    stateManager.setState('device', 'switch-1', device);
+    await executeActions(
+      { stateManager, event, device },
+      [
+        [
+          {
+            type: ACTIONS.SWITCH.TOGGLE,
+            devices: ['switch-1'],
+          },
+        ],
+      ],
+      {},
+    );
+    assert.notCalled(device.setValue);
   });
   it('should execute wait 5 ms', async () => {
     await executeActions(
@@ -322,7 +345,6 @@ describe('scene.executeActions', () => {
     const deviceFeatureSwitch = {
       device_id: 'device',
     };
-    const stateManager = new StateManager(event);
     stateManager.setState('deviceById', 'device', device);
     stateManager.setState('deviceFeature', 'light-1-binary', deviceFeatureLight);
     stateManager.setState('deviceFeature', 'switch-1-binary', deviceFeatureSwitch);
@@ -362,7 +384,7 @@ describe('scene.executeActions', () => {
     const light = {
       turnOn: fake.resolves(null),
     };
-    const stateManager = new StateManager(event);
+
     stateManager.setState('device', 'light-1', light);
     const promise = executeActions(
       { stateManager, event },
@@ -382,7 +404,7 @@ describe('scene.executeActions', () => {
     const example = {
       stop: fake.resolves(null),
     };
-    const stateManager = new StateManager(event);
+
     stateManager.setState('service', 'example', example);
     stateManager.setState('deviceFeature', 'my-device-feature', {
       device_id: 'device-id',
@@ -421,7 +443,7 @@ describe('scene.executeActions', () => {
     const example = {
       stop: fake.resolves(null),
     };
-    const stateManager = new StateManager(event);
+
     stateManager.setState('service', 'example', example);
     stateManager.setState('device', 'my-device', {
       id: 'device-id',
@@ -468,9 +490,145 @@ describe('scene.executeActions', () => {
       1,
     );
   });
+  it('should execute action device.setValue (with value=0)', async () => {
+    const example = {
+      stop: fake.resolves(null),
+    };
+
+    stateManager.setState('service', 'example', example);
+    stateManager.setState('device', 'my-device', {
+      id: 'device-id',
+      features: [
+        {
+          category: 'light',
+          type: 'binary',
+        },
+      ],
+    });
+    const device = {
+      setValue: fake.resolves(null),
+    };
+    await executeActions(
+      { stateManager, event, device },
+      [
+        [
+          {
+            type: ACTIONS.DEVICE.SET_VALUE,
+            device: 'my-device',
+            feature_category: 'light',
+            feature_type: 'binary',
+            value: 0,
+          },
+        ],
+      ],
+      {},
+    );
+    assert.calledWith(
+      device.setValue,
+      {
+        id: 'device-id',
+        features: [
+          {
+            category: 'light',
+            type: 'binary',
+          },
+        ],
+      },
+      {
+        category: 'light',
+        type: 'binary',
+      },
+      0,
+    );
+  });
+  it('should execute action device.setValue with evaluable value', async () => {
+    const example = {
+      stop: fake.resolves(null),
+    };
+
+    stateManager.setState('service', 'example', example);
+    stateManager.setState('device', 'my-device', {
+      id: 'device-id',
+      features: [
+        {
+          category: 'light',
+          type: 'binary',
+        },
+      ],
+    });
+    const device = {
+      setValue: fake.resolves(null),
+    };
+    await executeActions(
+      { stateManager, event, device },
+      [
+        [
+          {
+            type: ACTIONS.DEVICE.SET_VALUE,
+            device: 'my-device',
+            feature_category: 'light',
+            feature_type: 'binary',
+            evaluate_value: '0 + 1',
+          },
+        ],
+      ],
+      {},
+    );
+    assert.calledWith(
+      device.setValue,
+      {
+        id: 'device-id',
+        features: [
+          {
+            category: 'light',
+            type: 'binary',
+          },
+        ],
+      },
+      {
+        category: 'light',
+        type: 'binary',
+      },
+      1,
+    );
+  });
+  it('should abort scene value is not valid number in device.setValue', async () => {
+    const example = {
+      stop: fake.resolves(null),
+    };
+
+    stateManager.setState('service', 'example', example);
+    stateManager.setState('device', 'my-device', {
+      id: 'device-id',
+      features: [
+        {
+          category: 'light',
+          type: 'binary',
+        },
+      ],
+    });
+    const device = {
+      setValue: fake.resolves(null),
+    };
+    const promise = executeActions(
+      { stateManager, event, device },
+      [
+        [
+          {
+            type: ACTIONS.DEVICE.SET_VALUE,
+            device: 'my-device',
+            feature_category: 'light',
+            feature_type: 'binary',
+            value: 'wrong_string',
+          },
+        ],
+      ],
+      {},
+    );
+    return chaiAssert.isRejected(promise, AbortScene, 'ACTION_VALUE_NOT_A_NUMBER');
+  });
 
   it('should execute action user.setSeenAtHome', async () => {
-    const stateManager = new StateManager(event);
     const house = {
       userSeen: fake.resolves(null),
     };
@@ -491,7 +649,6 @@ describe('scene.executeActions', () => {
     assert.calledWith(house.userSeen, 'my-house', 'john');
   });
   it('should execute action user.setLeftHome', async () => {
-    const stateManager = new StateManager(event);
     const house = {
       userLeft: fake.resolves(null),
     };
@@ -512,7 +669,6 @@ describe('scene.executeActions', () => {
     assert.calledWith(house.userLeft, 'my-house', 'john');
   });
   it('should execute action user.checkPresence and not call userLeft because user was seen', async () => {
-    const stateManager = new StateManager(event);
     stateManager.setState('deviceFeature', 'my-device', {
       last_value_changed: Date.now(),
     });
@@ -539,7 +695,6 @@ describe('scene.executeActions', () => {
     assert.notCalled(house.userLeft);
   });
   it('should execute action user.checkPresence and call userLeft because user was not seen', async () => {
-    const stateManager = new StateManager(event);
     stateManager.setState('deviceFeature', 'my-device', {
       last_value_changed: Date.now() - 15 * 60 * 1000,
     });
@@ -567,7 +722,6 @@ describe('scene.executeActions', () => {
   });
 
   it('should abort scene, house empty is not verified', async () => {
-    const stateManager = new StateManager(event);
     const house = {
       isEmpty: fake.resolves(false),
     };
@@ -587,7 +741,6 @@ describe('scene.executeActions', () => {
     return chaiAssert.isRejected(promise, AbortScene);
   });
   it('should finish, house empty is verified', async () => {
-    const stateManager = new StateManager(event);
     const house = {
       isEmpty: fake.resolves(true),
     };
@@ -606,7 +759,6 @@ describe('scene.executeActions', () => {
     );
   });
   it('should abort scene, house not empty is not verified', async () => {
-    const stateManager = new StateManager(event);
     const house = {
       isEmpty: fake.resolves(true),
     };
@@ -626,7 +778,6 @@ describe('scene.executeActions', () => {
     return chaiAssert.isRejected(promise, AbortScene);
   });
   it('should finish scene, house not empty is verified', async () => {
-    const stateManager = new StateManager(event);
     const house = {
       isEmpty: fake.resolves(false),
     };
@@ -646,8 +797,6 @@ describe('scene.executeActions', () => {
   });
 
   it('should execute action scene.start', async () => {
-    const stateManager = new StateManager(event);
-
     const execute = fake.resolves(undefined);
 
     const scope = {
@@ -674,8 +823,6 @@ describe('scene.executeActions', () => {
   });
 
   it('should not execute action scene.start when the scene has already been called as part of this chain', async () => {
-    const stateManager = new StateManager(event);
-
     const execute = fake.resolves(undefined);
 
     const scope = {
