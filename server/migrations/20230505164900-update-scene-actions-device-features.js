@@ -41,23 +41,29 @@ module.exports = {
                       }),
                     ),
                   );
-                  const deviceIds = devices
-                    .filter(device => device !== undefined)
-                    .map((device) => device.id);
-                  const deviceFeatures = await Promise.all(
-                    deviceIds.map(async (deviceId) =>
-                      db.DeviceFeature.findOne({
-                        where: {
-                          device_id: deviceId,
-                          category,
-                          type,
-                        },
-                      }),
-                    ),
-                  );
-                  action.device_features = deviceFeatures.map((deviceFeature) => deviceFeature.selector);
-                  delete action.devices;
-                  actionsModified = true;
+                  
+                  devices.forEach((device) => console.log(device));
+
+                  try {
+                    const deviceIds = devices.filter(device => device !== undefined).map((device) => device.id);
+
+                    const deviceFeatures = await Promise.all(
+                      deviceIds.map(async (deviceId) =>
+                        db.DeviceFeature.findOne({
+                          where: {
+                            device_id: deviceId,
+                            category,
+                            type,
+                          },
+                        }),
+                      ),
+                    );
+                    action.device_features = deviceFeatures.map((deviceFeature) => deviceFeature.selector);
+                    delete action.devices;
+                    actionsModified = true;
+                  } catch (e) {
+                    console.err(e);
+                  }
                 }
               }
               return action;
