@@ -41,12 +41,9 @@ module.exports = {
                       }),
                     ),
                   );
-                  
-                  devices.forEach((device) => console.log(device));
 
-                  try {
-                    const deviceIds = devices.filter(device => device !== undefined).map((device) => device.id);
-
+                  const deviceIds = devices.filter((device) => device).map((device) => device.id);
+                  if(deviceIds && deviceIds.length > 0) {
                     const deviceFeatures = await Promise.all(
                       deviceIds.map(async (deviceId) =>
                         db.DeviceFeature.findOne({
@@ -61,8 +58,6 @@ module.exports = {
                     action.device_features = deviceFeatures.map((deviceFeature) => deviceFeature.selector);
                     delete action.devices;
                     actionsModified = true;
-                  } catch (e) {
-                    console.err(e);
                   }
                 }
               }
