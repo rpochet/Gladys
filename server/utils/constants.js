@@ -51,6 +51,15 @@ const SERVICE_STATUS = {
   ERROR: 'ERROR',
 };
 
+const THERMOSTAT_MODE = {
+  OFF: 0,
+  FROST_PROTECTION: 1,
+  ECO: 2,
+  COMFORT_2: 3,
+  COMFORT_1: 4,
+  COMFORT: 5,
+};
+
 const SYSTEM_VARIABLE_NAMES = {
   DEVICE_STATE_HISTORY_IN_DAYS: 'DEVICE_STATE_HISTORY_IN_DAYS',
   DEVICE_STATE_MONTHLY_AGGREGATES_RETENTION_IN_DAYS: 'DEVICE_STATE_MONTHLY_AGGREGATES_RETENTION_IN_DAYS',
@@ -367,6 +376,7 @@ const DEVICE_FEATURE_CATEGORIES = {
   VOC_SENSOR: 'voc-sensor',
   VOLUME_SENSOR: 'volume-sensor',
   PV: 'pv',
+  TEXT: 'text',
 };
 
 const DEVICE_FEATURE_TYPES = {
@@ -458,6 +468,8 @@ const DEVICE_FEATURE_TYPES = {
     PLAY: 'play',
     PAUSE: 'pause',
     STOP: 'stop',
+    PREVIOUS: 'previous',
+    NEXT: 'next',
     REWIND: 'rewind',
     FORWARD: 'forward',
     RECORD: 'record',
@@ -513,6 +525,7 @@ const DEVICE_FEATURE_TYPES = {
   },
   THERMOSTAT: {
     TARGET_TEMPERATURE: 'target-temperature',
+    MODE: 'mode',
   },
   AIRQUALITY_SENSOR: {
     AQI: 'aqi',
@@ -522,6 +535,9 @@ const DEVICE_FEATURE_TYPES = {
     ENERGY: 'energy',
     VOLTAGE: 'voltage',
     CURRENT: 'current',
+  },
+  TEXT: {
+    TEXT: 'text',
   },
 };
 
@@ -759,6 +775,8 @@ const ACTIONS_STATUS = {
 };
 
 const DEVICE_POLL_FREQUENCIES = {
+  EVERY_10_MINUTES: 10 * 60 * 1000,
+  EVERY_5_MINUTES: 5 * 60 * 1000,
   EVERY_MINUTES: 60 * 1000,
   EVERY_30_SECONDS: 30 * 1000,
   EVERY_10_SECONDS: 10 * 1000,
@@ -853,6 +871,12 @@ const WEBSOCKET_MESSAGE_TYPES = {
   SUNSPEC: {
     CONNECTED: 'sunspec.connected',
     STATUS_CHANGE: 'sunspec.status-change',
+  },
+  OVERKIZ: {
+    CONNECTED: 'overkiz.connected',
+    NEW_DEVICE: 'overkiz.new-device',
+    UPDATE_DEVICE: 'overkiz.update-device',
+    ERROR: 'overkiz.error',
   },
 };
 
@@ -961,6 +985,7 @@ module.exports.ACTIONS_STATUS = ACTIONS_STATUS;
 module.exports.USER_ROLE = USER_ROLE;
 module.exports.AVAILABLE_LANGUAGES = AVAILABLE_LANGUAGES;
 module.exports.SESSION_TOKEN_TYPES = SESSION_TOKEN_TYPES;
+module.exports.THERMOSTAT_MODE = THERMOSTAT_MODE;
 
 module.exports.EVENT_LIST = EVENT_LIST;
 module.exports.LIFE_EVENT_LIST = LIFE_EVENT_LIST;

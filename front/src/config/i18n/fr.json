@@ -241,7 +241,10 @@
         "deviceTitle": "{{name}} - {{type}}",
         "noDevices": "Vous n'avez pas d'appareil dans votre maison ! <br/> Définissez votre appareil dans la page de l'intégration.",
         "addButton": "+",
-        "substractButton": "-"
+        "substractButton": "-",
+        "offMode": "Off",
+        "ecoMode": "Eco",
+        "comfortMode": "Comfort"
       },
       "temperatureInRoom": {
         "editRoomLabel": "Sélectionnez la pièce que vous souhaitez afficher ici.",
@@ -2398,6 +2401,8 @@
       "play": "Lecture",
       "pause": "Pause",
       "stop": "Stop",
+      "previous": "Précédent",
+      "next": "Suivant",
       "record": "Enregistrer"
     },
     "energy-sensor": {
@@ -2460,7 +2465,8 @@
     },
     "thermostat": {
       "shortCategoryName": "Thermostat",
-      "target-temperature": "Température de consigne"
+      "target-temperature": "Température de consigne",
+      "mode": "Mode"
     },
     "airquality-sensor": {
       "shortCategoryName": "Qualité de l'air",
@@ -2472,6 +2478,10 @@
       "current": "Intensité",
       "power": "Puissance",
       "energy": "Energie"
+    },
+    "text": {
+      "shortCategoryName": "Texte",
+      "text": "Texte"
     },
     "unknown": {
       "shortCategoryName": "Inconnu",

@@ -241,7 +241,10 @@
         "deviceTitle": "{{name}} - {{type}}",
         "noDevices": "Looks you don't have any devices in your house!<br/>Define your device in the integration page.",
         "addButton": "+",
-        "substractButton": "-"
+        "substractButton": "-",
+        "offMode": "Off",
+        "ecoMode": "Eco",
+        "comfortMode": "Comfort"
       },
       "temperatureInRoom": {
         "editRoomLabel": "Select the room you want to display here.",
@@ -2451,6 +2454,8 @@
       "play": "Play",
       "pause": "Pause",
       "stop": "Stop",
+      "previous": "Previous",
+      "next": "Next",
       "record": "Record"
     },
     "energy-sensor": {
@@ -2513,7 +2518,8 @@
     },
     "thermostat": {
       "shortCategoryName": "Thermostat",
-      "target-temperature": "Thermostat Temperature"
+      "target-temperature": "Thermostat Temperature",
+      "mode": "Level"
     },
     "airquality-sensor": {
       "shortCategoryName": "Air Quality",
@@ -2525,6 +2531,10 @@
       "current": "Current",
       "power": "Power",
       "energy": "Energy"
+    },
+    "text": {
+      "shortCategoryName": "Text",
+      "text": "Text"
     },
     "unknown": {
       "shortCategoryName": "Unknown",

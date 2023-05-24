@@ -270,6 +270,11 @@ const AppRouter = connect(
         <HomeKitPage path="/dashboard/integration/communication/homekit" />
         <OpenAIPage path="/dashboard/integration/communication/openai" />
 
+        <OverkizPage path="/dashboard/integration/device/overkiz" />
+        <OverkizEditPage path="/dashboard/integration/device/overkiz/edit-page" />
+        <OverkizDiscoverPage path="/dashboard/integration/device/overkiz/discover-page" />
+        <OverkizSetupPage path="/dashboard/integration/device/overkiz/settings-page" />
+
         <BluetoothDevicePage path="/dashboard/integration/device/bluetooth" />
         <BluetoothEditDevicePage path="/dashboard/integration/device/bluetooth/:deviceSelector" />
         <BluetoothSetupPage path="/dashboard/integration/device/bluetooth/setup" />
