@@ -297,6 +297,11 @@ const AppRouter = connect(
         <LANManagerDiscoverPage path="/dashboard/integration/device/lan-manager/discover" />
         <LANManagerSettingsPage path="/dashboard/integration/device/lan-manager/config" />
 
+        <OverkizPage path="/dashboard/integration/device/overkiz" />
+        <OverkizEditPage path="/dashboard/integration/device/overkiz/edit-page" />
+        <OverkizDiscoverPage path="/dashboard/integration/device/overkiz/discover-page" />
+        <OverkizSetupPage path="/dashboard/integration/device/overkiz/settings-page" />
+        
         <SunSpecDevicePage path="/dashboard/integration/device/sunspec" />
         <SunSpecDiscoverPage path="/dashboard/integration/device/sunspec/discover" />
         <SunSpecSettingsPage path="/dashboard/integration/device/sunspec/config" />
