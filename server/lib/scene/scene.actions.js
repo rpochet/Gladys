@@ -69,7 +69,7 @@ const actionsFunc = {
         const deviceFeature = self.stateManager.get('deviceFeature', deviceFeatureSelector);
         if (deviceFeature) {
           const device = self.stateManager.get('deviceById', deviceFeature.device_id);
-          await self.device.setValue(device, deviceFeature, 1);
+          await self.device.setValue(device, deviceFeature, deviceFeature.type === 'binary' ? 1 : 99);
         }
       } catch (e) {
         logger.warn(e);
@@ -95,7 +95,13 @@ const actionsFunc = {
         const deviceFeature = self.stateManager.get('deviceFeature', deviceFeatureSelector);
         if (deviceFeature) {
           const device = self.stateManager.get('deviceById', deviceFeature.device_id);
-          await self.device.setValue(device, deviceFeature, deviceFeature.last_value === 0 ? 1 : 0);
+          let value;
+          if(deviceFeature.last_value === 0) {
+            value = deviceFeature.type === 'binary' ? 1 : 99;
+          } else {
+            value = 0;
+          }
+          await self.device.setValue(device, deviceFeature, value);
         }
       } catch (e) {
         logger.warn(e);
@@ -108,7 +114,7 @@ const actionsFunc = {
         const deviceFeature = self.stateManager.get('deviceFeature', deviceFeatureSelector);
         if (deviceFeature) {
           const device = self.stateManager.get('deviceById', deviceFeature.device_id);
-          await self.device.setValue(device, deviceFeature, 1);
+          await self.device.setValue(device, deviceFeature, deviceFeature.type === 'binary' ? 1 : 99);
         }
       } catch (e) {
         logger.warn(e);
@@ -134,7 +140,13 @@ const actionsFunc = {
         const deviceFeature = self.stateManager.get('deviceFeature', deviceFeatureSelector);
         if (deviceFeature) {
           const device = self.stateManager.get('deviceById', deviceFeature.device_id);
-          await self.device.setValue(device, deviceFeature, deviceFeature.last_value === 0 ? 1 : 0);
+          let value;
+          if(deviceFeature.last_value === 0) {
+            value = deviceFeature.type === 'binary' ? 1 : 99;
+          } else {
+            value = 0;
+          }
+          await self.device.setValue(device, deviceFeature, value);
         }
       } catch (e) {
         logger.warn(e);

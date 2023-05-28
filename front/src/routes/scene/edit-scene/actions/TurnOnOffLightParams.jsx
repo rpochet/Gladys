@@ -12,7 +12,6 @@ class TurnOnOffLight extends Component {
     try {
       const devices = await this.props.httpClient.get('/api/v1/device', {
         device_feature_category: 'light',
-        device_feature_type: 'binary'
       });
       // keep only write lights, not read only
       const deviceFeatureOptions = [];

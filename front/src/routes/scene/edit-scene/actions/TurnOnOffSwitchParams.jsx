@@ -12,7 +12,6 @@ class TurnOnOffSwitch extends Component {
     try {
       const devices = await this.props.httpClient.get('/api/v1/device', {
         device_feature_category: 'switch',
-        device_feature_type: 'binary'
       });
       // keep only write switches, not read only
       const deviceFeatureOptions = [];
