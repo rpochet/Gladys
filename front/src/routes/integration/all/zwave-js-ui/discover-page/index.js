@@ -6,13 +6,15 @@ import NodeTab from './NodeTab';
 import { WEBSOCKET_MESSAGE_TYPES } from '../../../../../../../server/utils/constants';
 
 class ZwaveJSUIDevicePage extends Component {
-  nodeReadyListener = () => this.props.getNodes();
   scanCompleteListener = () => {
     this.props.getStatus();
     this.props.getNodes();
   };
   componentWillMount() {
-    this.props.session.dispatcher.addListener(WEBSOCKET_MESSAGE_TYPES.ZWAVEJSUI.NODE_READY, this.nodeReadyListener);
+    this.props.session.dispatcher.addListener(
+      WEBSOCKET_MESSAGE_TYPES.ZWAVEJSUI.STATUS_CHANGE,
+      this.scanCompleteListener
+    );
     this.props.session.dispatcher.addListener(
       WEBSOCKET_MESSAGE_TYPES.ZWAVEJSUI.SCAN_COMPLETE,
       this.scanCompleteListener
@@ -23,7 +25,10 @@ class ZwaveJSUIDevicePage extends Component {
   }
 
   componentWillUnmount() {
-    this.props.session.dispatcher.removeListener(WEBSOCKET_MESSAGE_TYPES.ZWAVEJSUI.NODE_READY, this.nodeReadyListener);
+    this.props.session.dispatcher.removeListener(
+      WEBSOCKET_MESSAGE_TYPES.ZWAVEJSUI.STATUS_CHANGE,
+      this.scanCompleteListener
+    );
     this.props.session.dispatcher.removeListener(
       WEBSOCKET_MESSAGE_TYPES.ZWAVEJSUI.SCAN_COMPLETE,
       this.scanCompleteListener
