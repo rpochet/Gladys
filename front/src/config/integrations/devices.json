@@ -4,6 +4,11 @@
     "img": "/assets/integrations/cover/zwave.jpg"
   },
   {
+    "key": "zwavejsui",
+    "link": "zwave-js-ui",
+    "img": "/assets/integrations/cover/zwave-js-ui.jpg"
+  },
+  {
     "key": "rtspCamera",
     "link": "rtsp-camera",
     "img": "/assets/integrations/cover/rtsp-camera.jpg"

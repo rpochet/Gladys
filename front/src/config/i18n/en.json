@@ -212,6 +212,7 @@
       "user-presence": "User presence",
       "camera": "Camera",
       "devices-in-room": "Devices in room",
+      "devices": "Devices",
       "chart": "Chart",
       "ecowatt": "Ecowatt (France)",
       "clock": "Clock"
@@ -239,9 +240,13 @@
         "editDeviceFeaturesLabel": "Select the devices you want to display. Only lights / sensors are showed here.",
         "noValue": "No value recorded",
         "deviceTitle": "{{name}} - {{type}}",
-        "noDevices": "Looks you don't have any devices in your house!<br/>Define your device in the integration page.",
         "addButton": "+",
         "substractButton": "-"
+      },
+      "devices": {
+        "editDeviceFeaturesLabel": "Select the devices you want to display.",
+        "editNameLabel": "Widget name",
+        "editNamePlaceholder": "Enter the name of the widget"
       },
       "temperatureInRoom": {
         "editRoomLabel": "Select the room you want to display here.",
@@ -340,8 +345,6 @@
       "title": "Integrations",
       "subtitle": "{{length}} of {{total}} integrations",
       "searchPlaceholder": "Search integrations",
-      "restartButton": "Restart",
-      "stopButton": "Stop",
       "menu": {
         "all": "All integrations",
         "device": "Devices",
@@ -392,7 +395,6 @@
         "scanButton": "Scan network",
         "bridgeButtonNotPressed": "Bridge button not pressed: Please press the button on your Philips Hue bridge and try again.",
         "unknownError": "An unknown error occured. Please try again or contact Gladys community.",
-        "noBridgesConnected": "No bridges connected.",
         "noBridgesFound": "We didn't find any Philips Hue bridges on your network. Are you sure you are connected to the same network as your bridge and your bridge is turned on?"
       },
       "device": {
@@ -675,7 +677,10 @@
       "qrCode": "Scan this QR code from your iOS Home app to add Gladys and all compatible devices.",
       "configurationError": "An error appears while getting settings.",
       "reload": "If you add a device recently on Gladys and it is not on Home app, try to reload the service with this button.",
-      "reloadButton": "Reload"
+      "reloadButton": "Reload",
+      "reset": "If there are any connection problems between your Home app and HomeKit Gladys bridge you can try to reset it by clicking the button below. <b>WARNING</b>, you will need to remove and add the Gladys bridge again to your Home application on your Apple device.",
+      "resetButton": "Reset",
+      "resetError": "An error appears while resetting bridge."
     },
     "owntracks": {
       "title": "Owntracks",
@@ -699,6 +704,124 @@
         "editButton": "Edit",
         "mostRecentValueAt": "Last value received {{mostRecentValueAt}}.",
         "noValueReceived": "No value received."
+      }
+    },
+    "zwavejsui": {
+      "title": "Z-Wave",
+      "description": "Control your Z-Wave devices.",
+      "deviceTab": "Devices",
+      "networkTab": "Network",
+      "settingsTab": "Settings",
+      "discoverTab": "Discover",
+      "documentation": "Z-Wave JS UI documentation",
+      "status": {
+        "error": "Failed to connect to Zwave network",
+        "connected": "Zwave network connected",
+        "notConfigured": "ZwaveJSUI USB dongle is not configured, please go to ",
+        "notEnabled": "ZwaveJSUI is not activated, please go to ",
+        "mqttNotInstalled": "MQTT broker failed to install",
+        "mqttNotRunning": "MQTT broker failed to start",
+        "zwave-js-uiNotInstalled": "ZwaveJSUI failed to install",
+        "zwave-js-uiNotRunning": "ZwaveJSUI failed to start",
+        "zwave-js-uiNotConnected": "ZwaveJSUI failed to connect to MQTT",
+        "settingsPageLink": "USB dongle configuration page",
+        "setupPageLink": "ZwaveJSUI configuration page"
+      },
+      "device": {
+        "title": "Z-Wave Devices",
+        "search": "Search devices",
+        "noDevices": "No Z-Wave devices added yet.",
+        "scanButton": "Scan",
+        "nameLabel": "Name",
+        "roomLabel": "Room",
+        "featuresLabel": "Features",
+        "saveButton": "Save",
+        "deleteButton": "Delete",
+        "editButton": "Edit",
+        "mostRecentValueAt": "Last value received {{mostRecentValueAt}}.",
+        "noValueReceived": "No value received.",
+        "conflictError": "Current device is already in Gladys.",
+        "deviceUpdatedSuccess": "The device was successfully added",
+        "updateDeviceError": "There was an error while creating this device in Gladys."
+      },
+      "discover": {
+        "title": "Z-Wave Devices",
+        "noDeviceDiscovered": "No Z-Wave devices found. Have you correctly configured Zwavejs UI in Settings?",
+        "addNodeButton": "Add",
+        "addNodeSecureButton": "Add Secure",
+        "removeNode": "Remove",
+        "scanButton": "Scan",
+        "manufacturer": "Manufacturer",
+        "name": "Name",
+        "scanInProgressText": "Scan in Progress...",
+        "createDeviceInGladys": "Connect in Gladys",
+        "features": "Features",
+        "params": "Params",
+        "nodeId": "Node",
+        "zwaveNotConfiguredError": "Z-wave is not configured. Please configure ZWave JS UI in settings.",
+        "createDeviceError": "There was an error while creating this device in Gladys.",
+        "conflictError": "A device with this name already exist, please rename the device or delete the existing device.",
+        "deviceCreatedSuccess": "The device was added with success.",
+        "unknowNode": "Unknow node",
+        "sleepingNodeMsg": "Node sleeping or dead. Wake it up then refresh this page.",
+        "createGithubIssue": "Report a bug with this device"
+      },
+      "settings": {
+        "title": "Z-Wave Settings",
+        "description": "This service uses two independent docker containers (MQTT broker and ZwaveJS UI). The administration of ZwaveJS UI is available at following address, user = admin, password = zwave.",
+        "zwave-js-ui": "Zwavejs UI interface",
+        "zwaveJSUIVersionError": "Zwavejs UI version not supported: expected version {{expectedVersion}} but current version is {{currentVersion}}",
+        "securityKeysDescription": "If you are migrating from an existing ZWave network, please enter the 4 security keys of the network. If you are using  ZwaveJS UI, you can found these keys in the administration interface: Section Settings > Z-Wave.",
+        "urlLabel": "Broker URL",
+        "urlPlaceholder": "Ex: mqtt://[mqtt-broker-address]:[port]",
+        "userLabel": "Username",
+        "userPlaceholder": "Enter MQTT broker username",
+        "passwordLabel": "Password",
+        "passwordPlaceholder": "Enter MQTT broker password",
+        "mqttTopicPrefixLabel": "Topic Prefix",
+        "mqttTopicPrefixPlaceholder": "Enter MQTT broker topic prefix",
+        "mqttTopicWithLocationLabel": "Node location in topic",
+        "mqttTopicWithLocationDescription": "Add nodes location to values topic",
+        "s2UnauthenticatedKeyLabel": "S2 Unauthenticated",
+        "s2UnauthenticatedKeyPlaceholder": "Enter S2 Unauthenticated key",
+        "s2AuthenticatedKeyLabel": "S2 Authenticated",
+        "s2AuthenticatedKeyPlaceholder": "Enter S2 Authenticated key",
+        "s2AccessControlKeyLabel": "S2 AccessControlKey",
+        "s2AccessControlKeyPlaceholder": "Enter S2 AccessControl key",
+        "s0LegacyKeyLabel": "S0 LegacyKey",
+        "s0LegacyKeyPlaceholder": "Enter S0 Legacy key",
+        "connectButton": "Connect/Reconnect",
+        "disconnectButton": "Disconnect",
+        "connected": "Zwavejs UI was started with success.",
+        "notConnected": "Zwavejs UI is not connected",
+        "zwaveNotConfiguredError": "Z-wave is not configured. Please configure the Zwavejs UI in settings.",
+        "connecting": "Trying to connect to Z-Wave USB stick...",
+        "zwaveUsbDriverPathLabel": "Select the USB port where your Z-Wave stick is connected",
+        "refreshButton": "Refresh USB list",
+        "error": "An error occured while saving configuration.",
+        "nonDockerEnv": "Gladys is not running on Docker, you cannot install a MQTT broker from here.",
+        "invalidDockerNetwork": "Gladys is under custom installation, to install broker from here, Gladys container should be configured with \"host\" network mode.",
+        "externalZwaveJSUI": "External Zwavejs UI",
+        "containersStatus": "ZwaveJSUI Containers",
+        "serviceStatus": "Zwavejs UI Service Status",
+        "link": "Link",
+        "mqttZwavejsLink": "MQTT - ZwaveJS",
+        "gladysMqttLink": "Gladys - MQTT",
+        "zwave2Mqtt": "Zwavejs UI",
+        "gladys": "Gladys",
+        "mqtt": "MQTT",
+        "status": "Status"
+      },
+      "nodeOperation": {
+        "addNodeInstructions": "You can now include your device following instructions in your device manual.",
+        "removeNodeInstructions": "You can now exclude your device following instructions in your device manual.",
+        "addNodeTitle": "Inclusion Mode",
+        "removeNodeTitle": "Exclusion Mode",
+        "seconds": "seconds remaining",
+        "cancelButton": "Cancel",
+        "noNodeAdded": "No new device discovered, please click on scan button.",
+        "nodeAddedTitle": "A new node was found",
+        "nodeAddedDescription": "Wait a few seconds while we get all of the information from this node..."
       }
     },
     "openWeather": {
@@ -1187,10 +1310,13 @@
   },
   "editScene": {
     "editNamePlaceholder": "Enter a scene name",
+    "descriptionTitle": "Description",
+    "editDescriptionPlaceholder": "Enter a scene description",
     "startButton": "Start",
     "saveButton": "Save",
     "deleteButton": "Delete",
     "duplicateButton": "Duplicate",
+    "moreButton": "More",
     "triggersTitle": "Triggers",
     "newTrigger": "New trigger",
     "addTriggerButton": "Add trigger",
@@ -1215,6 +1341,13 @@
       },
       "messageSend": {
         "userLabel": "User",
+        "textLabel": "Message",
+        "textPlaceholder": "Message text",
+        "explanationText": "To inject a variable in the text, press '{{'. To set a variable value, you need to use the 'Get device value' box before this one."
+      },
+      "messageCameraSend": {
+        "userLabel": "User",
+        "cameraLabel": "Camera",
         "textLabel": "Message",
         "textPlaceholder": "Message text",
         "explanationText": "To inject a variable in the text, press '{{'. To set a variable value, you need to use the 'Get device value' box before this one."
@@ -1339,7 +1472,8 @@
         "set-value": "Set device value"
       },
       "message": {
-        "send": "Send Message"
+        "send": "Send Message",
+        "send-camera": "Send a camera image"
       },
       "delay": "Wait",
       "light": {
@@ -1592,7 +1726,6 @@
       "resetPassword": "Reset password",
       "editPreferences": "Edit preferences",
       "resetPasswordButton": "Reset password",
-      "saveButton": "Save",
       "success": "User saved with success !"
     }
   },
@@ -1932,7 +2065,11 @@
     "kilobytes-per-second": "kilobytes per second (kB/s)",
     "megabytes-per-second": "Megabytes per second (MB/s)",
     "gigabytes-per-second": "Gigabytes per second (GB/s)",
-    "aqi": "Air Quality Index"
+    "aqi": "Air Quality Index",
+    "microgram-per-cubic-meter": "Microgram per cubic meter (µg/m³)",
+    "square-centimeter": "Square centimer (cm2)",
+    "square-meter": "Square meter (m2)",
+    "square-kilometer": "Square kilometer (km2)"
   },
   "deviceFeatureUnitShort": {
     "celsius": "°C",
@@ -2004,7 +2141,11 @@
     "kilobytes-per-second": "kB/s",
     "megabytes-per-second": "MB/s",
     "gigabytes-per-second": "GB/s",
-    "aqi": "AQI"
+    "aqi": "AQI",
+    "microgram-per-cubic-meter": "µg/m³",
+    "square-centimeter": "cm2",
+    "square-meter": "m2",
+    "square-kilometer": "km2"
   },
   "deviceFeatureAction": {
     "category": {
@@ -2189,6 +2330,14 @@
       "shortCategoryName": "Soil moisture sensor",
       "decimal": "Soil moisture (decimal)"
     },
+    "pm25-sensor": {
+      "shortCategoryName": "PM2.5 sensor",
+      "decimal": "PM2.5 (decimal)"
+    },
+    "formaldehyd-sensor": {
+      "shortCategoryName": "Formaldehyd sensor",
+      "decimal": "Formaldehyd(decimal)"
+    },
     "vibration-sensor": {
       "shortCategoryName": "Vibration sensor",
       "binary": "Vibrate (yes/no)",
@@ -2310,6 +2459,10 @@
     "text": {
       "shortCategoryName": "Text",
       "text": "Text"
+    },
+    "surface": {
+      "shortCategoryName": "Surface",
+      "decimal": "Surface"
     },
     "unknown": {
       "shortCategoryName": "Unknown",

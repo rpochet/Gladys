@@ -212,6 +212,7 @@
       "user-presence": "Utilisateurs présent",
       "camera": "Caméra",
       "devices-in-room": "Appareils de la pièce",
+      "devices": "Appareils",
       "chart": "Graphique",
       "ecowatt": "Ecowatt ( France )",
       "clock": "Horloge"
@@ -239,9 +240,13 @@
         "editDeviceFeaturesLabel": "Sélectionnez les appareils que vous voulez afficher ici. Seuls les capteurs / et interrupteurs on/off sont supportés.",
         "noValue": "Aucune valeur enregistrée.",
         "deviceTitle": "{{name}} - {{type}}",
-        "noDevices": "Vous n'avez pas d'appareil dans votre maison ! <br/> Définissez votre appareil dans la page de l'intégration.",
         "addButton": "+",
         "substractButton": "-"
+      },
+      "devices": {
+        "editDeviceFeaturesLabel": "Sélectionnez les appareils que vous voulez afficher ici.",
+        "editNameLabel": "Nom du widget",
+        "editNamePlaceholder": "Entrez le nom du widget"
       },
       "temperatureInRoom": {
         "editRoomLabel": "Sélectionnez la pièce que vous souhaitez afficher ici.",
@@ -340,8 +345,6 @@
       "title": "Intégrations",
       "subtitle": "{{length}} de {{total}} intégrations",
       "searchPlaceholder": "Chercher une intégration",
-      "restartButton": "Redémarrer",
-      "stopButton": "Arrêter",
       "menu": {
         "all": "Toutes les intégrations",
         "device": "Appareils",
@@ -518,7 +521,6 @@
         "scanButton": "Recherche sur le réseau",
         "bridgeButtonNotPressed": "Le bouton du pont n'a pas été appuyé : veuillez appuyer sur le bouton de votre pont Philips Hue et réessayer.",
         "unknownError": "Une erreur inconnue s'est produite. Veuillez réessayer ou contacter <a href =\"https://community.gladysassistant.com\">Gladys community</a>.",
-        "noBridgesConnected": "Aucun pont connecté",
         "noBridgesFound": "Nous n'avons trouvé aucun pont Philips Hue sur votre réseau. Êtes-vous sûr que vous êtes connecté au même réseau que votre pont et que celui-ci est sous tension?"
       },
       "device": {
@@ -801,7 +803,10 @@
       "qrCode": "Scannez ce QR code depuis l'application Maison de votre appareil iOS pour ajouter Gladys et tous ses appareils compatibles.",
       "configurationError": "Une erreur est survenue lors de la récupération des paramètres HomeKit",
       "reload": "Si vous avez ajouté récemment un appareil sur Gladys et qu'il n'apparait pas sur votre application Maison, essayez de relancer l'intégration en cliquant sur le bouton ci-dessous.",
-      "reloadButton": "Relancer"
+      "reloadButton": "Relancer",
+      "reset": "En cas de problèmes de connexion entre votre application Maison et le pont Gladys HomeKit vous pouvez essayer de le réinitialiser en cliquant sur le bouton ci-dessous. <b>ATTENTION</b>, vous devrez supprimer et ajouter à nouveau le pont Gladys à votre application Maison sur votre appareil Apple.",
+      "resetButton": "Réinitialiser",
+      "resetError": "Une erreur est survenue pendant la réinitialisation du pont"
     },
     "owntracks": {
       "title": "Owntracks",
@@ -825,6 +830,124 @@
         "editButton": "Editer",
         "mostRecentValueAt": "Dernière valeur reçue {{mostRecentValueAt}}.",
         "noValueReceived": "Aucune valeur reçue."
+      }
+    },
+    "zwavejsui": {
+      "title": "Z-Wave",
+      "description": "Contrôlez vos appareils Z-Wave.",
+      "deviceTab": "Appareils",
+      "networkTab": "Réseau",
+      "settingsTab": "Paramètres",
+      "discoverTab": "Découverte Z-Wave",
+      "documentation": "Documentation Z-Wave JS UI",
+      "status": {
+        "error": "Impossible de se connecter au réseau Zwave",
+        "connected": "Réseau Zwave connecté",
+        "notConfigured": "Aucun dongle USB ZwaveJS UI configuré, veuillez vous rendre sur ",
+        "notEnabled": "Le service ZwaveJS UI n'est pas activé, veuillez vous rendre sur ",
+        "mqttNotInstalled": "Le broker MQTT n'a pas pu être installé.",
+        "mqttNotRunning": "Le broker MQTT n'a pas démarré.",
+        "zwave-js-uiNotInstalled": "ZwaveJS UI n'a pas pu être installé.",
+        "zwave-js-uiNotRunning": "ZwaveJS UI n'a pas démarré.",
+        "zwave-js-uiNotConnected": "ZwaveJS UI n'a pas réussi à se connecter au broker MQTT",
+        "settingsPageLink": "la page de paramétrage du dongle USB",
+        "setupPageLink": "la page de configuration de ZwaveJSUI"
+      },
+      "device": {
+        "title": "Appareils Z-Wave",
+        "search": "Chercher un appareil",
+        "noDevices": "Aucun appareil Z-Wave n'a encore été ajouté.",
+        "scanButton": "Rechercher",
+        "nameLabel": "Nom",
+        "roomLabel": "Pièce",
+        "featuresLabel": "Fonctionnalités",
+        "saveButton": "Sauvegarder",
+        "deleteButton": "Supprimer",
+        "editButton": "Editer",
+        "mostRecentValueAt": "Dernière valeur reçue {{mostRecentValueAt}}.",
+        "noValueReceived": "Aucune valeur reçue.",
+        "conflictError": "L'appareil actuel est déjà dans Gladys.",
+        "deviceUpdatedSuccess": "L'appareil a été ajouté avec succès.",
+        "updateDeviceError": "Une erreur s'est produite lors de la création de cet appareil dans Gladys."
+      },
+      "discover": {
+        "title": "Appareils Z-Wave",
+        "noDeviceDiscovered": "Aucun appareil Z-Wave trouvé. Avez-vous correctement configuré Zwavejs UI dans les paramètres ?",
+        "addNodeButton": "Ajouter",
+        "addNodeSecureButton": "Ajout sécurisé",
+        "removeNode": "Supprimer",
+        "scanButton": "Recherche",
+        "manufacturer": "Fabricant",
+        "name": "Nom",
+        "scanInProgressText": "Recherche en cours...",
+        "createDeviceInGladys": "Connecter dans Gladys",
+        "features": "Fonctionnalités",
+        "params": "Paramètre",
+        "nodeId": "Noeud",
+        "zwaveNotConfiguredError": "Ce service Z-wave n'est pas configuré. Veuillez configurer le service Zwavejs UI dans les paramètres.",
+        "createDeviceError": "Une erreur s'est produite lors de la création de cet appareil dans Gladys.",
+        "conflictError": "Un appareil avec ce nom existe déjà, merci de renommer cet appareil ou de supprimer l'existant.",
+        "deviceCreatedSuccess": "L'appareil a été ajouté avec succès.",
+        "unknowNode": "Noeud inconnu",
+        "sleepingNodeMsg": "Noeud endormi ou mort. Réveillez le noeud puis rafraîchissez cette page.",
+        "createGithubIssue": "Signaler un bug avec cet appareil"
+      },
+      "settings": {
+        "title": "Paramètres Z-Wave",
+        "description": "Ce service utilise deux containers Docker (MQTT broker and ZwaveJS UI). L'interface ZwaveJS UI est disponible à l'URL ci-dessous avec user = admin, mot de passe = zwave.",
+        "zwave-js-ui": "Zwavejs UI interface",
+        "zwaveJSUIVersionError": "Zwavejs UI version non supportée: version supportée {{expectedVersion}} mais version actuelle est {{currentVersion}} ",
+        "securityKeysDescription": "Si vous migrer un réseau ZWave existant, spécifier ci-dessous les 4 clés de sécurité du réseau. Si vous utilisez ZWave JS UI, vous trouverez ces clés dans l'interface d'administration ZWave JS UI: Section Settings > Z-Wave.",
+        "urlLabel": "URL du broker",
+        "urlPlaceholder": "Ex: mqtt://[adresse-broker-mqtt]:[port]",
+        "userLabel": "Nom d'utilisateur",
+        "userPlaceholder": "Entrez le nom d'utilisateur du broker MQTT",
+        "passwordLabel": "Mot de passe",
+        "passwordPlaceholder": "Entrez le mot de passe du broker MQTT",
+        "mqttTopicPrefixLabel": "Topic Préfix",
+        "mqttTopicPrefixPlaceholder": "Entrez le préfix du topic MQTT à écouter",
+        "mqttTopicWithLocationLabel": "Topic avec localisation",
+        "mqttTopicWithLocationDescription": "La topic contient l'endroit où se trouve le noeud",
+        "s2UnauthenticatedKeyLabel": "S2 Unauthenticated",
+        "s2UnauthenticatedKeyPlaceholder": "Entrez la clé S2 Unauthenticated",
+        "s2AuthenticatedKeyLabel": "S2 Authenticated",
+        "s2AuthenticatedKeyPlaceholder": "Entrez la clé S2 Authenticated",
+        "s2AccessControlKeyLabel": "S2 AccessControl",
+        "s2AccessControlKeyPlaceholder": "Entrez la clé S2 AccessControl",
+        "s0LegacyKeyLabel": "S0 LegacyKey",
+        "s0LegacyKeyPlaceholder": "Entrez la clé S0 Legacy",
+        "connectButton": "Connecter/Reconnecter",
+        "disconnectButton": "Déconnecter",
+        "connected": "Zwavejs UI démarré avec succès.",
+        "notConnected": "Zwavejs UI n'est pas connecté",
+        "zwaveNotConfiguredError": "Ce service Z-wave n'est pas configuré. Veuillez configurer Zwavejs UI dans les paramètres.",
+        "connecting": "Tentative de connexion à la clé USB Z-Wave...",
+        "zwaveUsbDriverPathLabel": "Sélectionnez le port USB auquel votre clé Z-Wave est connecté",
+        "refreshButton": "Rafraîchir la liste des appareils USB",
+        "error": "Une erreur s'est produite au démarrage du service Zwavejs UI.",
+        "nonDockerEnv": "Gladys ne s'exécute actuellement pas dans Docker, il est impossible d'activer ZwaveJSUI depuis Gladys.",
+        "invalidDockerNetwork": "Gladys est basée sur une installation personalisée, pour installer ZwaveJSUI depuis cette page, le conteneur Docker de Gladys doit être démarré avec l'option \"network=host\".",
+        "externalZwaveJSUI": "ZwaveJS UI externe",
+        "containersStatus": "Conteneurs liés à Zwavejs UI",
+        "serviceStatus": "Etat du service Zwavejs UI",
+        "link": "Lien",
+        "mqttZwavejsLink": "MQTT - ZwaveJS",
+        "gladysMqttLink": "Gladys - MQTT",
+        "zwave2Mqtt": "Zwavejs UI",
+        "gladys": "Gladys",
+        "mqtt": "MQTT",
+        "status": "Status"
+      },
+      "nodeOperation": {
+        "addNodeInstructions": "Vous pouvez maintenant inclure votre appareil en suivant les instructions du manuel de celui-ci.",
+        "removeNodeInstructions": "Vous pouvez désormais exclure votre appareil en suivant les instructions du manuel de celui-ci.",
+        "addNodeTitle": "Mode d'inclusion",
+        "removeNodeTitle": "Mode d'exclusion",
+        "seconds": "secondes restantes",
+        "cancelButton": "Annuler",
+        "noNodeAdded": "Aucun nouvel appareil Z-Wave n'a encore été ajouté, essayez .",
+        "nodeAddedTitle": "Un nouveau nœud a été trouvé",
+        "nodeAddedDescription": "Attendez quelques secondes pendant que nous obtenons toutes les informations de ce nœud..."
       }
     },
     "openWeather": {
@@ -1187,10 +1310,13 @@
   },
   "editScene": {
     "editNamePlaceholder": "Entrez un nom de scène",
+    "descriptionTitle": "Description",
+    "editDescriptionPlaceholder": "Entrez une description pour la scène",
     "startButton": "Démarrer",
     "saveButton": "Sauvegarder",
     "deleteButton": "Supprimer",
     "duplicateButton": "Dupliquer",
+    "moreButton": "Plus",
     "triggersTitle": "Déclencheurs",
     "newTrigger": "Nouveau déclencheur",
     "addTriggerButton": "Ajouter déclencheur",
@@ -1215,6 +1341,13 @@
       },
       "messageSend": {
         "userLabel": "Utilisateur",
+        "textLabel": "Message",
+        "textPlaceholder": "Texte du message",
+        "explanationText": "Pour injecter une variable, tapez '{{'. Attention, vous devez avoir défini une variable auparavant dans une action 'Récupérer le dernier état' placé avant ce bloc message."
+      },
+      "messageCameraSend": {
+        "userLabel": "Utilisateur",
+        "cameraLabel": "Camera",
         "textLabel": "Message",
         "textPlaceholder": "Texte du message",
         "explanationText": "Pour injecter une variable, tapez '{{'. Attention, vous devez avoir défini une variable auparavant dans une action 'Récupérer le dernier état' placé avant ce bloc message."
@@ -1339,7 +1472,8 @@
         "set-value": "Contrôler un appareil"
       },
       "message": {
-        "send": "Envoyer un message"
+        "send": "Envoyer un message",
+        "send-camera": "Envoyer une image de caméra"
       },
       "delay": "Attendre",
       "light": {
@@ -1592,7 +1726,6 @@
       "resetPassword": "Réinitialiser le mot de passe",
       "editPreferences": "Editer les préférences",
       "resetPasswordButton": "Réinitialiser",
-      "saveButton": "Enregistrer",
       "success": "Profil enregistré avec succès !"
     }
   },
@@ -1932,7 +2065,11 @@
     "kilobytes-per-second": "Kilooctets par seconde (Ko/s)",
     "megabytes-per-second": "Megaoctets par seconde (Mo/s)",
     "gigabytes-per-second": "Gigaoctets par seconde (Go/s)",
-    "aqi": "Indice de Qualité de l'Air"
+    "aqi": "Indice de Qualité de l'Air",
+    "microgram-per-cubic-meter": "Microgramme par mètre cube (µg/m³)",
+    "square-centimeter": "Centimètre carré (cm2)",
+    "square-meter": "Mètre carré (m2)",
+    "square-kilometer": "Kilomètre carré (km2)"
   },
   "deviceFeatureUnitShort": {
     "celsius": "°C",
@@ -2004,7 +2141,11 @@
     "kilobytes-per-second": "Ko/s",
     "megabytes-per-second": "Mo/s",
     "gigabytes-per-second": "Go/s",
-    "aqi": "AQI"
+    "aqi": "AQI",
+    "microgram-per-cubic-meter": "µg/m³",
+    "square-centimeter": "cm2",
+    "square-meter": "m2",
+    "square-kilometer": "km2"
   },
   "deviceFeatureAction": {
     "category": {
@@ -2187,7 +2328,15 @@
     },
     "soil-moisture-sensor": {
       "shortCategoryName": "Capteur d'humidité du sol",
-      "decimal": "Humidité du sol (decimal)"
+      "decimal": "Humidité du sol (Décimale)"
+    },
+    "pm25-sensor": {
+      "shortCategoryName": "Capteur de PM2.5",
+      "decimal": "PM2.5 (Décimale)"
+    },
+    "formaldehyd-sensor": {
+      "shortCategoryName": "Formaldehyd sensor",
+      "decimal": "Formaldehyd (Décimale)"
     },
     "vibration-sensor": {
       "shortCategoryName": "Capteur de vibration",
@@ -2310,6 +2459,10 @@
     "text": {
       "shortCategoryName": "Texte",
       "text": "Texte"
+    },
+    "surface": {
+      "shortCategoryName": "Surface",
+      "decimal": "Surface"
     },
     "unknown": {
       "shortCategoryName": "Inconnu",

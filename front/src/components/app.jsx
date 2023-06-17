@@ -43,7 +43,6 @@ import Dashboard from '../routes/dashboard';
 import NewDashboard from '../routes/dashboard/new-dashboard';
 import EditDashboard from '../routes/dashboard/edit-dashboard';
 
-import Device from '../routes/device';
 import IntegrationPage from '../routes/integration';
 import ChatPage from '../routes/chat';
 import MapPage from '../routes/map';
@@ -130,6 +129,13 @@ import EweLinkEditPage from '../routes/integration/all/ewelink/edit-page';
 import EweLinkDiscoverPage from '../routes/integration/all/ewelink/discover-page';
 import EweLinkSetupPage from '../routes/integration/all/ewelink/setup-page';
 
+// ZwaveJSUI
+import ZwaveJSUIDevicePage from '../routes/integration/all/zwave-js-ui/device-page';
+import ZwaveJSUIDeviceOperationPage from '../routes/integration/all/zwave-js-ui/node-operation-page';
+import ZwaveJSUIDiscoverPage from '../routes/integration/all/zwave-js-ui/discover-page';
+import ZwaveJSUISettingsPage from '../routes/integration/all/zwave-js-ui/settings-page';
+import ZwaveJSUIEditPage from '../routes/integration/all/zwave-js-ui/edit-page';
+
 // OpenAI integration
 import OpenAIPage from '../routes/integration/all/openai/index';
 
@@ -197,7 +203,6 @@ const AppRouter = connect(
         <Dashboard path="/dashboard/:dashboardSelector" />
         <EditDashboard path="/dashboard/:dashboardSelector/edit" />
         <NewDashboard path="/dashboard/create/new" />
-        <Device path="/dashboard/device" />
         <IntegrationPage path="/dashboard/integration" />
 
         <IntegrationPage path="/dashboard/integration/device" category="device" />
@@ -262,6 +267,13 @@ const AppRouter = connect(
         <BroadlinkRemoteSetupPage path="/dashboard/integration/device/broadlink/edit" />
         <BroadlinkRemoteSetupPage path="/dashboard/integration/device/broadlink/edit/:deviceSelector" />
         <BroadlinkPeripheralPage path="/dashboard/integration/device/broadlink/peripheral" />
+
+        <ZwaveJSUIDevicePage path="/dashboard/integration/device/zwave-js-ui" />
+        <ZwaveJSUIDevicePage path="/dashboard/integration/device/zwave-js-ui/node" />
+        <ZwaveJSUIDiscoverPage path="/dashboard/integration/device/zwave-js-ui/discover" />
+        <ZwaveJSUISettingsPage path="/dashboard/integration/device/zwave-js-ui/settings" />
+        <ZwaveJSUIDeviceOperationPage path="/dashboard/integration/device/zwave-js-ui/node-operation" />
+        <ZwaveJSUIEditPage path="/dashboard/integration/device/zwave-js-ui/edit/:deviceSelector" />
 
         <LANManagerDevicePage path="/dashboard/integration/device/lan-manager" />
         <LANManagerDiscoverPage path="/dashboard/integration/device/lan-manager/discover" />

@@ -275,6 +275,7 @@ const ACTIONS = {
   },
   MESSAGE: {
     SEND: 'message.send',
+    SEND_CAMERA: 'message.send-camera',
   },
   CONDITION: {
     ONLY_CONTINUE_IF: 'condition.only-continue-if',
@@ -347,6 +348,8 @@ const DEVICE_FEATURE_CATEGORIES = {
   LIGHT_SENSOR: 'light-sensor',
   MOTION_SENSOR: 'motion-sensor',
   OPENING_SENSOR: 'opening-sensor',
+  PM25_SENSOR: 'pm25-sensor',
+  FORMALDEHYD_SENSOR: 'formaldehyd-sensor',
   PRECIPITATION_SENSOR: 'precipitation-sensor',
   PRESENCE_SENSOR: 'presence-sensor',
   PRESSURE_SENSOR: 'pressure-sensor',
@@ -356,6 +359,7 @@ const DEVICE_FEATURE_CATEGORIES = {
   SISMIC_SENSOR: 'sismic-sensor',
   SMOKE_SENSOR: 'smoke-sensor',
   SOIL_MOISTURE_SENSOR: 'soil-moisture-sensor',
+  SURFACE: 'surface',
   SWITCH: 'switch',
   SPEED_SENSOR: 'speed-sensor',
   TELEVISION: 'television',
@@ -432,6 +436,9 @@ const DEVICE_FEATURE_TYPES = {
     BINARY: 'binary',
     MODE: 'mode',
     TARGET_TEMPERATURE: 'target-temperature',
+  },
+  SURFACE: {
+    DECIMAL: 'decimal',
   },
   TELEVISION: {
     BINARY: 'binary',
@@ -559,6 +566,10 @@ const DEVICE_FEATURE_UNITS = {
   CM: 'cm',
   M: 'm',
   KM: 'km',
+  // surface units
+  SQUARE_CENTIMETER: 'square-centimeter',
+  SQUARE_METER: 'square-meter',
+  SQUARE_KILOMETER: 'square-kilometer',
   // Degree units
   DEGREE: 'degree',
   // Volume units
@@ -612,6 +623,8 @@ const DEVICE_FEATURE_UNITS = {
   GIGABYTES_PER_SECOND: 'gigabytes-per-second',
   // Airquality Index
   AQI: 'aqi',
+  // For air quality (pm2.5, formaldehyd)
+  MICROGRAM_PER_CUBIC_METER: 'microgram-per-cubic-meter',
 };
 
 const WEATHER_UNITS = {
@@ -726,6 +739,36 @@ const DEVICE_FEATURE_UNITS_BY_CATEGORY = {
   ],
   [DEVICE_FEATURE_CATEGORIES.THERMOSTAT]: [DEVICE_FEATURE_UNITS.CELSIUS, DEVICE_FEATURE_UNITS.FAHRENHEIT],
   [DEVICE_FEATURE_CATEGORIES.AIRQUALITY_SENSOR]: [DEVICE_FEATURE_UNITS.AQI],
+  [DEVICE_FEATURE_CATEGORIES.PM25_SENSOR]: [DEVICE_FEATURE_UNITS.MICROGRAM_PER_CUBIC_METER],
+  [DEVICE_FEATURE_CATEGORIES.FORMALDEHYD_SENSOR]: [DEVICE_FEATURE_UNITS.MICROGRAM_PER_CUBIC_METER],
+  [DEVICE_FEATURE_CATEGORIES.SURFACE]: [
+    DEVICE_FEATURE_UNITS.SQUARE_CENTIMETER,
+    DEVICE_FEATURE_UNITS.SQUARE_METER,
+    DEVICE_FEATURE_UNITS.SQUARE_KILOMETER,
+  ],
+};
+
+const DEVICE_FEATURE_MINMAX_BY_TYPE = {
+  [DEVICE_FEATURE_TYPES.SENSOR.BINARY]: {
+    MIN: 0,
+    MAX: 1,
+  },
+  [DEVICE_FEATURE_TYPES.SWITCH.POWER]: {
+    MIN: 0,
+    MAX: 10000, // 10 kW
+  },
+  [DEVICE_FEATURE_TYPES.SWITCH.ENERGY]: {
+    MIN: 0,
+    MAX: 100000, // 10 kW during 10000 hour (more than one year)
+  },
+  [DEVICE_FEATURE_TYPES.SWITCH.CURRENT]: {
+    MIN: 0,
+    MAX: 40,
+  },
+  [DEVICE_FEATURE_TYPES.SWITCH.VOLTAGE]: {
+    MIN: 0,
+    MAX: 400,
+  },
 };
 
 const ACTIONS_STATUS = {
@@ -782,6 +825,16 @@ const WEBSOCKET_MESSAGE_TYPES = {
     DOWNLOAD_FINISHED: 'upgrade.download-finished',
     DOWNLOAD_FAILED: 'upgrade.download-failed',
   },
+  ZWAVEJSUI: {
+    DISCOVER: 'zwave-js-ui.discover',
+    STATUS_CHANGE: 'zwave-js-ui.status-change',
+    SCAN_COMPLETE: 'zwave-js-ui.scan-complete',
+    MQTT_ERROR: 'zwave-js-ui.mqtt-error',
+    PERMIT_JOIN: 'zwave-js-ui.permit-join',
+    NODE_READY: 'zwave-js-ui.node-ready',
+    NODE_ADDED: 'zwave-js-ui.node-added',
+    NODE_REMOVED: 'zwave-js-ui.node-removed',
+  },
   LAN: {
     SCANNING: 'lan.scanning',
   },
@@ -829,6 +882,7 @@ const DASHBOARD_BOX_TYPE = {
   USER_PRESENCE: 'user-presence',
   CAMERA: 'camera',
   DEVICES_IN_ROOM: 'devices-in-room',
+  DEVICES: 'devices',
   CHART: 'chart',
   ECOWATT: 'ecowatt',
   CLOCK: 'clock',
@@ -943,6 +997,8 @@ module.exports.DEVICE_FEATURE_UNITS = DEVICE_FEATURE_UNITS;
 module.exports.DEVICE_FEATURE_UNITS_LIST = DEVICE_FEATURE_UNITS_LIST;
 
 module.exports.DEVICE_FEATURE_UNITS_BY_CATEGORY = DEVICE_FEATURE_UNITS_BY_CATEGORY;
+
+module.exports.DEVICE_FEATURE_MINMAX_BY_TYPE = DEVICE_FEATURE_MINMAX_BY_TYPE;
 
 module.exports.SERVICE_STATUS = SERVICE_STATUS;
 module.exports.SERVICE_STATUS_LIST = createList(SERVICE_STATUS);
