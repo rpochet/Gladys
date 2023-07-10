@@ -150,6 +150,13 @@ import SunSpecDevicePage from '../routes/integration/all/sunspec/device-page';
 import SunSpecDiscoverPage from '../routes/integration/all/sunspec/discover-page';
 import SunSpecSettingsPage from '../routes/integration/all/sunspec/settings-page';
 
+// Tuya integration
+import TuyaPage from '../routes/integration/all/tuya/device-page';
+import TuyaEditPage from '../routes/integration/all/tuya/edit-page';
+import TuyaSetupPage from '../routes/integration/all/tuya/setup-page';
+import TuyaDiscoverPage from '../routes/integration/all/tuya/discover-page';
+
+
 const defaultState = getDefaultState();
 const store = createStore(defaultState);
 
@@ -272,6 +279,11 @@ const AppRouter = connect(
         <OverkizEditPage path="/dashboard/integration/device/overkiz/edit-page" />
         <OverkizDiscoverPage path="/dashboard/integration/device/overkiz/discover-page" />
         <OverkizSetupPage path="/dashboard/integration/device/overkiz/settings-page" />
+
+        <TuyaPage path="/dashboard/integration/device/tuya" />
+        <TuyaEditPage path="/dashboard/integration/device/tuya/edit/:deviceSelector" />
+        <TuyaDiscoverPage path="/dashboard/integration/device/tuya/discover" />
+        <TuyaSetupPage path="/dashboard/integration/device/tuya/setup" />
 
         <BluetoothDevicePage path="/dashboard/integration/device/bluetooth" />
         <BluetoothEditDevicePage path="/dashboard/integration/device/bluetooth/:deviceSelector" />
