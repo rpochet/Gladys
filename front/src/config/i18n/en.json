@@ -429,9 +429,12 @@
       "testConnectionButton": "Test connection",
       "saveButton": "Save",
       "deleteButton": "Delete",
-      "rotate180Label": "180° Rotation",
       "saveError": "There was an error saving the camera.",
-      "testConnectionError": "There was an error while getting the RTSP Flux. Are you sure the provided URL is right and accessible from Gladys instance?"
+      "testConnectionError": "There was an error while getting the RTSP Flux. Are you sure the provided URL is right and accessible from Gladys instance?",
+      "rotationO": "No rotation",
+      "rotation90": "90°",
+      "rotation18O": "180°",
+      "rotation27O": "270°"
     },
     "tasmota": {
       "title": "Tasmota",
@@ -833,6 +836,78 @@
       "apiKeyPlaceholder": "Enter OpenWeather API key",
       "saveButton": "Save",
       "instructionsToUse": "To use this integration, go to the dashboard and create a weather box."
+    },
+    "tuya": {
+      "title": "Tuya",
+      "description": "Control your Tuya devices (works with the cloud)",
+      "deviceTab": "Devices",
+      "discoverTab": "Tuya discover",
+      "setupTab": "Setup",
+      "documentation": "Tuya documentation",
+      "discoverDeviceDescr": "Automatically scan Tuya devices",
+      "nameLabel": "Device Name",
+      "namePlaceholder": "Enter the name of your device",
+      "modelLabel": "Model",
+      "roomLabel": "Room",
+      "saveButton": "Save",
+      "updateButton": "Update",
+      "alreadyCreatedButton": "Already created",
+      "deleteButton": "Delete",
+      "unmanagedModelButton": "Model not managed or available",
+      "status": {
+        "notConnected": "Gladys failed to connect to Tuya cloud account, please go to ",
+        "setupPageLink": "Tuya configuration page.",
+        "online": "Online",
+        "offline": "Offline"
+      },
+      "device": {
+        "title": "Devices in Gladys",
+        "updates": "Check updates",
+        "editButton": "Edit",
+        "noDeviceFound": "No Tuya device found.",
+        "featuresLabel": "Features"
+      },
+      "discover": {
+        "title": "Devices detected on your Tuya cloud account",
+        "description": "Tuya devices are automatically discovered. Your eWeLink devices need to be added to your eWeLink cloud account before.",
+        "error": "Error discovering Tuya devices. Please verify your credentials on Setup.",
+        "noDeviceFound": "No Tuya device discovered.",
+        "scan": "Scan"
+      },
+      "setup": {
+        "title": "Tuya configuration",
+        "description": "You can connect Gladys to your Tuya cloud account to control the related devices.",
+        "descriptionCreateAccount": "You need to create an account at <a href=\"https://www.tuya.com/\" target=\"_blank\" rel= \"noopener noreferrer\">Tuya</a>.",
+        "descriptionCreateProject": "You must then create a \"Cloud Project\" in your Tuya account.",
+        "descriptionGetKeys": "You will have access to the Access Key and the Secret Key.",
+        "descriptionGetAppAccountUid": "To have your \"App account UID\", you must go to the \"Devices\" -> \"Link Tuya App Account\" section and add an application account.",
+        "descriptionGetAppAccountUid2": "Once the addition is finalized, your \"App account UID\" will be in the UID column.",
+        "endpoints": {
+          "china": "China",
+          "westernAmerica": "Western America",
+          "easternAmerica": "Eastern America",
+          "centralEurope": "Central Europe",
+          "westernEurope": "Western Europe",
+          "india": "India"
+        },
+        "endpoint": "Endpoint",
+        "accessKey": "Access Key",
+        "accessKeyPlaceholder": "Enter Tuya access key",
+        "secretKey": "Secret Key",
+        "secretKeyPlaceholder": "Enter Tuya secret key",
+        "appAccountId": "App account UID",
+        "appAccountIdPlaceholder": "Enter Tuya application UID",
+        "saveLabel": "Save configuration",
+        "error": "An error occured while saving configuration.",
+        "connecting": "Configuration saved. Now connecting to your Tuya cloud account...",
+        "connected": "Connected to the Tuya cloud account with success !",
+        "connectionError": "Error while connecting, please check your configuration."
+      },
+      "error": {
+        "defaultError": "There was an error saving the device.",
+        "defaultDeletionError": "There was an error deleting the device.",
+        "conflictError": "Current device is already in Gladys."
+      }
     },
     "mqtt": {
       "title": "MQTT",
@@ -2017,8 +2092,8 @@
     "millivolt": "Millivolt (mV)",
     "volt": "Volt (V)",
     "volt-ampere": "Voltampere (VA)",
+    "volt-ampere-reactive": "Voltampere reactive (VAr)",
     "kilovolt-ampere": "Kilovoltampere (kVA)",
-    "volt-ampere-reactive": "Voltampere reactive (var)",
     "mm": "Millimeter (mm)",
     "cm": "Centimeter (cm)",
     "m": "Meter (m)",
@@ -2026,7 +2101,7 @@
     "degree": "Angular degree (°)",
     "liter": "Liter (l)",
     "milliliter": "Milliliter (ml)",
-    "cubicmeter": "Cubic meter (m3)",
+    "cubicmeter": "Cubic meter (m³)",
     "euro": "Euro (€)",
     "dollar": "Dollar ($)",
     "bitcoin": "Bitcoin (₿)",
@@ -2067,9 +2142,9 @@
     "gigabytes-per-second": "Gigabytes per second (GB/s)",
     "aqi": "Air Quality Index",
     "microgram-per-cubic-meter": "Microgram per cubic meter (µg/m³)",
-    "square-centimeter": "Square centimer (cm2)",
-    "square-meter": "Square meter (m2)",
-    "square-kilometer": "Square kilometer (km2)"
+    "square-centimeter": "Square centimer (cm²)",
+    "square-meter": "Square meter (m²)",
+    "square-kilometer": "Square kilometer (km²)"
   },
   "deviceFeatureUnitShort": {
     "celsius": "°C",
@@ -2093,8 +2168,8 @@
     "millivolt": "mV",
     "volt": "V",
     "volt-ampere": "VA",
+    "volt-ampere-reactive": "VAr",
     "kilovolt-ampere": "kVA",
-    "volt-ampere-reactive": "var",
     "mm": "mm",
     "cm": "cm",
     "m": "m",
@@ -2102,7 +2177,7 @@
     "degree": "°",
     "liter": "l",
     "milliliter": "ml",
-    "cubicmeter": "m3",
+    "cubicmeter": "m³",
     "euro": "€",
     "dollar": "$",
     "bitcoin": "₿",
@@ -2143,9 +2218,9 @@
     "gigabytes-per-second": "GB/s",
     "aqi": "AQI",
     "microgram-per-cubic-meter": "µg/m³",
-    "square-centimeter": "cm2",
-    "square-meter": "m2",
-    "square-kilometer": "km2"
+    "square-centimeter": "cm²",
+    "square-meter": "m²",
+    "square-kilometer": "km²"
   },
   "deviceFeatureAction": {
     "category": {
