@@ -190,6 +190,10 @@ function getRoutes(gladys) {
       authenticated: true,
       controller: dashboardController.destroy,
     },
+    'get /api/v1/dashboard/:dashboard_selector/device_feature': {
+      authenticated: true,
+      controller: dashboardController.getDeviceFeaturesBySelector,
+    },
     // device
     'post /api/v1/device': {
       authenticated: true,
