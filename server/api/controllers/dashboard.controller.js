@@ -85,11 +85,32 @@ module.exports = function DashboardController(gladys) {
     });
   }
 
+  /**
+   * @api {get} /api/v1/dashboard/:dashboard_selector/device_feature getDeviceFeaturesBySelector
+   * @apiName getDeviceFeaturesBySelector
+   * @apiGroup Dashboard
+   * @apiUse DashboardSuccess
+   */
+  async function getDeviceFeaturesBySelector(req, res) {
+    const dashboard = await gladys.dashboard.getBySelector(req.user.id, req.params.dashboard_selector);
+    const deviceFeatures = await Promise.all(
+      dashboard.boxes
+        .flat(2) // 2 level array
+        .flatMap((box) => box.device_features)
+        .map(async (selector) => {
+          const deviceFeature = await gladys.device.getFeatureBySelector(selector);
+          return deviceFeature;
+        }),
+    );
+    res.json(deviceFeatures);
+  }
+
   return Object.freeze({
     create: asyncMiddleware(create),
     destroy: asyncMiddleware(destroy),
     get: asyncMiddleware(get),
     getBySelector: asyncMiddleware(getBySelector),
+    getDeviceFeaturesBySelector: asyncMiddleware(getDeviceFeaturesBySelector),
     update: asyncMiddleware(update),
     updateOrder: asyncMiddleware(updateOrder),
   });
