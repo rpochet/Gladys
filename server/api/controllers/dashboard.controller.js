@@ -95,14 +95,12 @@ module.exports = function DashboardController(gladys) {
     const dashboard = await gladys.dashboard.getBySelector(req.user.id, req.params.dashboard_selector);
     const deviceFeatures = await Promise.all(
       dashboard.boxes
-        .flat(2)
-        .flatMap(b => 
-          b.device_features
-        )
-        .map(async d => {
-          const df = await gladys.device.getFeatureBySelector(d);
-          return df;
-        })
+        .flat(2) // 2 level array
+        .flatMap((box) => box.device_features)
+        .map(async (selector) => {
+          const deviceFeature = await gladys.device.getFeatureBySelector(selector);
+          return deviceFeature;
+        }),
     );
     res.json(deviceFeatures);
   }
