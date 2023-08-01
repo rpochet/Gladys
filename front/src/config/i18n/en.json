@@ -46,7 +46,18 @@
   "device": {
     "searchPlaceHolder": "Search devices",
     "noFeatures": "No features",
-    "tooMuchStatesToDelete": "This device has {{count}} states in database. To prevent your Gladys instance to be slow while deleting them, we've started a delete of those states slowly in background. You can come back to delete this device later when the device will not have any states anymore. To follow the delete job, <a href=\"/dashboard/settings/jobs\">click here</a>."
+    "tooMuchStatesToDelete": "This device has {{count}} states in database. To prevent your Gladys instance to be slow while deleting them, we've started a delete of those states slowly in background. You can come back to delete this device later when the device will not have any states anymore. To follow the delete job, <a href=\"/dashboard/settings/jobs\">click here</a>.",
+    "noNameLabel": "No name",
+    "nameLabel": "Name",
+    "roomLabel": "Room",
+    "featuresLabel": "Features",
+    "saveButton": "Save",
+    "deleteButton": "Delete",
+    "mostRecentValueAt": "Last value received {{mostRecentValueAt}}.",
+    "noValueReceived": "No value received.",
+    "discoverTab": "Discover",
+    "devicesTab": "Devices",
+    "settingsTab": "Settings"
   },
   "login": {
     "title": "Gladys Assistant",
@@ -978,6 +989,53 @@
         "userPlaceholder": "Enter MQTT broker username",
         "passwordLabel": "Password",
         "passwordPlaceholder": "Enter MQTT broker password",
+        "saveLabel": "Save configuration",
+        "error": "An error occured while saving configuration.",
+        "connecting": "Configuration saved. Now connecting to your MQTT broker...",
+        "connected": "Connected to the MQTT broker with success !",
+        "connectionError": "Error while connecting, please check your configuration.",
+        "disconnected": "Disconnected from MQTT broker."
+      }
+    },
+    "ups": {
+      "title": "UPS",
+      "description": "Connect to a local or remote MQTT server",
+      "deviceTab": "Devices",
+      "discoverTab": "Discover",
+      "setupTab": "Setup",
+      "status": {
+        "notConfigured": "UPS service is not configured, please go to ",
+        "notConnected": "UPS service failed to connect to network, please go to ",
+        "setupPageLink": "UPS configuration page"
+      },
+      "device": {
+        "noDeviceDiscovered": "No new device discovered.",
+        "discoverDeviceDescr": "Automatically scan UPS devices"
+      },
+      "discover": {
+        "title": "UPS Devices",
+        "noDeviceDiscovered": "No new device discovered, please click on scan button.",
+        "scanButton": "Scan network",
+        "noNameLabel": "No name",
+        "nameLabel": "Name",
+        "externalIdLabel": "External ID",
+        "roomLabel": "Room",
+        "featuresLabel": "Features",
+        "saveButton": "Save",
+        "deleteButton": "Delete",
+        "returnButton": "Return back",
+        "notFound": "Requested device not found.",
+        "backToList": "Back to device list",
+        "saveError": "Error saving or deleting device",
+        "saveConflictError": "Conflict: Are you sure all device feature external IDs are unique?",
+        "mostRecentValueAt": "Last value received {{mostRecentValueAt}}.",
+        "noValueReceived": "No value received."
+      },
+      "setup": {
+        "title": "UPS configuration",
+        "mqttDescription": "You can connect Gladys to a UPS broker to send & receive MQTT messages. Learn more about Gladys MQTT API <a href=\"https://gladysassistant.com/en/docs/api/mqtt-api\">here</a>.",
+        "urlLabel": "Broker URL",
+        "urlPlaceholder": "Ex: mqtt://[mqtt-broker-address]:[port]",
         "saveLabel": "Save configuration",
         "error": "An error occured while saving configuration.",
         "connecting": "Configuration saved. Now connecting to your MQTT broker...",

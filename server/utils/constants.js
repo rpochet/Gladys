@@ -778,6 +778,8 @@ const ACTIONS_STATUS = {
 };
 
 const DEVICE_POLL_FREQUENCIES = {
+  EVERY_30_MINUTES: 30 * 60 * 1000,
+  EVERY_10_MINUTES: 10 * 60 * 1000,
   EVERY_MINUTES: 60 * 1000,
   EVERY_30_SECONDS: 30 * 1000,
   EVERY_10_SECONDS: 10 * 1000,
@@ -879,6 +881,10 @@ const WEBSOCKET_MESSAGE_TYPES = {
   TUYA: {
     STATUS: 'tuya.status',
     DISCOVER: 'tuya.discover',
+  },
+  UPS: {
+    CONNECTED: 'ups.connected',
+    ERROR: 'ups.error',
   },
 };
 
