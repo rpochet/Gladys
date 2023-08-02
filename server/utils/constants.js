@@ -910,6 +910,10 @@ const WEBSOCKET_MESSAGE_TYPES = {
     STATUS: 'tuya.status',
     DISCOVER: 'tuya.discover',
   },
+  UPS: {
+    CONNECTED: 'ups.connected',
+    ERROR: 'ups.error',
+  },
 };
 
 const DASHBOARD_TYPE = {

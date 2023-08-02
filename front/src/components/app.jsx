@@ -156,6 +156,13 @@ import TuyaEditPage from '../routes/integration/all/tuya/edit-page';
 import TuyaSetupPage from '../routes/integration/all/tuya/setup-page';
 import TuyaDiscoverPage from '../routes/integration/all/tuya/discover-page';
 
+<<<<<<< HEAD
+=======
+// UPS integration
+import UpsDevicePage from '../routes/integration/all/ups/device-page';
+import UpsDiscoverPage from '../routes/integration/all/ups/discover-page';
+import UpsSetupPage from '../routes/integration/all/ups/setup-page';
+>>>>>>> apcups
 
 const defaultState = getDefaultState();
 const store = createStore(defaultState);
@@ -316,6 +323,10 @@ const AppRouter = connect(
         <SunSpecDiscoverPage path="/dashboard/integration/device/sunspec/discover" />
         <SunSpecSettingsPage path="/dashboard/integration/device/sunspec/config" />
 
+        <UpsDevicePage path="/dashboard/integration/device/ups" />
+        <UpsDiscoverPage path="/dashboard/integration/device/ups/discover" />
+        <UpsSetupPage path="/dashboard/integration/device/ups/setup" />
+        
         <GoogleHomeWelcomePage path="/dashboard/integration/communication/googlehome" />
         <GoogleHomeGateway path="/dashboard/integration/device/google-home/authorize" />
         <AlexaWelcomePage path="/dashboard/integration/communication/alexa" />

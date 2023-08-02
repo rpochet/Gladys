@@ -76,5 +76,10 @@
     "key": "tuya",
     "link": "tuya",
     "img": "/assets/integrations/cover/tuya.jpg"
+  },
+  {
+    "key": "ups",
+    "link": "ups",
+    "img": "/assets/integrations/cover/ups.jpg"
   }
 ]
