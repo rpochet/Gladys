@@ -156,13 +156,11 @@ import TuyaEditPage from '../routes/integration/all/tuya/edit-page';
 import TuyaSetupPage from '../routes/integration/all/tuya/setup-page';
 import TuyaDiscoverPage from '../routes/integration/all/tuya/discover-page';
 
-<<<<<<< HEAD
-=======
 // UPS integration
 import UpsDevicePage from '../routes/integration/all/ups/device-page';
 import UpsDiscoverPage from '../routes/integration/all/ups/discover-page';
 import UpsSetupPage from '../routes/integration/all/ups/setup-page';
->>>>>>> apcups
+
 
 const defaultState = getDefaultState();
 const store = createStore(defaultState);
