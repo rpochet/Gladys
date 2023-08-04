@@ -12,5 +12,7 @@
     "arm64"
   ],
   "scripts": {},
-  "dependencies": {}
+  "dependencies": {
+    "apcaccess": "^1.1.2"
+  }
 }

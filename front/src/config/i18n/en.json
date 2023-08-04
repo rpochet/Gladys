@@ -1002,11 +1002,11 @@
       "description": "Connect to a local or remote MQTT server",
       "deviceTab": "Devices",
       "discoverTab": "Discover",
-      "setupTab": "Setup",
+      "settingsTab": "Settings",
       "status": {
         "notConfigured": "UPS service is not configured, please go to ",
         "notConnected": "UPS service failed to connect to network, please go to ",
-        "setupPageLink": "UPS configuration page"
+        "settingsPageLink": "UPS configuration page"
       },
       "device": {
         "noDeviceDiscovered": "No new device discovered.",
@@ -1031,7 +1031,7 @@
         "mostRecentValueAt": "Last value received {{mostRecentValueAt}}.",
         "noValueReceived": "No value received."
       },
-      "setup": {
+      "settings": {
         "title": "UPS configuration",
         "mqttDescription": "You can connect Gladys to a UPS broker to send & receive MQTT messages. Learn more about Gladys MQTT API <a href=\"https://gladysassistant.com/en/docs/api/mqtt-api\">here</a>.",
         "urlLabel": "Broker URL",

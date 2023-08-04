@@ -148,7 +148,7 @@ import TuyaDiscoverPage from '../routes/integration/all/tuya/discover-page';
 // UPS integration
 import UpsDevicePage from '../routes/integration/all/ups/device-page';
 import UpsDiscoverPage from '../routes/integration/all/ups/discover-page';
-import UpsSetupPage from '../routes/integration/all/ups/setup-page';
+import UpsSettingsPage from '../routes/integration/all/ups/settings-page';
 
 const defaultState = getDefaultState();
 const store = createStore(defaultState);
@@ -297,7 +297,7 @@ const AppRouter = connect(
 
         <UpsDevicePage path="/dashboard/integration/device/ups" />
         <UpsDiscoverPage path="/dashboard/integration/device/ups/discover" />
-        <UpsSetupPage path="/dashboard/integration/device/ups/setup" />
+        <UpsSettingsPage path="/dashboard/integration/device/ups/settings" />
         
         <GoogleHomeWelcomePage path="/dashboard/integration/communication/googlehome" />
         <GoogleHomeGateway path="/dashboard/integration/device/google-home/authorize" />

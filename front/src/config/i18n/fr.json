@@ -1137,11 +1137,11 @@
       "description": "Connexion à un serveur UPS, en local ou en distant.",
       "deviceTab": "Appareils",
       "discoverTab": "Découverte",
-      "setupTab": "Configuration",
+      "settingsTab": "Configuration",
       "status": {
         "notConfigured": "Le service UPS n'est pas configuré, veuillez vous rendre sur la ",
         "notConnected": "Gladys n'a pas réussi à se connecter au serveur UPS, plus d'informations sur la ",
-        "setupPageLink": "page de configuration du service UPS."
+        "settingsPageLink": "Page de configuration du service UPS."
       },
       "device": {
         "noDeviceDiscovered": "Aucun appareil UPS n'a encore été ajouté",
@@ -1166,8 +1166,8 @@
         "mostRecentValueAt": "Dernière valeur reçue {{mostRecentValueAt}}.",
         "noValueReceived": "Aucune valeur reçue."
       },
-      "setup": {
-        "title": "Configuration MQTT",
+      "settings": {
+        "title": "Configuration UPS",
         "upsDescription": "Vous pouvez connecter Gladys à un broker (serveur) MQTT pour envoyer et recevoir des messages MQTT. En savoir plus sur l'API Gladys MQTT <a href=\"https://gladysassistant.com/fr/docs/api/mqtt-api/\">ici</a>.",
         "urlLabel": "URL du broker",
         "urlPlaceholder": "Ex: mqtt://[adresse-broker-mqtt]:[port]",

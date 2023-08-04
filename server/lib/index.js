@@ -140,10 +140,6 @@ function Gladys(params = {}) {
         await brain.load();
       }
 
-      if (!params.disableService) {
-        await service.load(gladys);
-        await service.startAll();
-      }
       if (!params.disableSceneLoading) {
         await scene.init();
       }
@@ -158,6 +154,10 @@ function Gladys(params = {}) {
       }
       if (!params.disableAreaLoading) {
         await area.init();
+      }
+      if (!params.disableService) {
+        await service.load(gladys);
+        await service.startAll();
       }
       if (!params.disableSchedulerLoading) {
         scheduler.init();

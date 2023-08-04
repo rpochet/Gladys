@@ -1,16 +1,15 @@
 /**
  * @description Get UPS status.
  * @returns {object} Current UPS status.
- * @example
- * status();
+ * @example getStatus();
  */
-function status() {
+function getStatus() {
   return {
     configured: true,
-    connected: this.connected,
+    scanInProgress: this.scanInProgress,
   };
 }
 
 module.exports = {
-  status,
+  getStatus,
 };

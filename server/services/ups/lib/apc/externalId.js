@@ -1,17 +1,19 @@
 /**
  * @description Return name of device.
  * @param {object} node - The UPS node.
+ * @param {object} node.UPSNAME - The UPS node UPSNAME.
  * @returns {string} Return name.
  * @example
  * getDeviceName(node);
  */
-function getDeviceName(node) {
-  return `UPS APC ${node.name}`;
+function getDeviceName({ UPSNAME }) {
+  return `UPS APC ${UPSNAME}`;
 }
 
 /**
  * @description Return external id of device.
  * @param {object} node - The UPS node.
+ * @param {object} node.UPSNAME - The UPS node UPSNAME.
  * @returns {string} Return external id.
  * @example
  * getDeviceExternalId(node);

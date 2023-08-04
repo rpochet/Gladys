@@ -6,8 +6,12 @@ const { UPS_TYPES } = require('./constants');
  * init();
  */
 async function init() {
-  this.upsData = Promise.all(Object.entries(UPS_TYPES).map((value) => value[1].scan.call(this)));
-  this.connect();
+  this.upsData = await Promise.all(Object.keys(UPS_TYPES)
+    .map((value) => 
+      require(`./${value}`).init.call(this)
+    )
+  );
+  await this.connect();
 }
 
 module.exports = {

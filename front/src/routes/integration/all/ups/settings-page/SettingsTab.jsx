@@ -3,25 +3,26 @@ import { Text, MarkupText } from 'preact-i18n';
 import cx from 'classnames';
 import { RequestStatus } from '../../../../../utils/consts';
 
-class SetupTab extends Component {
+class SettingsTab extends Component {
+
   render(props) {
     let alertMessage = null;
 
     const { connectMqttStatus, mqttConnected } = props;
     switch (connectMqttStatus) {
       case RequestStatus.Error:
-        // Error while updating setup
+        // Error while updating settings
         alertMessage = (
           <p class="alert alert-danger">
-            <Text id="integration.ups.setup.error" />
+            <Text id="integration.ups.settings.error" />
           </p>
         );
         break;
       case RequestStatus.Success:
-        // Updating setup with success = connecting...
+        // Updating settings with success = connecting...
         alertMessage = (
           <p class="alert alert-info">
-            <Text id="integration.ups.setup.connecting" />
+            <Text id="integration.ups.settings.connecting" />
           </p>
         );
         break;
@@ -31,9 +32,9 @@ class SetupTab extends Component {
     return (
       <div class="card">
         <div class="card-header">
-          <h3 class="card-title">
-            <Text id="integration.ups.setup.title" />
-          </h3>
+          <h2 class="card-title">
+            <Text id="integration.ups.settings.title" />
+          </h2>
         </div>
         <div class="card-body">
           <div
@@ -44,7 +45,7 @@ class SetupTab extends Component {
             <div class="loader" />
             <div class="dimmer-content">
               <p>
-                <MarkupText id="integration.ups.setup.mqttDescription" />
+                <MarkupText id="integration.ups.settings.mqttDescription" />
               </p>
               {alertMessage}
             </div>
@@ -55,4 +56,4 @@ class SetupTab extends Component {
   }
 }
 
-export default SetupTab;
+export default SettingsTab;

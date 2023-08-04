@@ -2,14 +2,16 @@ const logger = require('../../../utils/logger');
 const { UPS_TYPES } = require('./constants');
 
 /**
- * @description Connect and listen to all topics.
- * @example
- * connect();
+ * @description Connect to all UPS systems.
+ * @example connect();
  */
-function connect() {
+async function connect() {
   logger.info('Connecting to UPS...');
-  this.upsData = Promise.all(Object.entries(UPS_TYPES).map((value) => value[1].connect.call(this)));
-  this.connected = true;
+  this.upsData = await Promise.all(Object.keys(UPS_TYPES)
+    .map((value) => 
+      require(`./${value}`).connect.call(this)
+    )
+  );
 }
 
 module.exports = {

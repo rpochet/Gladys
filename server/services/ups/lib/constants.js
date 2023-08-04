@@ -4,14 +4,15 @@ const {
   DEVICE_POLL_FREQUENCIES,
 } = require('../../../utils/constants');
 const { slugify } = require('../../../utils/slugify');
-const { apcConnect, apcInit, apcScan } = require('./apc');
 
 const UPS_TYPES = {
-  APC: {
-    connect: apcConnect,
-    init: apcInit,
-    scan: apcScan,
-  },
+  'apc': 'APC',
+};
+
+const CONFIGURATION = {
+  apc: {
+    URL: 'APC_URL'
+  }
 };
 
 const PARAM_NAMES = {
@@ -21,9 +22,6 @@ const PARAM_NAMES = {
 
 const DEFAULT = {
   DEVICE: {
-    external_id: 'ups:0',
-    selector: 'ups-0',
-    name: 'UPS',
     should_poll: true,
     poll_frequency: DEVICE_POLL_FREQUENCIES.EVERY_MINUTES,
     features: [
@@ -57,6 +55,7 @@ const DEFAULT = {
 
 module.exports = {
   UPS_TYPES,
+  CONFIGURATION,
   PARAM_NAMES,
   DEFAULT,
 };
