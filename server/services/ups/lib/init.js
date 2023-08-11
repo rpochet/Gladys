@@ -7,11 +7,10 @@ const { UPS_TYPES } = require('./constants');
  */
 async function init() {
   this.upsData = await Promise.all(Object.keys(UPS_TYPES)
-    .map((value) => 
-      require(`./${value}`).init.call(this)
+    .map((type) => 
+      this[`${type}Init`]()
     )
   );
-  await this.connect();
 }
 
 module.exports = {

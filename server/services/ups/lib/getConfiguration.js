@@ -1,21 +1,22 @@
-const { CONFIGURATION } = require('./constants');
+const { UPS_TYPES } = require('./constants');
 
 /**
- * @description Get MQTT configuration.
- * @returns {Promise} Current MQTT network configuration.
- * @example
- * getConfiguration();
+ * @description Get UPS configuration.
+ * @returns {Promise} Current UPS configuration.
+ * @example getConfiguration();
  */
 async function getConfiguration() {
-  const mqttUrl = await this.gladys.variable.getValue(CONFIGURATION.MQTT_URL_KEY, this.serviceId);
-  const mqttUsername = await this.gladys.variable.getValue(CONFIGURATION.MQTT_USERNAME_KEY, this.serviceId);
-  const mqttPassword = await this.gladys.variable.getValue(CONFIGURATION.MQTT_PASSWORD_KEY, this.serviceId);
-
-  return {
-    mqttUrl,
-    mqttUsername,
-    mqttPassword,
-  };
+  const configuration = {};
+  (await Promise.all(Object.keys(UPS_TYPES)
+    .map(async (type) => {
+      const cfg = {};
+      cfg[type] = await this[`${type}Handler`].getConfiguration();
+      return cfg;
+    })
+  )).forEach((configurationForType) => 
+    configuration[Object.keys(configurationForType)[0]] = Object.values(configurationForType)[0]
+  );
+  return configuration;
 }
 
 module.exports = {

@@ -8,6 +8,12 @@ const { poll } = require('./poll');
 const { scanNetwork } = require('./scanNetwork');
 const { getDevices } = require('./getDevices');
 const { UPS_TYPES } = require('./constants');
+const { apcGetConfiguration } = require('./apc/getConfiguration');
+const { apcConnect } = require('./apc/connect');
+const { apcInit } = require('./apc/init');
+const { apcDisconnect } = require('./apc/disconnect');
+const { apcScan } = require('./apc/scan');
+const APCHandler = require('./apc');
 
 /**
  * @description Add ability to connect to a MQTT broker.
@@ -24,9 +30,17 @@ const UpsHandler = function UpsHandler(gladys, ApcAccess, serviceId) {
   this.upsTypes = {};
 
   // For each supported device type
-  this.upsTypes[UPS_TYPES.apc] = {
-    connected: false,
-  };
+  Object.keys(UPS_TYPES).forEach((type) => {
+    this.upsTypes[type] = {
+      connected: false,
+    };
+    this.apcHandler = new APCHandler();
+    /* this[`${type}Init`] = apcInit;
+    this[`${type}Connect`] = apcConnect;
+    this[`${type}Disconnect`] = apcDisconnect;
+    this[`${type}Scan`] = apcScan;
+    this[`${type}GetConfiguration`] = apcGetConfiguration; */
+  });
   this.ApcAccess = ApcAccess;
   //
 };

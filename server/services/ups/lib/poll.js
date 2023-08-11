@@ -1,4 +1,3 @@
-
 /**
  * @description Scan devices.
  * @example

@@ -1,7 +1,6 @@
 const asyncMiddleware = require('../../../api/middlewares/asyncMiddleware');
 
 module.exports = function UpsController(upsHandler) {
-
   /**
    * @api {get} /api/v1/service/ups/devices Get UPS devices.
    * @apiName getDevices

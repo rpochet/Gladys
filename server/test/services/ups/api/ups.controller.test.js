@@ -40,9 +40,7 @@ describe('GET /api/v1/service/ups', () => {
   });
 
   it('should save configuration', async () => {
-    const configuration = {
-      
-    };
+    const configuration = {};
     const req = {
       body: configuration,
     };

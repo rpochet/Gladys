@@ -8,8 +8,8 @@ const { UPS_TYPES } = require('./constants');
 async function disconnect() {
   logger.info('Disconnecting to UPS...');
   this.upsData = await Promise.all(Object.keys(UPS_TYPES)
-    .map((value) => 
-      require(`./${value}`).disconnect.call(this)
+    .map((type) => 
+      this[`${type}Handler`].disconnect()
     )
   );
 }

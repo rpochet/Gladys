@@ -6,6 +6,7 @@
 function getStatus() {
   return {
     configured: true,
+    connected: true,
     scanInProgress: this.scanInProgress,
   };
 }
