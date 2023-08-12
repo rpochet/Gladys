@@ -3,9 +3,9 @@ const UpsController = require('./api/ups.controller');
 const UpsHandler = require('./lib');
 
 module.exports = function UpsService(gladys, serviceId) {
-  const ApcAccess = require('apcaccess');
+  const Nut = require('node-nut');
 
-  const upsHandler = new UpsHandler(gladys, ApcAccess, serviceId);
+  const upsHandler = new UpsHandler(gladys, Nut, serviceId);
 
   /**
    * @public

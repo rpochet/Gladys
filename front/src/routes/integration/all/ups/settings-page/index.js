@@ -35,6 +35,6 @@ class UpsNodePage extends Component {
 }
 
 export default connect(
-  'user,session,httpClient,connectMqttStatus,upsConnected,upsConnectionError',
+  'user,session,httpClient,nutUrl,useEmbeddedBroker,brokerContainerAvailable,dockerBased,networkModeValid,connectUpsStatus,upsConnected,upsConnectionError',
   actions
 )(UpsNodePage);

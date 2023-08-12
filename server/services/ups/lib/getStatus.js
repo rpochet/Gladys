@@ -5,9 +5,8 @@
  */
 function getStatus() {
   return {
-    configured: true,
-    connected: true,
-    scanInProgress: this.scanInProgress,
+    configured: this.configured,
+    connected: this.upsNut.isConnected(),
   };
 }
 

@@ -80,10 +80,8 @@ describe('GET /api/v1/service/ups', () => {
     const res = {
       json: fake.returns(status),
     };
-    upsManager.scanNetwork = fake.returns(null);
     upsManager.getStatus = fake.returns(status);
     await upsController['post /api/v1/service/ups/scan'].controller(req, res);
-    assert.calledOnce(upsManager.scanNetwork);
     assert.calledOnce(upsManager.getStatus);
     assert.calledOnceWithExactly(res.json, status);
   });

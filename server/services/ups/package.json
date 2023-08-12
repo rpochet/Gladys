@@ -13,6 +13,7 @@
   ],
   "scripts": {},
   "dependencies": {
-    "apcaccess": "^1.1.2"
+    "apcaccess": "^1.1.2",
+    "node-nut": "^1.0.3"
   }
 }

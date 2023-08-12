@@ -4,32 +4,15 @@ import { RequestStatus } from '../../../../../utils/consts';
 const createActions = store => {
   const integrationActions = createActionsIntegration(store);
   const actions = {
-    async getUsbPorts(state) {
-      store.setState({
-        zwaveGetUsbPortStatus: RequestStatus.Getting
-      });
-      try {
-        const usbPorts = await state.httpClient.get('/api/v1/service/usb/port');
-        store.setState({
-          usbPorts,
-          zwaveGetUsbPortStatus: RequestStatus.Success
-        });
-      } catch (e) {
-        store.setState({
-          zwaveGetUsbPortStatus: RequestStatus.Error
-        });
-      }
-    },
     async loadStatus(state) {
       let upsStatus = {
+        configured: false,
         connected: false
       };
       try {
         upsStatus = await state.httpClient.get('/api/v1/service/ups/status');
       } finally {
-        store.setState({
-          upsConnected: upsStatus.connected
-        });
+        store.setState(upsStatus);
       }
     },
     async loadProps(state) {
@@ -38,11 +21,11 @@ const createActions = store => {
         configuration = await state.httpClient.get('/api/v1/service/ups/config');
       } finally {
         store.setState({
-          upsUrl: configuration.upsUrl,
-          upsUsername: configuration.upsUsername,
-          upsPassword: configuration.upsPassword,
-          passwordChanges: false,
-          connected: false
+          nutUrl: configuration.nutUrl,
+          useEmbeddedBroker: configuration.useEmbeddedBroker,
+          dockerBased: configuration.dockerBased,
+          networkModeValid: configuration.networkModeValid,
+          brokerContainerAvailable: configuration.brokerContainerAvailable,
         });
       }
     },
@@ -52,40 +35,38 @@ const createActions = store => {
     async saveConfiguration(state) {
       event.preventDefault();
       store.setState({
-        connectMqttStatus: RequestStatus.Getting,
+        connectUpsStatus: RequestStatus.Getting,
         upsConnected: false,
         upsConnectionError: undefined
       });
       try {
-        const { upsUrl, upsUsername, upsPassword } = state;
-        await state.httpClient.post(`/api/v1/service/ups/connect`, {
-          upsUrl,
-          upsUsername,
-          upsPassword,
+        const { nutUrl, useEmbeddedBroker } = state;
+        await state.httpClient.post(`/api/v1/service/ups/config`, {
+          nutUrl,
+          useEmbeddedBroker
         });
 
         store.setState({
-          connectMqttStatus: RequestStatus.Success
+          connectUpsStatus: RequestStatus.Success
         });
       } catch (e) {
         store.setState({
-          connectMqttStatus: RequestStatus.Error,
-          passwordChanges: false
+          connectUpsStatus: RequestStatus.Error,
         });
       }
     },
     displayConnectedMessage() {
-      // display 3 seconds a message "MQTT connected"
+      // display 3 seconds a message "UPS connected"
       store.setState({
         upsConnected: true,
-        connectMqttStatus: undefined,
+        connectUpsStatus: undefined,
         upsConnectionError: undefined
       });
     },
-    displayMqttError(state, error) {
+    displayUpsError(state, error) {
       store.setState({
         upsConnected: false,
-        connectMqttStatus: undefined,
+        connectUpsStatus: undefined,
         upsConnectionError: error
       });
     }

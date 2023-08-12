@@ -1,25 +1,23 @@
+const { PARAM_NAMES } = require("../constants");
+
 /**
  * @description Return name of device.
  * @param {object} node - The UPS node.
- * @param {object} node.UPSNAME - The UPS node UPSNAME.
  * @returns {string} Return name.
- * @example
- * getDeviceName(node);
+ * @example getDeviceName(node);
  */
-function getDeviceName({ UPSNAME }) {
-  return `UPS APC ${UPSNAME}`;
+function getDeviceName(node) {
+  return `${node[PARAM_NAMES.DEVICE_MODEL].trim()}`;
 }
 
 /**
  * @description Return external id of device.
  * @param {object} node - The UPS node.
- * @param {object} node.UPSNAME - The UPS node UPSNAME.
  * @returns {string} Return external id.
- * @example
- * getDeviceExternalId(node);
+ * @example getDeviceExternalId(node);
  */
-function getDeviceExternalId({ UPSNAME }) {
-  return `ups:apc:${UPSNAME}`;
+function getDeviceExternalId(node) {
+  return `ups:${node[PARAM_NAMES.DEVICE_SERIAL].trim()}`;
 }
 
 /**
@@ -27,11 +25,10 @@ function getDeviceExternalId({ UPSNAME }) {
  * @param {object} node - The UPS node.
  * @param {object} property - The UPS property.
  * @returns {string} Return name.
- * @example
- * getDeviceFeatureName(node, property);
+ * @example getDeviceFeatureName(node, property);
  */
 function getDeviceFeatureName(node, property) {
-  return `UPS APC ${node.name} - ${property.featureId}`;
+  return `UPS ${node[PARAM_NAMES.DEVICE_MODEL].trim()} - ${property.featureId}`;
 }
 
 /**
@@ -39,11 +36,10 @@ function getDeviceFeatureName(node, property) {
  * @param {object} node - The UPS node.
  * @param {object} property - The UPS property.
  * @returns {string} Return external id.
- * @example
- * getDeviceFeatureExternalId(node, property);
+ * @example getDeviceFeatureExternalId(node, property);
  */
 function getDeviceFeatureExternalId(node, property) {
-  return `ups:apc:${node.name}:${property.featureId}`;
+  return `ups:${node[PARAM_NAMES.DEVICE_SERIAL].trim()}:${property.featureId}`;
 }
 
 module.exports = {

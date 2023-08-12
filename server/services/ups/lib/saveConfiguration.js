@@ -1,5 +1,4 @@
-const { CONFIGURATION } = require('./apc/constants');
-const { UPS_TYPES } = require('./constants');
+const { CONFIGURATION } = require('./constants');
 
 const updateOrDestroyVariable = async (variable, key, value, serviceId) => {
   if (value !== undefined && value !== null && (typeof value !== 'string' || value.length > 0)) {
@@ -12,15 +11,12 @@ const updateOrDestroyVariable = async (variable, key, value, serviceId) => {
 /**
  * @description Save UPS configuration.
  * @param {object} configuration - UPS configuration.
+ * @param {string} configuration.nutUrl - UPS NUT Url.
  * @returns {Promise} Resolve when configuration updated & connected.
  * @example saveConfiguration(configuration);
  */
-async function saveConfiguration(configuration) {
-  await Promise.all(Object.keys(UPS_TYPES)
-    .map((type) => 
-      this[`${type}SaveConfiguration`](configuration[type])
-    )
-  );
+async function saveConfiguration({nutUrl}) {
+  await this.gladys.variable.setValue(CONFIGURATION.URL, nutUrl, this.serviceId);
 }
 
 module.exports = {

@@ -1,4 +1,4 @@
-const { PARAM_NAMES } = require('./constants');
+const { PARAM_NAMES } = require("../constants");
 
 /**
  * @description Convert APC value.
@@ -9,8 +9,17 @@ const { PARAM_NAMES } = require('./constants');
  */
 function unbind(name, value) {
   switch (name) {
-    case PARAM_NAMES.BCHARGE:
-      return parseFloat(value.split(' ')[0]);
+    case PARAM_NAMES.UPS_STATUS:
+      switch (value) {
+        case 'OL':
+          return 'ONLINE';
+        case 'LB':
+          return 'LOW_BATTERY';
+        case 'OB':
+          return 'ON_BATTERY';
+        default:
+          return 'UNKNOWN_STATUS';
+      }
     default:
       return value;
   }

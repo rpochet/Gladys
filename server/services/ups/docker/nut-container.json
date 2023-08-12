@@ -1,9 +1,9 @@
 {
-  "name": "gladys-apcupsd",
-  "Image": "gregewing/apcupsd",
+  "name": "gladys-nut",
+  "Image": "gregewing/nut",
   "ExposedPorts": { "3551/tcp": {} },
   "HostConfig": {
-    "Binds": ["/var/lib/gladysassistant/apcupsd:/etc/apcupsd"],
+    "Binds": ["/var/lib/gladysassistant/nut:/etc/nut"],
     "LogConfig": {
       "Type": "json-file",
       "Config": {

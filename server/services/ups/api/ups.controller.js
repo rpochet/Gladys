@@ -44,16 +44,6 @@ module.exports = function UpsController(upsHandler) {
     res.json(configuration);
   }
 
-  /**
-   * @api {post} /api/v1/service/ups/scan Scan UPS network.
-   * @apiName scanNetwork
-   * @apiGroup Ups
-   */
-  async function scanNetwork(req, res) {
-    upsHandler.scanNetwork(req.type);
-    return getStatus(req, res);
-  }
-
   return {
     'get /api/v1/service/ups/devices': {
       authenticated: true,
@@ -70,10 +60,6 @@ module.exports = function UpsController(upsHandler) {
     'post /api/v1/service/ups/config': {
       authenticated: true,
       controller: asyncMiddleware(saveConfiguration),
-    },
-    'post /api/v1/service/ups/scan': {
-      authenticated: true,
-      controller: asyncMiddleware(scanNetwork),
     },
   };
 };

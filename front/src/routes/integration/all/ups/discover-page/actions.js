@@ -20,7 +20,7 @@ function createActions(store) {
         if (state.upsDeviceSearch && state.upsDeviceSearch.length) {
           options.search = state.upsDeviceSearch;
         }
-        const upsDevices = await state.httpClient.get('/api/v1/service/ups/device', options);
+        const upsDevices = await state.httpClient.get('/api/v1/service/ups/devices', options);
         store.setState({
           upsDevices,
           getUpsDevicesStatus: RequestStatus.Success
@@ -29,22 +29,6 @@ function createActions(store) {
         store.setState({
           upsDevices: [],
           getUpsDevicesStatus: RequestStatus.Error
-        });
-      }
-    },
-    async scanNetwork(state) {
-      store.setState({
-        upsScanNetworkStatus: RequestStatus.Getting
-      });
-      try {
-        await state.httpClient.post('/api/v1/service/ups/scan');
-        store.setState({
-          upsScanNetworkStatus: RequestStatus.Success
-        });
-        actions.getStatus(store.getState());
-      } catch (e) {
-        store.setState({
-          upsScanNetworkStatus: RequestStatus.Error
         });
       }
     },
