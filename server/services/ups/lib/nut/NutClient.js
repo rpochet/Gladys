@@ -7,15 +7,17 @@ const logger = require('../../../../utils/logger');
  * @example promisify(() => {})
  */
 function promisify(f) {
-  return function (...args) { // return a wrapper-function (*)
+  return function(...args) {
+    // return a wrapper-function (*)
     return new Promise((resolve, reject) => {
       /**
        * @description Convert Callback to Promise.
-       * @param result
-       * @param err
-       * @example
+       * @param {object} result - Function result.
+       * @param {object} err - Function error.
+       * @example callback({}, '')
        */
-      function callback(result, err) { // our custom callback for f (**)
+      function callback(result, err) {
+        // our custom callback for f (**)
         if (err) {
           reject(err);
         } else {
@@ -31,7 +33,6 @@ function promisify(f) {
 }
 
 class NutClient {
-
   constructor(Nut, nutHost, nutPort) {
     this.nutHost = nutHost;
     this.nutPort = nutPort;
@@ -45,7 +46,7 @@ class NutClient {
       logger.error(`There was an error with UPS: ${err}`);
       this.connected = false;
     });
-  
+
     this.upsNut.on('close', () => {
       logger.info(`UPS Connection closed.`);
       this.connected = false;
@@ -53,7 +54,7 @@ class NutClient {
 
     this.upsNut.on('ready', async () => {
       logger.info(`UPS Connected.`);
-      this.connected = true;      
+      this.connected = true;
     });
   }
 
@@ -76,15 +77,14 @@ class NutClient {
     const nodes = {};
     try {
       const upslist = await this.GetUPSListP();
-      const d = await Promise.all(
-        Object.keys(upslist)
-          .map(async (upsName) => {
-            return [upsName, await this.GetUPSVarsP(upsName)];
-          })
-      );
-      d.forEach((ups) =>{
-        nodes[ups[0]] = ups[1];
-      }); 
+      (await Promise.all(
+        Object.keys(upslist).map(async (upsName) => {
+          return [upsName, await this.GetUPSVarsP(upsName)];
+        }),
+      )).forEach((ups) => {
+        const [ upsName, upsVars ] = ups;
+        nodes[upsName] = upsVars;
+      });
     } catch (err) {
       logger.error(`Error getting UPS List: ${err}`);
     }

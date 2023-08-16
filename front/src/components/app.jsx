@@ -298,7 +298,7 @@ const AppRouter = connect(
         <UpsDevicePage path="/dashboard/integration/device/ups" />
         <UpsDiscoverPage path="/dashboard/integration/device/ups/discover" />
         <UpsSettingsPage path="/dashboard/integration/device/ups/settings" />
-        
+
         <GoogleHomeWelcomePage path="/dashboard/integration/communication/googlehome" />
         <GoogleHomeGateway path="/dashboard/integration/device/google-home/authorize" />
         <AlexaWelcomePage path="/dashboard/integration/communication/alexa" />

@@ -1,6 +1,3 @@
-const { DEVICE_POLL_FREQUENCIES, DEVICE_FEATURE_CATEGORIES, DEVICE_FEATURE_TYPES, DEVICE_FEATURE_UNITS_BY_CATEGORY } = require("../../../utils/constants");
-const { slugify } = require('../../../utils/slugify');
-
 const UPS_TYPES = {
   apc: 'APC',
 };
@@ -9,11 +6,23 @@ const CONFIGURATION = {
   URL: 'UPS_NUT_URL',
 };
 
+const STATUS = {
+  ONLINE: 'OL',
+  ON_BATTERY: 'OB',
+  LOW_BATTERY: 'LB',
+};
+
 const PARAM_NAMES = {
   BATTERY_CHARGE: 'battery.charge',
   BATTERY_CHARGE_LOW: 'battery.charge.low',
+  BATTERY_CHARGE_WARNING: 'battery.charge.warning',
+  BATTERY_DATE: 'battery.date',
+  BATTERY_MFR_DATE: 'battery.mft.data',
   BATTERY_RUNTIME: 'battery.runtime',
+  BATTERY_RUNTIME_LOW: 'battery.runtime.low',
   BATTERY_TYPE: 'battery.type',
+  BATTERY_VOLTAGE: 'battery.voltage',
+  BATTERY_VOLTAGE_NOMINAL: 'battery.voltage.nominal',
   DEVICE_MFR: 'device.mfr',
   DEVICE_MODEL: 'device.model',
   DEVICE_SERIAL: 'device.serial',
@@ -58,42 +67,15 @@ const PARAM_NAMES = {
 };
 
 const DEFAULT = {
-  DEVICE: {
-    should_poll: true,
-    poll_frequency: DEVICE_POLL_FREQUENCIES.EVERY_MINUTES,
-    features: [
-      {
-        name: PARAM_NAMES.UPS_STATUS,
-        external_id: `ups:0:${PARAM_NAMES.UPS_STATUS}`,
-        selector: slugify(`ups:0:${PARAM_NAMES.UPS_STATUS}`),
-        category: DEVICE_FEATURE_CATEGORIES.TEXT,
-        type: DEVICE_FEATURE_TYPES.TEXT.TEXT,
-        read_only: true,
-        keep_history: true,
-        has_feedback: false,
-        min: 0,
-        max: 5,
-      },
-      {
-        name: PARAM_NAMES.BATTERY_CHARGE,
-        external_id: `ups:0:${PARAM_NAMES.BATTERY_CHARGE}`,
-        selector: slugify(`ups:0:${PARAM_NAMES.BATTERY_CHARGE}`),
-        category: DEVICE_FEATURE_CATEGORIES.BATTERY,
-        type: DEVICE_FEATURE_TYPES.BATTERY.INTEGER,
-        read_only: true,
-        keep_history: true,
-        has_feedback: false,
-        unit: DEVICE_FEATURE_UNITS_BY_CATEGORY[DEVICE_FEATURE_CATEGORIES.BATTERY],
-        min: 0,
-        max: 100,
-      },
-    ],
-  },
+  UPS_URL: 'localhost:9443',
+  NUT_HOST: '192.168.1.4',
+  NUT_PORT: 9443,
 };
 
 module.exports = {
   UPS_TYPES,
   PARAM_NAMES,
+  STATUS,
   CONFIGURATION,
   DEFAULT,
 };

@@ -1,4 +1,4 @@
-const { PARAM_NAMES } = require("../constants");
+const { PARAM_NAMES } = require('../constants');
 
 /**
  * @description Return name of device.
@@ -28,7 +28,7 @@ function getDeviceExternalId(node) {
  * @example getDeviceFeatureName(node, property);
  */
 function getDeviceFeatureName(node, property) {
-  return `UPS ${node[PARAM_NAMES.DEVICE_MODEL].trim()} - ${property.featureId}`;
+  return `UPS ${node[PARAM_NAMES.DEVICE_MODEL].trim()} - ${property}`;
 }
 
 /**
@@ -39,7 +39,7 @@ function getDeviceFeatureName(node, property) {
  * @example getDeviceFeatureExternalId(node, property);
  */
 function getDeviceFeatureExternalId(node, property) {
-  return `ups:${node[PARAM_NAMES.DEVICE_SERIAL].trim()}:${property.featureId}`;
+  return `ups:${node[PARAM_NAMES.DEVICE_SERIAL].trim()}:${property}`;
 }
 
 module.exports = {

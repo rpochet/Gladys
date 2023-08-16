@@ -21,6 +21,15 @@ class UpsDevicePage extends Component {
 }
 
 export default connect(
-  ['session','user','devices','houses','currentIntegration','getDevicesStatus','deviceSearch','getDeviceOrderDir'],
+  [
+    'session',
+    'user',
+    'devices',
+    'houses',
+    'currentIntegration',
+    'getDevicesStatus',
+    'deviceSearch',
+    'getDeviceOrderDir'
+  ],
   actions
 )(UpsDevicePage);

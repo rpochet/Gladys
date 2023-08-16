@@ -24,6 +24,13 @@ const AC_MODE = {
   HEATING: 2,
 };
 
+const UPS_MODE = {
+  ONLINE: 0,
+  ON_BATTERY: 1,
+  LOW_BATTERYNG: 2,
+  UNKNOWN: 3,
+};
+
 const USER_ROLE = {
   ADMIN: 'admin',
   HABITANT: 'habitant',
@@ -371,6 +378,7 @@ const DEVICE_FEATURE_CATEGORIES = {
   VOC_SENSOR: 'voc-sensor',
   VOLUME_SENSOR: 'volume-sensor',
   TEXT: 'text',
+  UPS: 'ups',
 };
 
 const DEVICE_FEATURE_TYPES = {
@@ -528,6 +536,12 @@ const DEVICE_FEATURE_TYPES = {
   },
   TEXT: {
     TEXT: 'text',
+  },
+  UPS: {
+    BATTERY: 'battery',
+    BATTERY_VOLTAGE: 'battery-voltage',
+    BATTERY_VOLTAGE_NOMINAL: 'battery-voltage-nominal',
+    STATUS: 'status',
   },
 };
 
@@ -746,28 +760,53 @@ const DEVICE_FEATURE_UNITS_BY_CATEGORY = {
     DEVICE_FEATURE_UNITS.SQUARE_METER,
     DEVICE_FEATURE_UNITS.SQUARE_KILOMETER,
   ],
+  [DEVICE_FEATURE_CATEGORIES.UPS]: {
+    [DEVICE_FEATURE_TYPES.UPS.BATTERY]: [DEVICE_FEATURE_UNITS.PERCENT],
+    [DEVICE_FEATURE_TYPES.UPS.BATTERY_VOLTAGE]: [DEVICE_FEATURE_UNITS.VOLT],
+    [DEVICE_FEATURE_TYPES.UPS.BATTERY_VOLTAGE_NOMINAL]: [DEVICE_FEATURE_UNITS.VOLT],
+  },
 };
 
 const DEVICE_FEATURE_MINMAX_BY_TYPE = {
   [DEVICE_FEATURE_TYPES.SENSOR.BINARY]: {
-    MIN: 0,
-    MAX: 1,
+    min: 0,
+    max: 1,
   },
   [DEVICE_FEATURE_TYPES.SWITCH.POWER]: {
-    MIN: 0,
-    MAX: 10000, // 10 kW
+    min: 0,
+    max: 10000, // 10 kW
   },
   [DEVICE_FEATURE_TYPES.SWITCH.ENERGY]: {
-    MIN: 0,
-    MAX: 100000, // 10 kW during 10000 hour (more than one year)
+    min: 0,
+    max: 100000, // 10 kW during 10000 hour (more than one year)
   },
   [DEVICE_FEATURE_TYPES.SWITCH.CURRENT]: {
-    MIN: 0,
-    MAX: 40,
+    min: 0,
+    max: 40,
   },
   [DEVICE_FEATURE_TYPES.SWITCH.VOLTAGE]: {
-    MIN: 0,
-    MAX: 400,
+    min: 0,
+    max: 400,
+  },
+  [DEVICE_FEATURE_TYPES.BATTERY.INTEGER]: {
+    min: 0,
+    max: 100,
+  },
+  [DEVICE_FEATURE_TYPES.UPS.STATUS]: {
+    min: 0,
+    max: Object.keys(UPS_MODE).length,
+  },
+  [DEVICE_FEATURE_TYPES.UPS.BATTERY]: {
+    min: 0,
+    max: 100,
+  },
+  [DEVICE_FEATURE_TYPES.UPS.BATTERY_VOLTAGE]: {
+    min: 0,
+    max: 24,
+  },
+  [DEVICE_FEATURE_TYPES.UPS.BATTERY_VOLTAGE_NOMINAL]: {
+    min: 0,
+    max: 24,
   },
 };
 
@@ -903,6 +942,7 @@ const DASHBOARD_BOX_TYPE = {
   CHART: 'chart',
   ECOWATT: 'ecowatt',
   CLOCK: 'clock',
+  UPS: 'ups',
 };
 
 const ERROR_MESSAGES = {
@@ -982,6 +1022,7 @@ module.exports.STATE = STATE;
 module.exports.BUTTON_STATUS = BUTTON_STATUS;
 module.exports.COVER_STATE = COVER_STATE;
 module.exports.AC_MODE = AC_MODE;
+module.exports.UPS_MODE = UPS_MODE;
 module.exports.EVENTS = EVENTS;
 module.exports.LIFE_EVENTS = LIFE_EVENTS;
 module.exports.STATES = STATES;

@@ -6,7 +6,6 @@ import SettingsForm from './SettingsForm';
 import SettingsBrokerContainer from './SettingsBrokerContainer';
 
 class SettingsTab extends Component {
-
   updateDockerUsage = () => {
     const useEmbeddedBroker = !this.props.useEmbeddedBroker;
     const config = { useEmbeddedBroker };

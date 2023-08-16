@@ -12,7 +12,8 @@ const DeviceTab = ({ children, ...props }) => {
     <div class="card">
       <div class="card-header">
         <h3 class="card-title">
-          <Text id="device.title" 
+          <Text
+            id="device.title"
             fields={{
               integrationName: props.currentIntegration && props.currentIntegration.name
             }}

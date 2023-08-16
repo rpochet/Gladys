@@ -2,7 +2,6 @@ import { Component } from 'preact';
 import { Text, Localizer } from 'preact-i18n';
 
 class SettingsForm extends Component {
-
   updateUrl = e => {
     this.props.updateConfiguration({ nutUrl: e.target.value });
   };

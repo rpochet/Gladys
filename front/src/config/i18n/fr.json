@@ -234,7 +234,8 @@
       "devices": "Appareils",
       "chart": "Graphique",
       "ecowatt": "Ecowatt ( France )",
-      "clock": "Horloge"
+      "clock": "Horloge",
+      "ups": "Onduleur ASI"
     },
     "boxes": {
       "column": "Colonne {{index}}",
@@ -1149,7 +1150,7 @@
       },
       "discover": {
         "title": "Appareils UPS",
-        "noDeviceDiscovered": "Aucun appareil UPS n'a encore été ajouté. Veuillez cliquer sur le bouton Rechercher",        
+        "noDeviceDiscovered": "Aucun appareil UPS n'a encore été ajouté. Veuillez cliquer sur le bouton Rechercher",
         "scanButton": "Rechercher",
         "noNameLabel": "Pas de nom",
         "nameLabel": "Nom",
@@ -2618,6 +2619,12 @@
     "unknown": {
       "shortCategoryName": "Inconnu",
       "unknown": "Inconnu"
+    },
+    "ups": {
+      "status": "Status",
+      "battery": "Battery",
+      "battery-voltage": "Battery Voltage",
+      "battery-voltage-nominal": "Battery Voltage Nominal"
     }
   },
   "errorPage": {

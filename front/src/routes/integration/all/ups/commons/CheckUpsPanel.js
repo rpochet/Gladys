@@ -30,7 +30,4 @@ class CheckUpsPanel extends Component {
   }
 }
 
-export default connect(
-  'user,session,connected,configured',
-  actions
-)(CheckUpsPanel);
+export default connect('user,session,connected,configured', actions)(CheckUpsPanel);

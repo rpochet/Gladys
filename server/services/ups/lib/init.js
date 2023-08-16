@@ -1,5 +1,5 @@
 const logger = require('../../../utils/logger');
-const { CONFIGURATION } = require('./constants');
+const { CONFIGURATION, DEFAULT } = require('./constants');
 const { ServiceNotConfiguredError } = require('../../../utils/coreErrors');
 const { NutClient } = require('./nut/NutClient');
 
@@ -14,9 +14,10 @@ async function init() {
     throw new ServiceNotConfiguredError('SERVICE_NOT_CONFIGURED');
   }
   this.configured = true;
-  
-  const [ nutHost = '192.168.1.4', nutPort = 3493 ] = nutUrl.split(':');
-  
+  logger.info('Initializing UPS...');
+
+  const [nutHost = DEFAULT.NUT_HOST, nutPort = DEFAULT.NUT_PORT] = nutUrl.split(':');
+
   this.upsNut = new NutClient(this.Nut, nutHost, nutPort);
 
   this.connect();

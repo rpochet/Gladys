@@ -25,7 +25,7 @@ const createActions = store => {
           useEmbeddedBroker: configuration.useEmbeddedBroker,
           dockerBased: configuration.dockerBased,
           networkModeValid: configuration.networkModeValid,
-          brokerContainerAvailable: configuration.brokerContainerAvailable,
+          brokerContainerAvailable: configuration.brokerContainerAvailable
         });
       }
     },
@@ -51,7 +51,7 @@ const createActions = store => {
         });
       } catch (e) {
         store.setState({
-          connectUpsStatus: RequestStatus.Error,
+          connectUpsStatus: RequestStatus.Error
         });
       }
     },

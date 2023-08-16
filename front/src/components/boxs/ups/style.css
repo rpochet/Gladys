@@ -1,0 +1,75 @@
+.level {
+  margin: 10px;
+  border: 1px solid black;
+  position: relative;
+}
+
+.level:after {
+  content: '\A';
+  position: absolute;
+  top: 0; 
+  bottom: 0;
+  left: 0; 
+}
+
+.level-10:after {
+  width: 10%;
+  background: black;
+}
+
+.level-20:after {
+  width: 2ch;
+  background: red;
+}
+
+.level-30:after {
+  width: 30%;
+  background: orangered;
+}
+
+.level-40:after {
+  width: 40%;
+  background: orange;
+}
+
+.level-50:after {
+  width: 50%;
+  background: greenyellow;
+}
+
+.level-60:after {
+  width: 60%;
+  background: greenyellow;
+}
+
+.level-70:after {
+  width: 70%;
+  background: greenyellow;
+}
+
+.level-80:after {
+  width: 80%;
+  background: green;
+}
+
+.level-90:after {
+  width: 90%;
+  background: green;
+}
+
+.level-100:after {
+  width: 100%;
+  background: green;
+}
+
+.status-ok {
+  color: green;
+  width: 48px;
+  height: 48px;
+}
+
+.status-nok {
+  color: red;
+  width: 48px;
+  height: 48px;
+}

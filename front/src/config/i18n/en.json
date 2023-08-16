@@ -226,7 +226,8 @@
       "devices": "Devices",
       "chart": "Chart",
       "ecowatt": "Ecowatt (France)",
-      "clock": "Clock"
+      "clock": "Clock",
+      "ups": "UPS Inverter"
     },
     "boxes": {
       "column": "Column {{index}}",
@@ -2609,6 +2610,12 @@
     "unknown": {
       "shortCategoryName": "Unknown",
       "unknown": "Unknown"
+    },
+    "ups": {
+      "status": "Status",
+      "battery": "Battery",
+      "battery-voltage": "Battery Voltage",
+      "battery-voltage-nominal": "Battery Voltage Nominal"
     }
   },
   "errorPage": {

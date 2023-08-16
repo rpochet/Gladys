@@ -18,7 +18,7 @@ const { getDevices } = require('./getDevices');
 const UpsHandler = function UpsHandler(gladys, Nut, serviceId) {
   this.gladys = gladys;
   this.serviceId = serviceId;
-  
+
   this.Nut = Nut;
   this.configured = false;
   this.connected = false;
