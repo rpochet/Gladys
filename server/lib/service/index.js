@@ -10,6 +10,7 @@ const { getServices } = require('./service.getServices');
 const { getMessageServices } = require('./service.getMessageServices');
 const { getLocalServiceByName } = require('./service.getLocalServiceByName');
 const { getUsage } = require('./service.getUsage');
+const { getStatus } = require('./service.getStatus');
 
 const Service = function Service(servicesFromFiles, stateManager) {
   this.servicesFromFiles = servicesFromFiles;
@@ -28,5 +29,6 @@ Service.prototype.getServices = getServices;
 Service.prototype.getMessageServices = getMessageServices;
 Service.prototype.getLocalServiceByName = getLocalServiceByName;
 Service.prototype.getUsage = getUsage;
+Service.prototype.getStatus = getStatus;
 
 module.exports = Service;

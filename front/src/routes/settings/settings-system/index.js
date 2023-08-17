@@ -82,6 +82,7 @@ class SettingsSystem extends Component {
     this.props.getInfos();
     this.props.getDiskSpace();
     this.props.getContainers();
+    this.props.getServices();
     this.getTimezone();
     this.getDeviceStateHistoryPreference();
     // we start the ping a little bit after to give it some time to breathe
@@ -127,6 +128,6 @@ class SettingsSystem extends Component {
 }
 
 export default connect(
-  'httpClient,session,systemPing,systemInfos,systemDiskSpace,systemContainers,downloadUpgradeProgress,downloadUpgradeStatus',
+  'httpClient,session,systemPing,systemInfos,systemDiskSpace,systemContainers,systemServices,downloadUpgradeProgress,downloadUpgradeStatus',
   actions
 )(SettingsSystem);

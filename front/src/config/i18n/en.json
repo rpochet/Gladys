@@ -1833,6 +1833,17 @@
       "paused": "Paused",
       "exited": "Exited",
       "dead": "Dead"
+    },
+    "services": "Services",
+    "serviceName": "Name",
+    "serviceConfigured": "Configured",
+    "serviceConnected": "Connected",
+    "serviceError": "Error",
+    "serviceState": {
+      "configured": "V",
+      "not_configured": "X",
+      "connected": "V",
+      "not_connected": "X"
     }
   },
   "newArea": {

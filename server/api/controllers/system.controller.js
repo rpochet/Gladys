@@ -33,6 +33,16 @@ module.exports = function SystemController(gladys) {
   }
 
   /**
+   * @api {get} /api/v1/system/service
+   * @apiName getServices
+   * @apiGroup System
+   */
+  async function getServices(req, res) {
+    const services = await gladys.service.getStatus(req.query.pod_id);
+    res.json(services);
+  }
+
+  /**
    * @api {post} /api/v1/system/upgrade/download
    * @apiName getContainers
    * @apiGroup System
@@ -89,6 +99,7 @@ module.exports = function SystemController(gladys) {
     getSystemInfos: asyncMiddleware(getSystemInfos),
     getDiskSpace: asyncMiddleware(getDiskSpace),
     getContainers: asyncMiddleware(getContainers),
+    getServices: asyncMiddleware(getServices),
     shutdown: asyncMiddleware(shutdown),
     getUpgradeDownloadStatus: asyncMiddleware(getUpgradeDownloadStatus),
     vacuum: asyncMiddleware(vacuum),

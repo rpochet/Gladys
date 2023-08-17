@@ -83,6 +83,22 @@ function createActions(store) {
         });
       }
     },
+    async getServices(state) {
+      store.setState({
+        SystemGetServicesStatus: RequestStatus.Getting
+      });
+      try {
+        const systemServices = await state.httpClient.get('/api/v1/system/service');
+        store.setState({
+          systemServices,
+          SystemGetServicesStatus: RequestStatus.Success
+        });
+      } catch (e) {
+        store.setState({
+          SystemGetServicesStatus: RequestStatus.Error
+        });
+      }
+    },
     async getUpgradeDownloadStatus(state) {
       store.setState({
         getUpgradeDownloadStatusStatus: RequestStatus.Getting

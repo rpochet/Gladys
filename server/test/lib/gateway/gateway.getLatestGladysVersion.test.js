@@ -56,6 +56,7 @@ describe('gateway.getLatestGladysVersion', () => {
     system.shutdown = fake.resolves(true);
 
     service.getUsage = fake.resolves({ zigbee: true });
+    service.getStatus = fake.resolves({ zigbee: true });
 
     gateway = new Gateway(variable, event, system, {}, config, {}, {}, service, job, scheduler);
   });
@@ -70,5 +71,6 @@ describe('gateway.getLatestGladysVersion', () => {
     expect(version).to.have.property('created_at');
     assert.calledOnce(system.saveLatestGladysVersion);
     assert.calledOnceWithExactly(service.getUsage);
+    assert.calledOnceWithExactly(service.getStatus);
   });
 });

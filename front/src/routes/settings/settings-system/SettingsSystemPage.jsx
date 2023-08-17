@@ -226,6 +226,68 @@ const SystemPage = ({ children, ...props }) => (
       <div class="col-lg-6">
         <div class="card">
           <h3 class="card-header">
+            <Text id="systemSettings.services" />
+          </h3>
+          <div class="table-responsive" style={{ maxHeight: '200px' }}>
+            <table class="table table-hover table-outline table-vcenter text-nowrap card-table">
+              <thead>
+                <tr>
+                  <th>
+                    <Text id="systemSettings.serviceName" />
+                  </th>
+                  <th>
+                    <Text id="systemSettings.serviceConfigured" />
+                  </th>
+                  <th>
+                    <Text id="systemSettings.serviceConnected" />
+                  </th>
+                  <th>
+                    <Text id="systemSettings.serviceError" />
+                  </th>
+                </tr>
+              </thead>
+              <tbody>
+                {props.systemServices &&
+                  Object.keys(props.systemServices).map(service => {
+                    const status = props.systemServices[service];
+                    return (
+                      <tr>
+                        <td>{service}</td>
+                        <td>
+                          <span
+                            class={cx('badge', {
+                              'badge-success': status.configured,
+                              'badge-warning': !status.configured
+                            })}
+                          >
+                            <Text
+                              id={`systemSettings.serviceState.${status.configured ? 'configured' : 'not_configured'}`}
+                            />
+                          </span>
+                        </td>
+                        <td>
+                          <span
+                            class={cx('badge', {
+                              'badge-success': status.connected,
+                              'badge-warning': !status.connected
+                            })}
+                          >
+                            <Text
+                              id={`systemSettings.serviceState.${status.connected ? 'connected' : 'not_connected'}`}
+                            />
+                          </span>
+                        </td>
+                        <td>{status.error}</td>
+                      </tr>
+                    );
+                  })}
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <div class="card">
+          <h3 class="card-header">
             <Text id="systemSettings.containers" />
           </h3>
           <div class="table-responsive" style={{ maxHeight: '200px' }}>

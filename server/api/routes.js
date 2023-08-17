@@ -494,6 +494,10 @@ function getRoutes(gladys) {
       authenticated: true,
       controller: systemController.getContainers,
     },
+    'get /api/v1/system/service': {
+      authenticated: true,
+      controller: systemController.getServices,
+    },
     'post /api/v1/system/shutdown': {
       authenticated: true,
       admin: true,

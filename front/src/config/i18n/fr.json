@@ -1834,6 +1834,17 @@
       "paused": "En Pause",
       "exited": "Arrêté",
       "dead": "Mort"
+    },
+    "services": "Services",
+    "serviceName": "Nom",
+    "serviceConfigured": "Configuré",
+    "serviceConnected": "Connecté",
+    "serviceError": "Erreur",
+    "serviceState": {
+      "configured": "V",
+      "not_configured": "X",
+      "connected": "V",
+      "not_connected": "X"
     }
   },
   "newArea": {

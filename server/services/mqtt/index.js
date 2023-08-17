@@ -28,9 +28,33 @@ module.exports = function MqttService(gladys, serviceId) {
     mqttHandler.disconnect();
   }
 
+  /**
+   * @public
+   * @description Test if Mqtt is used.
+   * @returns {Promise<boolean>} Returns true if Mqtt is used.
+   * @example
+   *  const used = await gladys.services.mqtt.isUsed();
+   */
+  async function isUsed() {
+    return mqttHandler.connected;
+  }
+
+  /**
+   * @public
+   * @description Get Mqtt status.
+   * @returns {Promise<boolean>} Returns Mqtt status.
+   * @example
+   *  const used = await gladys.services.mqtt.getStatus();
+   */
+  async function getStatus() {
+    return mqttHandler.status();
+  }
+
   return Object.freeze({
     start,
     stop,
+    isUsed,
+    getStatus,
     device: mqttHandler,
     controllers: MqttController(mqttHandler),
   });
