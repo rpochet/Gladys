@@ -3,7 +3,6 @@ import { connect } from 'unistore/preact';
 import { Text } from 'preact-i18n';
 import BaseEditBox from '../baseEditBox';
 import actions from '../../../actions/dashboard/boxActions';
-import { GetUpsModes } from '../../../utils/consts';
 
 const EditUpsBox = ({ children, ...props }) => (
   <BaseEditBox {...props} titleKey="dashboard.boxTitle.ups">
@@ -30,6 +29,7 @@ const EditUpsBox = ({ children, ...props }) => (
         </label>
       </div>
       <div>
+        /*{' '}
         {Object.keys(GetUpsModes).map(key => {
           const mode = GetUpsModes[key];
           const label = `dashboard.boxes.ups.displayModes.${mode}`;
@@ -47,7 +47,8 @@ const EditUpsBox = ({ children, ...props }) => (
               </label>
             </div>
           );
-        })}
+        })}{' '}
+        */
       </div>
     </div>
   </BaseEditBox>

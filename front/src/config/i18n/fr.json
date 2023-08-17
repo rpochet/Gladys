@@ -348,6 +348,11 @@
         "displaySecond": "Afficher les secondes ?",
         "yes": "Oui",
         "no": "Non"
+      },
+      "ups": {
+        "status": "Statut",
+        "batteryVoltage": "Tension de la batterie",
+        "unknownError": "Une erreur est survenue lors du rafraichissement des UPS"
       }
     }
   },

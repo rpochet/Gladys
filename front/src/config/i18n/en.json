@@ -340,6 +340,11 @@
         "displaySecond": "Display seconds?",
         "yes": "Yes",
         "no": "No"
+      },
+      "ups": {
+        "status": "Status",
+        "batteryVoltage": "Battery voltage",
+        "unknownError": "We are unable to get UPS data"
       }
     }
   },

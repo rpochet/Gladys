@@ -7,7 +7,7 @@ const logger = require('../../../../utils/logger');
  * @example promisify(() => {})
  */
 function promisify(f) {
-  return function(...args) {
+  return function promisifyCallback(...args) {
     // return a wrapper-function (*)
     return new Promise((resolve, reject) => {
       /**
@@ -77,12 +77,14 @@ class NutClient {
     const nodes = {};
     try {
       const upslist = await this.GetUPSListP();
-      (await Promise.all(
-        Object.keys(upslist).map(async (upsName) => {
-          return [upsName, await this.GetUPSVarsP(upsName)];
-        }),
-      )).forEach((ups) => {
-        const [ upsName, upsVars ] = ups;
+      (
+        await Promise.all(
+          Object.keys(upslist).map(async (upsName) => {
+            return [upsName, await this.GetUPSVarsP(upsName)];
+          }),
+        )
+      ).forEach((ups) => {
+        const [upsName, upsVars] = ups;
         nodes[upsName] = upsVars;
       });
     } catch (err) {

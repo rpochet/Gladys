@@ -5,18 +5,21 @@ import style from './style.css';
 import cx from 'classnames';
 
 import { PARAM_NAMES } from '../../../../../server/services/ups/lib/constants';
+import { WEBSOCKET_MESSAGE_TYPES, DASHBOARD_BOX_TYPE } from '../../../../../server/utils/constants';
 import actions from '../../../actions/dashboard/boxes/ups';
 import { RequestStatus, GetUpsStatus, DASHBOARD_BOX_STATUS_KEY, DASHBOARD_BOX_DATA_KEY } from '../../../utils/consts';
 import get from 'get-value';
-
-const BOX_REFRESH_INTERVAL_MS = 30 * 60 * 1000;
+import RelativeTime from '../../device/RelativeTime';
 
 class UpsBox extends Component {
-  render({ ...props }) {
-    const { loading, upsObject } = props;
+  render({ user, ...props }) {
+    const { upsObject } = props;
     const name = upsObject.name;
     const status = upsObject.features.find(feature => feature.name === PARAM_NAMES.UPS_STATUS).last_value;
-    const battery = upsObject.features.find(feature => feature.name === PARAM_NAMES.BATTERY_CHARGE).last_value;
+
+    const batteryFeature = upsObject.features.find(feature => feature.name === PARAM_NAMES.BATTERY_CHARGE);
+    const { last_value: battery, last_value_changed: lastValueChanged } = batteryFeature;
+
     const batteryVoltage = upsObject.features.find(feature => feature.name === PARAM_NAMES.BATTERY_VOLTAGE).last_value;
     const batteryVoltageNominal = upsObject.features.find(
       feature => feature.name === PARAM_NAMES.BATTERY_VOLTAGE_NOMINAL
@@ -58,7 +61,7 @@ class UpsBox extends Component {
             </div>
             <div
               class={cx('dimmer', {
-                active: loading
+                active: props.boxStatus === RequestStatus.Getting
               })}
             >
               <div class="loader py-3" />
@@ -67,7 +70,9 @@ class UpsBox extends Component {
                   <table class="table card-table table-vcenter">
                     <tbody>
                       <tr>
-                        <td>Status: </td>
+                        <td>
+                          <Text id="dashboard.boxes.ups.status" />
+                        </td>
                         <td>
                           <i
                             class={cx('fe', {
@@ -103,11 +108,14 @@ class UpsBox extends Component {
                           <div class={cx(style.level, style[batteryLevelClassname])}>
                             <Text id="global.percentValue" fields={{ value: battery }} />
                           </div>
-                          <Text id="global.percentValue" fields={{ value: battery }} />
+                          <Text id="global.percentValue" fields={{ value: battery }} /> (
+                          <RelativeTime datetime={lastValueChanged} language={user.language} futureDisabled />)
                         </td>
                       </tr>
                       <tr>
-                        <td>Batterie voltage: </td>
+                        <td>
+                          <Text id="dashboard.boxes.ups.batteryVoltage" />
+                        </td>
                         <td>
                           {batteryVoltage} / {batteryVoltageNominal} <Text id={`deviceFeatureUnitShort.volt`} />
                         </td>
@@ -128,21 +136,26 @@ class UpsBoxComponent extends Component {
   refreshData = () => {
     this.props.getUps(this.props.box, this.props.x, this.props.y);
   };
-  componentDidMount() {
-    this.refreshData();
-    // refresh ups every interval
-    this.interval = setInterval(() => this.refreshData(), BOX_REFRESH_INTERVAL_MS);
-  }
 
-  componentDidUpdate(previousProps) {
-    const houseChanged = get(previousProps, 'box.house') !== get(this.props, 'box.house');
-    if (houseChanged) {
+  updateDeviceStateWebsocket = payload => {
+    if (payload.device_feature_selector.startsWith(DASHBOARD_BOX_TYPE.UPS)) {
       this.refreshData();
     }
+  };
+
+  componentDidMount() {
+    this.refreshData();
+    this.props.session.dispatcher.addListener(
+      WEBSOCKET_MESSAGE_TYPES.DEVICE.NEW_STATE,
+      this.updateDeviceStateWebsocket
+    );
   }
 
   componentWillUnmount() {
-    clearInterval(this.interval);
+    this.props.session.dispatcher.removeListener(
+      WEBSOCKET_MESSAGE_TYPES.DEVICE.NEW_STATE,
+      this.updateDeviceStateWebsocket
+    );
   }
 
   render(props, {}) {
@@ -152,8 +165,8 @@ class UpsBoxComponent extends Component {
 
     const upsObjectList = get(boxData, 'ups');
 
-    return <>{upsObjectList && upsObjectList.map(upsObject => <UpsBox upsObject={upsObject} />)}</>;
+    return <>{upsObjectList && upsObjectList.map(upsObject => <UpsBox user={props.user} upsObject={upsObject} />)}</>;
   }
 }
 
-export default connect('DashboardBoxDataUps,DashboardBoxStatusUps,user', actions)(UpsBoxComponent);
+export default connect('DashboardBoxDataUps,DashboardBoxStatusUps,user,session', actions)(UpsBoxComponent);
