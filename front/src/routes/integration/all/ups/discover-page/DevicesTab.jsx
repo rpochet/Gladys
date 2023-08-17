@@ -25,7 +25,7 @@ const UpsDevicesTab = ({ children, ...props }) => {
               searchPlaceHolder={<Text id="device.searchPlaceHolder" />}
             />
           </Localizer>
-          <button class="btn btn-outline-primary" onClick={props.scanNetwork}>
+          <button class="btn btn-outline-primary" onClick={props.getUpsDevices}>
             <Text id="integration.ups.discover.scanButton" /> <i class="fe fe-radio" />
           </button>
         </div>

@@ -234,7 +234,8 @@
       "devices": "Appareils",
       "chart": "Graphique",
       "ecowatt": "Ecowatt ( France )",
-      "clock": "Horloge"
+      "clock": "Horloge",
+      "ups": "Onduleur ASI"
     },
     "boxes": {
       "column": "Colonne {{index}}",
@@ -350,6 +351,11 @@
         "displaySecond": "Afficher les secondes ?",
         "yes": "Oui",
         "no": "Non"
+      },
+      "ups": {
+        "status": "Statut",
+        "batteryVoltage": "Tension de la batterie",
+        "unknownError": "Une erreur est survenue lors du rafraichissement des UPS"
       }
     }
   },
@@ -1140,11 +1146,11 @@
       "description": "Connexion à un serveur UPS, en local ou en distant.",
       "deviceTab": "Appareils",
       "discoverTab": "Découverte",
-      "setupTab": "Configuration",
+      "settingsTab": "Configuration",
       "status": {
         "notConfigured": "Le service UPS n'est pas configuré, veuillez vous rendre sur la ",
         "notConnected": "Gladys n'a pas réussi à se connecter au serveur UPS, plus d'informations sur la ",
-        "setupPageLink": "page de configuration du service UPS."
+        "settingsPageLink": "Page de configuration du service UPS."
       },
       "device": {
         "noDeviceDiscovered": "Aucun appareil UPS n'a encore été ajouté",
@@ -1152,7 +1158,7 @@
       },
       "discover": {
         "title": "Appareils UPS",
-        "noDeviceDiscovered": "Aucun appareil UPS n'a encore été ajouté. Veuillez cliquer sur le bouton Rechercher",        
+        "noDeviceDiscovered": "Aucun appareil UPS n'a encore été ajouté. Veuillez cliquer sur le bouton Rechercher",
         "scanButton": "Rechercher",
         "noNameLabel": "Pas de nom",
         "nameLabel": "Nom",
@@ -1169,17 +1175,25 @@
         "mostRecentValueAt": "Dernière valeur reçue {{mostRecentValueAt}}.",
         "noValueReceived": "Aucune valeur reçue."
       },
-      "setup": {
-        "title": "Configuration MQTT",
-        "upsDescription": "Vous pouvez connecter Gladys à un broker (serveur) MQTT pour envoyer et recevoir des messages MQTT. En savoir plus sur l'API Gladys MQTT <a href=\"https://gladysassistant.com/fr/docs/api/mqtt-api/\">ici</a>.",
+      "settings": {
+        "title": "Configuration UPS",
+        "mqttDescription": "Vous pouvez connecter Gladys à un broker (serveur) UPS pour envoyer et recevoir des messages UPS. En savoir plus sur l'API Gladys UPS <a href=\"https://gladysassistant.com/fr/docs/api/mqtt-api/\">ici</a>.",
+        "embeddedBrokerLabel": "Broker dans un conteneur Docker",
+        "nonDockerEnv": "Gladys ne s'exécute actuellement pas Docker, il est impossible d'installer le broker UPS depuis Gladys.",
+        "invalidDockerNetwork": "Gladys est basée sur une installation personalisée, pour installer le broker depuis cette page, le conteneur Docker de Gladys doit être démarré avec l'option \"network=host\".",
+        "installBrokerContainer": "Utiliser un broker dans un conteneur Docker.",
+        "brokerDockerNotInstalled": "Aucun broker n'est disponible actuellement sur votre environnement Docker, continuez pour installer et configurer le broker <a href=\"https://mosquitto.org/\">eclipse-mosquitto</a> dans un conteneur Docker.",
+        "installBrokerButton": "Installez le broker sur Docker",
+        "installingBrokerButton": "Installation en cours...",
+        "installBrokerError": "Une erreur est survenue lors de l'installation du conteneur Docker, veuillez consulter les logs Gladys.",
         "urlLabel": "URL du broker",
-        "urlPlaceholder": "Ex: mqtt://[adresse-broker-mqtt]:[port]",
+        "urlPlaceholder": "Ex: [adresse-broker-ups]:[port]",
         "saveLabel": "Sauvegarder la configuration",
         "error": "Une erreur s'est produite lors de l'enregistrement de la configuration.",
-        "connecting": "Configuration enregistrée. Connexion au broker MQTT en cours...",
-        "connected": "Connecté au broker MQTT avec succès !",
+        "connecting": "Configuration enregistrée. Connexion au broker UPS en cours...",
+        "connected": "Connecté au broker UPS avec succès !",
         "connectionError": "Erreur lors de la connexion, veuillez vérifier votre configuration.",
-        "disconnected": "Déconnecté du broker MQTT."
+        "disconnected": "Déconnecté du broker UPS."
       }
     },
     "broadlink": {
@@ -2725,6 +2739,12 @@
     "unknown": {
       "shortCategoryName": "Inconnu",
       "unknown": "Inconnu"
+    },
+    "ups": {
+      "status": "Status",
+      "battery": "Battery",
+      "battery-voltage": "Battery Voltage",
+      "battery-voltage-nominal": "Battery Voltage Nominal"
     }
   },
   "errorPage": {

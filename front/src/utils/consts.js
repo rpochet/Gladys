@@ -94,6 +94,12 @@ export const GetWeatherModes = {
   DailyForecast: 'dailyForecast'
 };
 
+export const GetUpsStatus = {
+  Getting: 'Getting',
+  GetError: 'GetError',
+  Success: 'Success'
+};
+
 export const DASHBOARD_BOX_STATUS_KEY = 'DashboardBoxStatus';
 export const DASHBOARD_BOX_DATA_KEY = 'DashboardBoxData';
 
@@ -308,5 +314,11 @@ export const DeviceFeatureCategoriesIcon = {
   },
   [DEVICE_FEATURE_CATEGORIES.UNKNOWN]: {
     [DEVICE_FEATURE_TYPES.UNKNOWN.UNKNOWN]: 'help-circle'
+  },
+  [DEVICE_FEATURE_CATEGORIES.UPS]: {
+    [DEVICE_FEATURE_TYPES.UPS.STATUS]: 'info',
+    [DEVICE_FEATURE_TYPES.UPS.BATTERY]: 'battery',
+    [DEVICE_FEATURE_TYPES.UPS.BATTERY_VOLTAGE]: 'zap',
+    [DEVICE_FEATURE_TYPES.UPS.BATTERY_VOLTAGE_NOMINAL]: 'zap'
   }
 };

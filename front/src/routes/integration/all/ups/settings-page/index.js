@@ -2,7 +2,7 @@ import { Component } from 'preact';
 import { connect } from 'unistore/preact';
 import actions from './actions';
 import UpsPage from '../UpsPage';
-import SetupTab from './SetupTab';
+import SettingsTab from './SettingsTab';
 import { WEBSOCKET_MESSAGE_TYPES } from '../../../../../../../server/utils/constants';
 
 class UpsNodePage extends Component {
@@ -28,13 +28,13 @@ class UpsNodePage extends Component {
   render(props, {}) {
     return (
       <UpsPage>
-        <SetupTab {...props} />
+        <SettingsTab {...props} />
       </UpsPage>
     );
   }
 }
 
 export default connect(
-  'user,session,httpClient,connectMqttStatus,upsConnected,upsConnectionError',
+  'user,session,httpClient,nutUrl,useEmbeddedBroker,brokerContainerAvailable,dockerBased,networkModeValid,connectUpsStatus,upsConnected,upsConnectionError',
   actions
 )(UpsNodePage);

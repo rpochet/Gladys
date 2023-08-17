@@ -21,6 +21,15 @@ class UpsNodePage extends Component {
 }
 
 export default connect(
-  ['session','user','upsDevices','houses','currentIntegration','getUpsDevicesStatus','upsDeviceSearch','getUpsDeviceOrderDir'],
+  [
+    'session',
+    'user',
+    'upsDevices',
+    'houses',
+    'currentIntegration',
+    'getUpsDevicesStatus',
+    'upsDeviceSearch',
+    'getUpsDeviceOrderDir'
+  ],
   actions
 )(UpsNodePage);

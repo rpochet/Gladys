@@ -22,15 +22,12 @@ class CheckUpsPanel extends Component {
     return (
       <div class="alert alert-warning">
         <Text id={messageKey} />
-        <Link href="/dashboard/integration/device/ups/setup">
-          <Text id="integration.ups.status.setupPageLink" />
+        <Link href="/dashboard/integration/device/ups/settings">
+          <Text id="integration.ups.status.settingsPageLink" />
         </Link>
       </div>
     );
   }
 }
 
-export default connect(
-  'user,session,connected,configured',
-  actions
-)(CheckUpsPanel);
+export default connect('user,session,connected,configured', actions)(CheckUpsPanel);

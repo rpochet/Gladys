@@ -4,22 +4,6 @@ import { RequestStatus } from '../../../../../utils/consts';
 const createActions = store => {
   const integrationActions = createActionsIntegration(store);
   const actions = {
-    async getUsbPorts(state) {
-      store.setState({
-        zwaveGetUsbPortStatus: RequestStatus.Getting
-      });
-      try {
-        const usbPorts = await state.httpClient.get('/api/v1/service/usb/port');
-        store.setState({
-          usbPorts,
-          zwaveGetUsbPortStatus: RequestStatus.Success
-        });
-      } catch (e) {
-        store.setState({
-          zwaveGetUsbPortStatus: RequestStatus.Error
-        });
-      }
-    },
     async getConfiguration(state) {
       store.setState({
         zwaveGetConfigurationStatus: RequestStatus.Getting

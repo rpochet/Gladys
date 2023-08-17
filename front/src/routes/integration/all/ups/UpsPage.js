@@ -36,14 +36,14 @@ const DashboardSettings = ({ children }) => (
                   </Link>
 
                   <Link
-                    href="/dashboard/integration/device/ups/setup"
+                    href="/dashboard/integration/device/ups/settings"
                     activeClassName="active"
                     class="list-group-item list-group-item-action d-flex align-items-center"
                   >
                     <span class="icon mr-3">
                       <i class="fe fe-sliders" />
                     </span>
-                    <Text id="integration.ups.setupTab" />
+                    <Text id="integration.ups.settingsTab" />
                   </Link>
                 </div>
               </div>

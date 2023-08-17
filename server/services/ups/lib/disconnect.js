@@ -1,21 +1,12 @@
 const logger = require('../../../utils/logger');
 
 /**
- * @description Disconnect to all topics.
- * @example
- * disconnect();
+ * @description Disconnect from all UPS systems.
+ * @example disconnect();
  */
-function disconnect() {
-  this.connected = false;
-
-  if (this.mqttClient) {
-    logger.debug(`Disconnecting existing MQTT server...`);
-    this.mqttClient.end();
-    this.mqttClient.removeAllListeners();
-    this.mqttClient = null;
-  } else {
-    logger.debug('Not connected');
-  }
+async function disconnect() {
+  logger.info('Disconnecting to UPS...');
+  this.upsNut.close();
 }
 
 module.exports = {
