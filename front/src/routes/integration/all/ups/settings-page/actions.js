@@ -4,7 +4,7 @@ import { RequestStatus } from '../../../../../utils/consts';
 const createActions = store => {
   const integrationActions = createActionsIntegration(store);
   const actions = {
-    async loadStatus(state) {
+    async getStatus(state) {
       let upsStatus = {
         configured: false,
         connected: false
@@ -15,7 +15,7 @@ const createActions = store => {
         store.setState(upsStatus);
       }
     },
-    async loadProps(state) {
+    async getConfiguration(state) {
       let configuration = {};
       try {
         configuration = await state.httpClient.get('/api/v1/service/ups/config');
