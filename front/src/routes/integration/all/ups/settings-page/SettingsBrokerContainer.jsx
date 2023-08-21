@@ -7,7 +7,7 @@ class SetupBrokerContainer extends Component {
     this.setState({ installing: RequestStatus.Getting });
     try {
       await this.props.httpClient.post('/api/v1/service/ups/config/docker');
-      await this.props.loadProps();
+      await this.props.getConfiguration();
       this.props.updateConfiguration({ useEmbeddedBroker: true });
       this.setState({ installing: RequestStatus.Success });
     } catch (e) {

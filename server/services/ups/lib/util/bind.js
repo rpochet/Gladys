@@ -13,6 +13,7 @@ function unbind(name, value) {
     case PARAM_NAMES.UPS_STATUS:
       switch (value) {
         case STATUS.ONLINE:
+        case STATUS.ONLINE_CHARGING:
           return UPS_MODE.ONLINE;
         case STATUS.LOW_BATTERY:
           return UPS_MODE.LOW_BATTERY;

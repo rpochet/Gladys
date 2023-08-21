@@ -7,7 +7,7 @@ import cx from 'classnames';
 import { PARAM_NAMES } from '../../../../../server/services/ups/lib/constants';
 import { WEBSOCKET_MESSAGE_TYPES, DASHBOARD_BOX_TYPE } from '../../../../../server/utils/constants';
 import actions from '../../../actions/dashboard/boxes/ups';
-import { RequestStatus, GetUpsStatus, DASHBOARD_BOX_STATUS_KEY, DASHBOARD_BOX_DATA_KEY } from '../../../utils/consts';
+import { RequestStatus, DASHBOARD_BOX_DATA_KEY } from '../../../utils/consts';
 import get from 'get-value';
 import RelativeTime from '../../device/RelativeTime';
 
@@ -25,7 +25,7 @@ class UpsBox extends Component {
       feature => feature.name === PARAM_NAMES.BATTERY_VOLTAGE_NOMINAL
     ).last_value;
 
-    const batteryLevelClassname = `level-${(battery / 10) * 10}`;
+    const batteryLevelClassname = `level-${Math.round(battery / 10) * 10}`;
 
     return (
       <div class="card">
@@ -49,7 +49,7 @@ class UpsBox extends Component {
             <div class="card-body">
               <div class="dimmer active">
                 <div class="loader" />
-                <div class="dimmer-content" style={padding} />
+                <div class="dimmer-content" />
               </div>
             </div>
           </div>
@@ -76,35 +76,29 @@ class UpsBox extends Component {
                         <td>
                           <i
                             class={cx('fe', {
-                              'fe-zap': status === 0,
-                              'fe-zap-off': status !== 0
+                              'fe-zap': status <= 1,
+                              'fe-zap-off': status > 1
                             })}
-                          ></i>
+                          />
                           <i
-                            class={cx('fe', {
-                              'fe-chevrons-right': status === 0,
-                              [style['status-ok']]: status === 0,
-                              [style['status-nok']]: status !== 0
+                            class={cx('fe', 'fe-chevrons-right', {
+                              [style['status-ok']]: status <= 1,
+                              [style['status-nok']]: status > 1
                             })}
-                          ></i>
+                          />
                           <i
-                            class={cx('fe', {
-                              'fe-battery': status === 0,
-                              'fe-battery-charging': status === 0 && battery < 100
+                            class={cx('fe', 'fe-battery', {
+                              'fe-battery-charging': status <= 1 && battery < 100,
+                              [style['status-nok']]: status > 1
                             })}
-                          ></i>
+                          />
                           <i
-                            class={cx('fe', {
-                              'fe-chevrons-right': status === 0,
-                              [style['status-ok']]: status === 0,
-                              [style['status-nok']]: status !== 0
+                            class={cx('fe', 'fe-chevrons-right', {
+                              [style['status-ok']]: status <= 1,
+                              [style['status-nok']]: status > 1
                             })}
-                          ></i>
-                          <i
-                            class={cx('fe', {
-                              'fe-home': status === 0
-                            })}
-                          ></i>
+                          />
+                          <i class={cx('fe', 'fe-home')}/>
                           <div class={cx(style.level, style[batteryLevelClassname])}>
                             <Text id="global.percentValue" fields={{ value: battery }} />
                           </div>
@@ -160,8 +154,6 @@ class UpsBoxComponent extends Component {
 
   render(props, {}) {
     const boxData = get(props, `${DASHBOARD_BOX_DATA_KEY}Ups.${props.x}_${props.y}`);
-    const boxStatus = get(props, `${DASHBOARD_BOX_STATUS_KEY}Ups.${props.x}_${props.y}`);
-    const displayMode = this.props.box.modes || {};
 
     const upsObjectList = get(boxData, 'ups');
 

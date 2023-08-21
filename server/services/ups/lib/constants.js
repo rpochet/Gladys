@@ -8,7 +8,8 @@ const CONFIGURATION = {
 
 const STATUS = {
   ONLINE: 'OL',
-  ON_BATTERY: 'OB',
+  ONLINE_CHARGING: 'OL CHRG',
+  ON_BATTERY: 'OB DISCHRG',
   LOW_BATTERY: 'LB',
 };
 

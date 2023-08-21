@@ -28,28 +28,6 @@ const EditUpsBox = ({ children, ...props }) => (
           <Text id="dashboard.boxes.ups.editModeLabel" />
         </label>
       </div>
-      <div>
-        /*{' '}
-        {Object.keys(GetUpsModes).map(key => {
-          const mode = GetUpsModes[key];
-          const label = `dashboard.boxes.ups.displayModes.${mode}`;
-          return (
-            <div className="form-check">
-              <input
-                type="checkbox"
-                className="form-check-input"
-                name={mode}
-                checked={props.box.modes !== undefined && props.box.modes[mode]}
-                onChange={props.updateBoxModes}
-              />
-              <label className="form-check-label">
-                <Text id={label} />
-              </label>
-            </div>
-          );
-        })}{' '}
-        */
-      </div>
     </div>
   </BaseEditBox>
 );
