@@ -94,7 +94,7 @@ class NutClient {
   }
 
   close() {
-    logger.info(`cLosing UPS Connection ${this.nutHost}:${this.nutPort}.`);
+    logger.info(`Closing UPS Connection ${this.nutHost}:${this.nutPort}.`);
     return new Promise((resolve, reject) => {
       resolve();
     });

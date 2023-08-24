@@ -24,13 +24,6 @@ const AC_MODE = {
   HEATING: 2,
 };
 
-const UPS_MODE = {
-  ONLINE: 0,
-  ON_BATTERY: 1,
-  LOW_BATTERYNG: 2,
-  UNKNOWN: 3,
-};
-
 const USER_ROLE = {
   ADMIN: 'admin',
   HABITANT: 'habitant',
@@ -545,6 +538,12 @@ const DEVICE_FEATURE_TYPES = {
   },
 };
 
+const UPS_MODE = {
+  ONLINE: 1,
+  ON_BATTERY: 2,
+  LOW_BATTERY: 3,
+};
+
 const DEVICE_FEATURE_UNITS = {
   // Temperature units
   CELSIUS: 'celsius',
@@ -790,11 +789,7 @@ const DEVICE_FEATURE_MINMAX_BY_TYPE = {
   },
   [DEVICE_FEATURE_TYPES.BATTERY.INTEGER]: {
     min: 0,
-    max: 100,
-  },
-  [DEVICE_FEATURE_TYPES.UPS.STATUS]: {
-    min: 0,
-    max: Object.keys(UPS_MODE).length,
+    max: 10,
   },
   [DEVICE_FEATURE_TYPES.UPS.BATTERY]: {
     min: 0,

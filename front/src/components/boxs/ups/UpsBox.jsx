@@ -4,7 +4,7 @@ import { Text } from 'preact-i18n';
 import style from './style.css';
 import cx from 'classnames';
 
-import { PARAM_NAMES } from '../../../../../server/services/ups/lib/constants';
+import { PARAM_NAMES, DEFAULT } from '../../../../../server/services/ups/lib/constants';
 import { WEBSOCKET_MESSAGE_TYPES, DASHBOARD_BOX_TYPE } from '../../../../../server/utils/constants';
 import actions from '../../../actions/dashboard/boxes/ups';
 import { RequestStatus, DASHBOARD_BOX_DATA_KEY } from '../../../utils/consts';
@@ -26,6 +26,7 @@ class UpsBox extends Component {
     ).last_value;
 
     const batteryLevelClassname = `level-${Math.round(battery / 10) * 10}`;
+    const statusHigh = Math.round(status / (10**DEFAULT.MAX_STATUS_LENGTH));
 
     return (
       <div class="card">
@@ -76,26 +77,26 @@ class UpsBox extends Component {
                         <td>
                           <i
                             class={cx('fe', {
-                              'fe-zap': status <= 1,
-                              'fe-zap-off': status > 1
+                              'fe-zap': statusHigh <= 1,
+                              'fe-zap-off': statusHigh > 1
                             })}
                           />
                           <i
                             class={cx('fe', 'fe-chevrons-right', {
-                              [style['status-ok']]: status <= 1,
-                              [style['status-nok']]: status > 1
+                              [style['status-ok']]: statusHigh <= 1,
+                              [style['status-nok']]: statusHigh > 1
                             })}
                           />
                           <i
                             class={cx('fe', 'fe-battery', {
-                              'fe-battery-charging': status <= 1 && battery < 100,
-                              [style['status-nok']]: status > 1
+                              'fe-battery-charging': statusHigh <= 1 && battery < 100,
+                              [style['status-nok']]: statusHigh > 1
                             })}
                           />
                           <i
                             class={cx('fe', 'fe-chevrons-right', {
-                              [style['status-ok']]: status <= 1,
-                              [style['status-nok']]: status > 1
+                              [style['status-ok']]: statusHigh <= 1,
+                              [style['status-nok']]: statusHigh > 1
                             })}
                           />
                           <i class={cx('fe', 'fe-home')}/>
