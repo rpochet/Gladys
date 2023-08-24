@@ -28,11 +28,19 @@ class SettingsTab extends Component {
           </p>
         );
         break;
-      case RequestStatus.Success:
+      case RequestStatus.Getting:
         // Updating setup with success = connecting...
         alertMessage = (
           <p class="alert alert-info">
             <Text id="integration.ups.settings.connecting" />
+          </p>
+        );
+        break;
+      case RequestStatus.Success:
+        // Updating setup with success = connected...
+        alertMessage = (
+          <p class="alert alert-info">
+            <Text id="integration.ups.settings.connected" />
           </p>
         );
         break;

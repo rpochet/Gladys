@@ -7,10 +7,18 @@ const CONFIGURATION = {
 };
 
 const STATUS = {
+  CAL: 'CAL',
+  TRIM: 'TRIM',
+  BOOST: 'BOOST',
   ONLINE: 'OL',
-  ONLINE_CHARGING: 'OL CHRG',
-  ON_BATTERY: 'OB DISCHRG',
+  ON_BATTERY: 'OB',
+  OVER: 'OVER',
   LOW_BATTERY: 'LB',
+  REPLACE_BATTERY: 'RB',
+  BYPASS: 'BYPASS',
+  OFF: 'OFF',
+  CHARGING: 'CHRG',
+  DISCHARGING: 'DISCHRG',
 };
 
 const PARAM_NAMES = {
@@ -68,9 +76,10 @@ const PARAM_NAMES = {
 };
 
 const DEFAULT = {
-  UPS_URL: 'localhost:9443',
+  UPS_URL: 'localhost:3493',
   NUT_HOST: '192.168.1.4',
-  NUT_PORT: 9443,
+  NUT_PORT: 3493,
+  MAX_STATUS_LENGTH: 2,
 };
 
 module.exports = {

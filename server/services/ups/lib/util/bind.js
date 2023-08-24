@@ -1,5 +1,6 @@
 const { UPS_MODE } = require('../../../../utils/constants');
-const { PARAM_NAMES, STATUS } = require('../constants');
+const logger = require('../../../../utils/logger');
+const { PARAM_NAMES, STATUS, DEFAULT } = require('../constants');
 
 /**
  * @description Convert UPS value.
@@ -9,22 +10,27 @@ const { PARAM_NAMES, STATUS } = require('../constants');
  * @example unbind('ups.status', '0L');
  */
 function unbind(name, value) {
-  switch (name) {
-    case PARAM_NAMES.UPS_STATUS:
-      switch (value) {
+  if (name === PARAM_NAMES.UPS_STATUS) {
+    const statuses = value.split(' ');
+    let result = 0;
+    statuses.forEach((status, idx) => {
+      switch (status) {
         case STATUS.ONLINE:
-        case STATUS.ONLINE_CHARGING:
-          return UPS_MODE.ONLINE;
-        case STATUS.LOW_BATTERY:
-          return UPS_MODE.LOW_BATTERY;
+          result += (10**(DEFAULT.MAX_STATUS_LENGTH - idx) * UPS_MODE.ONLINE);
+          break;
         case STATUS.ON_BATTERY:
-          return UPS_MODE.ON_BATTERY;
+          result += (10**(DEFAULT.MAX_STATUS_LENGTH - idx) * UPS_MODE.ON_BATTERY);
+          break;
+        case STATUS.LOW_BATTERY:
+          result += (10**(DEFAULT.MAX_STATUS_LENGTH - idx) * UPS_MODE.LOW_BATTERY);
+          break;
         default:
-          return UPS_MODE.UNKNOWN;
+          logger.warn(`UPS Status unknown ${status}`);
       }
-    default:
-      return value;
+    });
+    return result;
   }
+  return value;
 }
 
 module.exports = {
