@@ -39,7 +39,7 @@ module.exports = function UpsController(upsHandler) {
   async function saveConfiguration(req, res) {
     await upsHandler.disconnect();
     await upsHandler.saveConfiguration(req.body);
-    await upsHandler.connect();
+    await upsHandler.init();
     const configuration = await upsHandler.getConfiguration();
     res.json(configuration);
   }

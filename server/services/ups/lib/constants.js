@@ -4,6 +4,7 @@ const UPS_TYPES = {
 
 const CONFIGURATION = {
   URL: 'UPS_NUT_URL',
+  NUT_EMBEDDED_BROKER: 'NUT_EMBEDDED_BROKER',
 };
 
 const STATUS = {

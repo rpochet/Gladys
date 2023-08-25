@@ -53,7 +53,7 @@ class NutClient {
     });
 
     this.upsNut.on('ready', async () => {
-      logger.info(`UPS Connected.`);
+      logger.info(`UPS Connected`);
       this.connected = true;
     });
   }

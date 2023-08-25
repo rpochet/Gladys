@@ -6,7 +6,7 @@
 function getStatus() {
   return {
     configured: this.configured,
-    connected: this.upsNut.isConnected(),
+    connected: this.upsNut && this.upsNut.isConnected(),
   };
 }
 
