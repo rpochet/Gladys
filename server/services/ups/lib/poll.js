@@ -8,6 +8,10 @@ const { getDeviceExternalId } = require('./util/externalId');
  * @example poll({});
  */
 async function poll(device) {
+  if (!this.connected || this.upsNut === undefined) {
+    return;
+  }
+
   const nodes = await this.upsNut.getNodes();
   Object.keys(nodes)
     .map((nodeId) => nodes[nodeId])

@@ -6,7 +6,9 @@ const logger = require('../../../utils/logger');
  */
 async function disconnect() {
   logger.info('Disconnecting to UPS...');
-  this.upsNut.close();
+  if (this.upsNut !== undefined) {
+    this.upsNut.close();
+  }
 }
 
 module.exports = {
