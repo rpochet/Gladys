@@ -17,7 +17,8 @@ async function getConfiguration() {
 
   // Look for broker docker image
   if (dockerBased) {
-    networkModeValid = await this.checkDockerNetwork();
+    const gladysNetworkMode = await this.gladys.system.getNetworkMode();
+    networkModeValid = gladysNetworkMode === 'host';
 
     const useEmbeddedBrokerVariable = await this.gladys.variable.getValue(
       CONFIGURATION.NUT_EMBEDDED_BROKER,
