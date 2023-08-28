@@ -791,6 +791,10 @@ const DEVICE_FEATURE_MINMAX_BY_TYPE = {
     min: 0,
     max: 10,
   },
+  [DEVICE_FEATURE_TYPES.UPS.STATUS]: {
+    min: 0,
+    max: Object.keys(UPS_MODE).length - 1,
+  },
   [DEVICE_FEATURE_TYPES.UPS.BATTERY]: {
     min: 0,
     max: 100,
