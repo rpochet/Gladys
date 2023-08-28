@@ -1,6 +1,7 @@
 const { DEVICE_FEATURE_TYPES, EVENTS } = require('../../../utils/constants');
 const { unbind } = require('./util/bind');
 const { getDeviceExternalId } = require('./util/externalId');
+const logger = require('../../../utils/logger');
 
 /**
  * @description Get device feature.
@@ -8,7 +9,8 @@ const { getDeviceExternalId } = require('./util/externalId');
  * @example poll({});
  */
 async function poll(device) {
-  if (!this.connected || this.upsNut === undefined) {
+  if (this.upsNut === undefined) {
+    logger.warn(`Unable to poll device ${device.name}: UPS not initialized`);
     return;
   }
 
