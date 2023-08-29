@@ -72,9 +72,6 @@ class UpsBox extends Component {
                     <tbody>
                       <tr>
                         <td>
-                          <Text id="dashboard.boxes.ups.status" />
-                        </td>
-                        <td>
                           <i
                             class={cx('fe', {
                               'fe-zap': statusHigh <= 1,
@@ -100,6 +97,8 @@ class UpsBox extends Component {
                             })}
                           />
                           <i class={cx('fe', 'fe-home')}/>
+                        </td>
+                        <td>
                           <div class={cx(style.level, style[batteryLevelClassname])}>
                             <Text id="global.percentValue" fields={{ value: battery }} />
                           </div>
