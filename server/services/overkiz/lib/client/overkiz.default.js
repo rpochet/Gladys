@@ -1,11 +1,10 @@
-
 const logger = require('../../../../utils/logger');
 const { ServiceNotConfiguredError } = require('../../../../utils/coreErrors');
 
 class DefaultLoginHandler {
   constructor(server, username, password) {
     this.server = server;
-    if(server.jwt === false || server.configuration === undefined) {
+    if (server.jwt === false || server.configuration === undefined) {
       throw new ServiceNotConfiguredError('');
     }
     this.username = username;
@@ -13,7 +12,7 @@ class DefaultLoginHandler {
   }
 
   async login() {
-    
+    logger.info(`Login to ${this.server}`);
   }
 }
 

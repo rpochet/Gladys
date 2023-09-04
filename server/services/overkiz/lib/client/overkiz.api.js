@@ -2,7 +2,9 @@ const axios = require('axios');
 const logger = require('../../../../utils/logger');
 
 class API {
-  constructor({host, platformLoginHandler, polling}) {
+  constructor({ host, platformLoginHandler, polling }) {
+    logger.info(`Connecting to Overkiz ${host}`);
+
     this.platformLoginHandler = platformLoginHandler;
     this.polling = polling;
     this.client = axios.create({
@@ -14,7 +16,6 @@ class API {
       config.headers.common.Cookie = `${this.platformLoginHandler.cookie}`;
       return config;
     });
-
   }
 
   async getSetup() {
@@ -26,7 +27,7 @@ class API {
   }
 
   async getDevices() {
-    return this.get(`/setup/devices`);    
+    return this.get(`/setup/devices`);
   }
 
   async exec(payload) {
@@ -50,7 +51,7 @@ class API {
     try {
       return await callback.call();
     } catch (e) {
-      if (e.isAxiosError && e.response.status === 401) {
+      if (e.isAxiosError && e.response && e.response.status === 401) {
         await this.platformLoginHandler.login();
         return callback.call();
       }

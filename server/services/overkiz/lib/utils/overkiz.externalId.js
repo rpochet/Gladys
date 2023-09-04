@@ -1,6 +1,6 @@
 /**
  * @description Return name of device.
- * @param {object} node - The zwave value.
+ * @param {object} node - The Overkiz value.
  * @returns {string} Return name.
  * @example
  * getDeviceName(node);
@@ -11,7 +11,7 @@ function getDeviceName(node) {
 
 /**
  * @description Return external id of device.
- * @param {object} node - The zwave value.
+ * @param {object} node - The Overkiz value.
  * @returns {string} Return external id.
  * @example
  * getDeviceExternalId(node);

@@ -1523,6 +1523,7 @@
         "defaultDeletionError": "There was an error deleting the device.",
         "conflictError": "Current device is already in Gladys."
       }
+<<<<<<< HEAD
     },
     "sunspec": {
       "title": "SunSpec",
@@ -1579,6 +1580,8 @@
         "deleteButtonTooltip": "Delete",
         "maskFormatError": "Invalid CIDR format"
       }
+=======
+>>>>>>> overkiz
     }
   },
   "editScene": {

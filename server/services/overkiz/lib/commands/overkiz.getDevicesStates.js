@@ -2,16 +2,17 @@ const logger = require('../../../../utils/logger');
 const { getDeviceFeatureExternalId, getNodeStateInfoByExternalId } = require('../utils/overkiz.externalId');
 const { unbindValue } = require('../utils/overkiz.bindValue');
 const { EVENTS, DEVICE_FEATURE_CATEGORIES } = require('../../../../utils/constants');
+const { DEVICE_STATES } = require('../overkiz.constants');
 
 /**
  * @description Update device states.
- * @param {object} device - Deviceto update states.
+ * @param {object} device - Device to update states.
  * @returns {Promise<object>} Return Object of informations.
  * @example
  * overkiz.getDevicesStates();
  */
 async function getDevicesStates(device) {
-  logger.info(`Overkiz : Get device state...`);
+  logger.info(`Overkiz : Get devices state...`);
 
   device.features.map(async (feature) => {
     const { deviceURL } = getNodeStateInfoByExternalId(feature);
@@ -22,12 +23,16 @@ async function getDevicesStates(device) {
 
     deviceStates.forEach((state) => {
       switch (state.name) {
-        case 'core:ComfortRoomTemperatureState':
-        case 'core:EcoRoomTemperatureState':
-        case 'core:TargetTemperatureState': // Consigne
-        case 'io:EffectiveTemperatureSetpointState':
-        case 'io:TargetHeatingLevelState': // Mode
+        case DEVICE_STATES.COMFORT_TEMPERATURE_STATE:
+        case DEVICE_STATES.TARGET_TEMPERATURE_STATE: // Consigne
+        case DEVICE_STATES.ECO_TEMPERATURE_STATE:
+        case DEVICE_STATES.HEATING_LEVEL_STATE: // Mode
           logger.info(`${state.name} has value ${state.value}`);
+          break;
+        case 'core:EcoRoomTemperatureState':
+          logger.warn(
+            `${state.name} has value ${state.value} BUT SHOULD NOT IT BE io:EffectiveTemperatureSetpointState`,
+          );
           break;
         default:
         //
@@ -36,8 +41,8 @@ async function getDevicesStates(device) {
 
     deviceStates.forEach((state) => {
       const deviceFeatureExternalId = getDeviceFeatureExternalId({ URL: deviceURL }, state.name);
-      const newValueUnbind = unbindValue(device, state.name, state.value);
       const deviceFeature = this.gladys.stateManager.get('deviceFeatureByExternalId', deviceFeatureExternalId);
+      const newValueUnbind = unbindValue(device, deviceFeature, state.value);
       if (deviceFeature) {
         if (deviceFeature.category !== DEVICE_FEATURE_CATEGORIES.PRESENCE_SENSOR || newValueUnbind !== 0) {
           this.eventManager.emit(EVENTS.DEVICE.NEW_STATE, {
