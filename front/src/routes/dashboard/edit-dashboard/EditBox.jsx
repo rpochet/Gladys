@@ -11,6 +11,7 @@ import EditClock from '../../../components/boxs/clock/EditClock';
 import EditUpsBox from '../../../components/boxs/ups/EditUpsBox';
 
 import SelectBoxType from '../../../components/boxs/SelectBoxType';
+import EditSceneBox from '../../../components/boxs/scene/EditSceneBox';
 
 const Box = ({ children, ...props }) => {
   switch (props.box.type) {
@@ -34,8 +35,13 @@ const Box = ({ children, ...props }) => {
       return <EditEcowatt {...props} />;
     case 'clock':
       return <EditClock {...props} />;
+<<<<<<< HEAD
     case 'ups':
       return <EditUpsBox {...props} />;
+=======
+    case 'scene':
+      return <EditSceneBox {...props} />;
+>>>>>>> sunspec
     default:
       return <SelectBoxType {...props} />;
   }

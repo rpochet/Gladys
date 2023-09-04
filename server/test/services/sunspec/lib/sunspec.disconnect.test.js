@@ -3,9 +3,13 @@ const sinon = require('sinon');
 
 const { fake, assert } = sinon;
 
+const proxyquire = require('proxyquire');
 const ModbusTCPMock = require('./utils/ModbusTCPMock.test');
 
-const SunSpecManager = require('../../../../services/sunspec/lib');
+const SunSpecManager = proxyquire('../../../../services/sunspec/lib', {
+  ModbusTCP: { ModbusTCP: ModbusTCPMock },
+  modbus: ModbusTCPMock,
+});
 
 const SERVICE_ID = 'faea9c35-759a-44d5-bcc9-2af1de37b8b4';
 
@@ -25,6 +29,9 @@ describe('SunSpec disconnect', () => {
     };
 
     sunSpecManager = new SunSpecManager(gladys, ModbusTCPMock, SERVICE_ID);
+    sunSpecManager.modbus = {
+      close: fake.returns(null),
+    };
   });
 
   it('should disconnect - not connected', async () => {
@@ -34,8 +41,6 @@ describe('SunSpec disconnect', () => {
   });
 
   it('should disconnect', async () => {
-    sunSpecManager.modbus.close = fake.returns(null);
-
     await sunSpecManager.disconnect();
 
     assert.calledOnce(sunSpecManager.modbus.close);

@@ -161,7 +161,6 @@ import UpsDevicePage from '../routes/integration/all/ups/device-page';
 import UpsDiscoverPage from '../routes/integration/all/ups/discover-page';
 import UpsSettingsPage from '../routes/integration/all/ups/settings-page';
 
-
 const defaultState = getDefaultState();
 const store = createStore(defaultState);
 

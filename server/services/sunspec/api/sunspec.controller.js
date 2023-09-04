@@ -22,17 +22,17 @@ module.exports = function SunSpecController(sunspecManager) {
   }
 
   /**
-   * @api {get} /api/v1/service/sunspec/configuration Get SunSpec configuration
+   * @api {get} /api/v1/service/sunspec/config Get SunSpec configuration
    * @apiName getConfiguration
    * @apiGroup SunSpec
    */
-  function getConfiguration(req, res) {
-    const configuration = sunspecManager.getConfiguration();
+  async function getConfiguration(req, res) {
+    const configuration = await sunspecManager.getConfiguration();
     res.json(configuration);
   }
 
   /**
-   * @api {post} /api/v1/service/sunspec/configuration Update configuration
+   * @api {post} /api/v1/service/sunspec/config Update configuration
    * @apiName updateConfiguration
    * @apiGroup SunSpec
    */
@@ -40,7 +40,8 @@ module.exports = function SunSpecController(sunspecManager) {
     await sunspecManager.updateConfiguration(req.body);
     await sunspecManager.disconnect();
     await sunspecManager.connect();
-    const configuration = sunspecManager.getConfiguration();
+    const configuration = await sunspecManager.getConfiguration();
+    sunspecManager.bdpvInit(configuration.bdpvActive);
     res.json(configuration);
   }
 
@@ -93,11 +94,11 @@ module.exports = function SunSpecController(sunspecManager) {
       authenticated: false,
       controller: asyncMiddleware(getStatus),
     },
-    'get /api/v1/service/sunspec/configuration': {
+    'get /api/v1/service/sunspec/config': {
       authenticated: true,
       controller: asyncMiddleware(getConfiguration),
     },
-    'post /api/v1/service/sunspec/configuration': {
+    'post /api/v1/service/sunspec/config': {
       authenticated: true,
       controller: asyncMiddleware(updateConfiguration),
     },

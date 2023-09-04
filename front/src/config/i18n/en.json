@@ -227,7 +227,11 @@
       "chart": "Chart",
       "ecowatt": "Ecowatt (France)",
       "clock": "Clock",
+<<<<<<< HEAD
       "ups": "UPS Inverter"
+=======
+      "scene": "Scene"
+>>>>>>> sunspec
     },
     "boxes": {
       "column": "Column {{index}}",
@@ -345,10 +349,17 @@
         "yes": "Yes",
         "no": "No"
       },
+<<<<<<< HEAD
       "ups": {
         "status": "Status",
         "batteryVoltage": "Battery voltage",
         "unknownError": "We are unable to get UPS data"
+=======
+      "scene": {
+        "editNameLabel": "Enter the name of this box",
+        "editNamePlaceholder": "Name displayed on the dashboard",
+        "editSceneLabel": "Select the scene you want to display here."
+>>>>>>> sunspec
       }
     }
   },
@@ -1000,6 +1011,7 @@
         "connecting": "Configuration saved. Now connecting to your MQTT broker...",
         "connected": "Connected to the MQTT broker with success !",
         "connectionError": "Error while connecting, please check your configuration.",
+        "networkError": "Unable to contact Gladys, is your Gladys instance connected and accessible?",
         "disconnected": "Disconnected from MQTT broker."
       }
     },
@@ -1435,7 +1447,8 @@
         "error": "An error occured while saving configuration.",
         "connecting": "Configuration saved. Now connecting to your eWeLink cloud account...",
         "connected": "Connected to the eWeLink cloud account with success !",
-        "connectionError": "Error while connecting, please check your configuration."
+        "connectionError": "Error while connecting, please check your configuration.",
+        "ewelinkIntegrationDeprecated": "September 2023: Unfortunately, this integration no longer seems to work due to changes in the eWeLink API."
       },
       "error": {
         "defaultError": "There was an error saving the device.",
@@ -1446,13 +1459,12 @@
     "openai": {
       "title": "OpenAI ChatGPT",
       "description": "Give Gladys the power of artifical intelligence",
-      "firstExplanation": "This is an alpha integration that let you talk to OpenAI ChatGPT.",
-      "itDoesNothing": "This tab is a sandbox allowing you to test the capabilities of ChatGPT. To test real home automation commands, activate ChatGPT in the Gladys chat.",
-      "aFewExamples": "A few examples: ",
+      "firstExplanation": "Gladys can use OpenAI ChatGPT artificial intelligence to help you communicate with your connected home.",
+      "aFewExamples": "A few examples of things you can ask: ",
       "turnOnTheLight": "Turn on the light in the kitchen",
       "sizeOfEiffelTower": "What's the size of the Eiffel Tower ?",
-      "whoIsJulesVerne": "Who is Jules Verne ?",
       "eggDuration": "How do you make hard boiled eggs ?",
+      "showMeTheCameraInTheKitchen": "Show me the camera in the kitchen",
       "activateOpenAiChat": "Activate ChatGPT in Gladys chat",
       "rateLimit": "As ChatGPT API is not free, this integration is limited to 1000 requests per month.",
       "notOnGladysPlus": "As ChatGPT API is not free, this integration is only available to Gladys Plus users.",
@@ -1517,7 +1529,7 @@
       "description": "Manage you SunSpec device through you local network.",
       "deviceTab": "Devices",
       "discoverTab": "Discover",
-      "setupTab": "Setup",
+      "settingsTab": "Settings",
       "device": {
         "title": "SunSpec Devices",
         "search": "Search devices",
@@ -1537,12 +1549,17 @@
         "updateButton": "Update",
         "discoveringError": "An error occurred, check scanner configuration, or check logs."
       },
-      "setup": {
+      "settings": {
         "title": "SunSpec settings",
         "errorLabel": "An error occurred while loading configuration.",
         "noConfigLabel": "Configuration not loaded, please retry.",
         "sunspecUrl": "SunSpec URL",
         "sunspecUrlPlaceholder": "Ex: [sunspec-address]:[port]",
+        "bdpvActiveLabel": "Activate BDPV Synchronisation",
+        "userLabel": "Nom d'utilisateur",
+        "userPlaceholder": "Entrez le nom d'utilisateur BDPV",
+        "apiKeyLabel": "Clé API",
+        "apiKeyPlaceholder": "Entrez la clé API",
         "fronius": {
           "description": "Activate Modbus TCP on Fronius inverters",
           "documentation": "Fronius Documentation"
@@ -2470,7 +2487,10 @@
           "28": "Cube flip 180°",
           "29": "Cube flip 90°",
           "30": "Cube rotate left",
-          "31": "Cube rotate right"
+          "31": "Cube rotate right",
+          "32": "Vibration",
+          "33": "Tilt",
+          "34": "Drop"
         }
       },
       "opening-sensor": {
@@ -2627,6 +2647,9 @@
       "acceleration-x": "Acceleration X",
       "acceleration-y": "Acceleration Y",
       "acceleration-z": "Acceleration Z",
+      "angle-x": "Angle X",
+      "angle-y": "Angle Y",
+      "angle-z": "Angle Z",
       "bed-activity": "Bed Activity"
     },
     "signal": {

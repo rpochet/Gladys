@@ -35,6 +35,9 @@ const BUTTON_STATUS = {
   FLIP_90: 29,
   ROTATE_LEFT: 30,
   ROTATE_RIGHT: 31,
+  VIBRATION: 32,
+  TILT: 33,
+  DROP: 34,
 };
 
 const COVER_STATE = {
@@ -460,6 +463,9 @@ const DEVICE_FEATURE_TYPES = {
     ACCELERATION_X: 'acceleration-x',
     ACCELERATION_Y: 'acceleration-y',
     ACCELERATION_Z: 'acceleration-z',
+    ANGLE_X: 'angle-x',
+    ANGLE_Y: 'angle-y',
+    ANGLE_Z: 'angle-z',
     BED_ACTIVITY: 'bed-activity',
   },
   BUTTON: {
@@ -959,6 +965,7 @@ const WEBSOCKET_MESSAGE_TYPES = {
     CONNECTED: 'sunspec.connected',
     STATUS_CHANGE: 'sunspec.status-change',
   },
+<<<<<<< HEAD
   OVERKIZ: {
     CONNECTED: 'overkiz.connected',
     NEW_DEVICE: 'overkiz.new-device',
@@ -972,6 +979,11 @@ const WEBSOCKET_MESSAGE_TYPES = {
   UPS: {
     CONNECTED: 'ups.connected',
     ERROR: 'ups.error',
+=======
+  TUYA: {
+    STATUS: 'tuya.status',
+    DISCOVER: 'tuya.discover',
+>>>>>>> sunspec
   },
 };
 
@@ -990,7 +1002,11 @@ const DASHBOARD_BOX_TYPE = {
   CHART: 'chart',
   ECOWATT: 'ecowatt',
   CLOCK: 'clock',
+<<<<<<< HEAD
   UPS: 'ups',
+=======
+  SCENE: 'scene',
+>>>>>>> sunspec
 };
 
 const ERROR_MESSAGES = {
