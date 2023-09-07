@@ -25,6 +25,7 @@ const System = require('./system');
 const Variable = require('./variable');
 const services = require('../services');
 const Weather = require('./weather');
+const GraphManager = require('./graph');
 
 /**
  * @description Start a new Gladys instance.
@@ -56,6 +57,7 @@ function Gladys(params = {}) {
   const area = new Area(event);
   const dashboard = new Dashboard();
   const stateManager = new StateManager(event);
+  const graphManager = new GraphManager(variable);
   const system = new System(db.sequelize, event, config, job);
   const http = new Http(system);
   const house = new House(event, stateManager);
@@ -65,7 +67,7 @@ function Gladys(params = {}) {
   const session = new Session(params.jwtSecret, cache);
   const user = new User(session, stateManager, variable);
   const location = new Location(user, event);
-  const device = new Device(event, message, stateManager, service, room, variable, job);
+  const device = new Device(event, message, stateManager, service, room, variable, job, graphManager);
   const calendar = new Calendar(service);
   const scheduler = new Scheduler(event);
   const weather = new Weather(service, event, message, house);
@@ -122,6 +124,7 @@ function Gladys(params = {}) {
     system,
     variable,
     weather,
+    graphManager,
     start: async () => {
       // set wal mode
       await db.sequelize.query('PRAGMA journal_mode=WAL;');

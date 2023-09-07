@@ -41,6 +41,7 @@ const DeviceManager = function DeviceManager(
   roomManager,
   variable,
   job,
+  graphManager,
 ) {
   this.eventManager = eventManager;
   this.messageManager = messageManager;
@@ -49,6 +50,7 @@ const DeviceManager = function DeviceManager(
   this.roomManager = roomManager;
   this.variable = variable;
   this.job = job;
+  this.graphManager = graphManager;
 
   this.STATES_TO_PURGE_PER_DEVICE_FEATURE_CLEAN_BATCH = 1000;
   this.WAIT_TIME_BETWEEN_DEVICE_FEATURE_CLEAN_BATCH = 100;

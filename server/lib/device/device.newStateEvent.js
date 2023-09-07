@@ -22,8 +22,10 @@ async function newStateEvent(event) {
       await this.saveStringState(device, deviceFeature, event.text);
     } else if (event.created_at) {
       await this.saveHistoricalState(deviceFeature, event.state, event.created_at);
+      await this.graphManager.saveHistoricalState(deviceFeature, event.state, event.created_at);
     } else {
       await this.saveState(deviceFeature, event.state);
+      await this.graphManager.saveState(deviceFeature, event.state);
     }
   } catch (e) {
     logger.debug(e);
