@@ -35,13 +35,10 @@ const Box = ({ children, ...props }) => {
       return <EditEcowatt {...props} />;
     case 'clock':
       return <EditClock {...props} />;
-<<<<<<< HEAD
     case 'ups':
       return <EditUpsBox {...props} />;
-=======
     case 'scene':
       return <EditSceneBox {...props} />;
->>>>>>> sunspec
     default:
       return <SelectBoxType {...props} />;
   }

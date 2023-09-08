@@ -227,11 +227,8 @@
       "chart": "Chart",
       "ecowatt": "Ecowatt (France)",
       "clock": "Clock",
-<<<<<<< HEAD
-      "ups": "UPS Inverter"
-=======
+      "ups": "UPS Inverter",
       "scene": "Scene"
->>>>>>> sunspec
     },
     "boxes": {
       "column": "Column {{index}}",
@@ -349,17 +346,15 @@
         "yes": "Yes",
         "no": "No"
       },
-<<<<<<< HEAD
       "ups": {
         "status": "Status",
         "batteryVoltage": "Battery voltage",
         "unknownError": "We are unable to get UPS data"
-=======
+      },
       "scene": {
         "editNameLabel": "Enter the name of this box",
         "editNamePlaceholder": "Name displayed on the dashboard",
         "editSceneLabel": "Select the scene you want to display here."
->>>>>>> sunspec
       }
     }
   },
@@ -1523,7 +1518,6 @@
         "defaultDeletionError": "There was an error deleting the device.",
         "conflictError": "Current device is already in Gladys."
       }
-<<<<<<< HEAD
     },
     "sunspec": {
       "title": "SunSpec",
@@ -1580,8 +1574,6 @@
         "deleteButtonTooltip": "Delete",
         "maskFormatError": "Invalid CIDR format"
       }
-=======
->>>>>>> overkiz
     }
   },
   "editScene": {

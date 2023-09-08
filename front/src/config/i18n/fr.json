@@ -235,11 +235,8 @@
       "chart": "Graphique",
       "ecowatt": "Ecowatt ( France )",
       "clock": "Horloge",
-<<<<<<< HEAD
-      "ups": "Onduleur ASI"
-=======
+      "ups": "Onduleur ASI",
       "scene": "Scène"
->>>>>>> sunspec
     },
     "boxes": {
       "column": "Colonne {{index}}",
@@ -357,17 +354,15 @@
         "yes": "Oui",
         "no": "Non"
       },
-<<<<<<< HEAD
       "ups": {
         "status": "Statut",
         "batteryVoltage": "Tension de la batterie",
         "unknownError": "Une erreur est survenue lors du rafraichissement des UPS"
-=======
+      },
       "scene": {
         "editNameLabel": "Entrez le nom de cette box",
         "editNamePlaceholder": "Nom affiché sur le tableau de bord",
         "editSceneLabel": "Sélectionnez la scène que vous souhaitez afficher ici."
->>>>>>> sunspec
       }
     }
   },

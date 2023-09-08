@@ -65,36 +65,21 @@
     "img": "/assets/integrations/cover/lan-manager.jpg"
   },
   {
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
->>>>>>> overkiz
     "key": "overkiz",
     "img": "/assets/integrations/cover/overkiz.jpg"
   },
   {
-<<<<<<< HEAD
-=======
->>>>>>> sunspec
     "key": "sunspec",
     "img": "/assets/integrations/cover/sunspec.png"
-  },
-  {
-    "key": "tuya",
-    "link": "tuya",
-    "img": "/assets/integrations/cover/tuya.jpg"
-<<<<<<< HEAD
   },
   {
     "key": "ups",
     "link": "ups",
     "img": "/assets/integrations/cover/ups.jpg"
-=======
->>>>>>> sunspec
-=======
+  },
+  {
     "key": "tuya",
     "link": "tuya",
     "img": "/assets/integrations/cover/tuya.jpg"
->>>>>>> overkiz
   }
 ]

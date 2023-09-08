@@ -965,14 +965,10 @@ const WEBSOCKET_MESSAGE_TYPES = {
     LEARN_MODE: 'broadlink.learn',
     SEND_MODE: 'broadlink.send',
   },
-<<<<<<< HEAD
   SUNSPEC: {
     CONNECTED: 'sunspec.connected',
     STATUS_CHANGE: 'sunspec.status-change',
   },
-<<<<<<< HEAD
-=======
->>>>>>> overkiz
   OVERKIZ: {
     CONNECTED: 'overkiz.connected',
     NEW_DEVICE: 'overkiz.new-device',
@@ -982,18 +978,14 @@ const WEBSOCKET_MESSAGE_TYPES = {
   TUYA: {
     STATUS: 'tuya.status',
     DISCOVER: 'tuya.discover',
-<<<<<<< HEAD
   },
   UPS: {
     CONNECTED: 'ups.connected',
     ERROR: 'ups.error',
-=======
+  },
   TUYA: {
     STATUS: 'tuya.status',
     DISCOVER: 'tuya.discover',
->>>>>>> sunspec
-=======
->>>>>>> overkiz
   },
 };
 
@@ -1012,11 +1004,8 @@ const DASHBOARD_BOX_TYPE = {
   CHART: 'chart',
   ECOWATT: 'ecowatt',
   CLOCK: 'clock',
-<<<<<<< HEAD
   UPS: 'ups',
-=======
   SCENE: 'scene',
->>>>>>> sunspec
 };
 
 const ERROR_MESSAGES = {
