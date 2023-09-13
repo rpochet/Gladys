@@ -987,10 +987,6 @@ const WEBSOCKET_MESSAGE_TYPES = {
     CONNECTED: 'ups.connected',
     ERROR: 'ups.error',
   },
-  TUYA: {
-    STATUS: 'tuya.status',
-    DISCOVER: 'tuya.discover',
-  },
 };
 
 const DASHBOARD_TYPE = {
