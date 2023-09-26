@@ -1,6 +1,5 @@
-const { CONFIGURATION, DEFAULT } = require('./sunspec.constants');
+const { DEFAULT } = require('./sunspec.constants');
 const { WEBSOCKET_MESSAGE_TYPES, EVENTS } = require('../../../utils/constants');
-const { ServiceNotConfiguredError } = require('../../../utils/coreErrors');
 const { ModbusClient } = require('./utils/sunspec.ModbusClient');
 const logger = require('../../../utils/logger');
 
@@ -12,24 +11,23 @@ const logger = require('../../../utils/logger');
 async function connect() {
   logger.debug(`SunSpec: Connecting...`);
 
-  const sunspecUrl = await this.gladys.variable.getValue(CONFIGURATION.SUNSPEC_DEVICE_URL, this.serviceId);
-  if (!sunspecUrl) {
-    throw new ServiceNotConfiguredError();
-  }
+  this.sunspecIps = await this.scan();
 
-  this.modbus = new ModbusClient(this.modbusClient);
-
-  const [sunspecHost, sunspecPort = DEFAULT.MODBUS_PORT] = sunspecUrl.split(':');
-  try {
-    await this.modbus.connect(sunspecHost, sunspecPort);
-  } catch (e) {
-    logger.error(e);
-    return;
-  }
+  const promises = [...this.sunspecIps].map(async (ip) => {
+    const modbus = new ModbusClient(this.modbusClient);
+    try {
+      await modbus.connect(ip, DEFAULT.MODBUS_PORT);
+      return modbus;
+    } catch (e) {
+      logger.error(e);
+    }
+    return null;
+  });
+  this.modbuses = await Promise.all(promises);
 
   this.connected = true;
 
-  this.gladys.event.emit(EVENTS.WEBSOCKET.SEND_ALL, {
+  this.eventManager.emit(EVENTS.WEBSOCKET.SEND_ALL, {
     type: WEBSOCKET_MESSAGE_TYPES.SUNSPEC.CONNECTED,
   });
 

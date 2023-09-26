@@ -3,29 +3,29 @@ const proxyquire = require('proxyquire');
 const sinon = require('sinon');
 const { PROPERTY } = require('../../../../../services/sunspec/lib/sunspec.constants');
 
-const { fake, assert } = sinon;
+const { fake, assert, stub } = sinon;
 
 describe('SunSpec BDPV', () => {
   let gladys;
   let sunspecManager;
   let MockedClient;
   let MockedCron;
-  let BdpvInit;
+  let Bdpv;
 
   beforeEach(() => {
+    const feature = {
+      property: PROPERTY.ACWH,
+      last_value: 1234,
+    };
     gladys = {
       event: {
         emit: fake.resolves(null),
       },
       stateManager: {
-        get: fake.returns({
-          property: PROPERTY.DCWH,
-          last_value: 1234,
-        }),
+        get: fake.returns(feature),
       },
       variable: {
-        getValue: sinon
-          .stub()
+        getValue: stub()
           .onFirstCall()
           .returns('SUNSPEC_BDPV_USER_NAME')
           .onSecondCall()
@@ -38,12 +38,7 @@ describe('SunSpec BDPV', () => {
       getDevices: () => {
         return [
           {
-            features: [
-              {
-                property: PROPERTY.DCWH,
-                last_Value: 1234,
-              },
-            ],
+            features: [feature],
           },
         ];
       },
@@ -66,10 +61,10 @@ describe('SunSpec BDPV', () => {
       },
     };
 
-    BdpvInit = proxyquire('../../../../../services/sunspec/lib/bdpv/sunspec.bdpv', {
+    Bdpv = proxyquire('../../../../../services/sunspec/lib/bdpv/sunspec.bdpv', {
       axios: MockedClient,
       'node-cron': MockedCron,
-    }).bdpvInit;
+    });
   });
 
   afterEach(() => {
@@ -77,7 +72,7 @@ describe('SunSpec BDPV', () => {
   });
 
   it('should bdpvInit active', async () => {
-    await BdpvInit.call(sunspecManager, true);
+    await Bdpv.bdpvInit.call(sunspecManager, true);
     sunspecManager.bdpvTask.run.call(sunspecManager);
     assert.calledTwice(gladys.variable.getValue);
     assert.calledOnce(MockedClient.create);
@@ -88,12 +83,29 @@ describe('SunSpec BDPV', () => {
   });
 
   it('should bdpvInit not active', async () => {
-    await BdpvInit.call(sunspecManager, false);
-    assert.calledTwice(gladys.variable.getValue);
-    assert.calledOnce(MockedClient.create);
-    // eslint-disable-next-line no-unused-expressions
-    expect(sunspecManager.bdpvTask).to.be.not.null;
-    assert.notCalled(sunspecManager.bdpvTask.start);
+    await Bdpv.bdpvInit.call(sunspecManager, false);
+  });
+
+  it('should bdpvInit disactivated', async () => {
+    sunspecManager.bdpvTask = {
+      stop: fake.returns(null),
+    };
+    await Bdpv.bdpvInit.call(sunspecManager, false);
     assert.calledOnce(sunspecManager.bdpvTask.stop);
+  });
+
+  it('should bdpvPush', async () => {
+    sunspecManager.bdpvParams = {};
+    sunspecManager.bdpvClient = {
+      get: fake.returns({
+        status: true,
+      }),
+    };
+    await Bdpv.bdpvPush.call(sunspecManager);
+    assert.calledOnceWithExactly(sunspecManager.bdpvClient.get, 'expeditionProd_v3.php', {
+      params: {
+        index: 1234000,
+      },
+    });
   });
 });

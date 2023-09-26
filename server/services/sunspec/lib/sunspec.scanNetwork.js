@@ -11,39 +11,44 @@ const { ModelFactory } = require('./utils/sunspec.ModelFactory');
 async function scanNetwork() {
   logger.debug(`SunSpec: Scanning network...`);
 
-  const { manufacturer, product, swVersion, serialNumber } = ModelFactory.createModel(
-    await this.modbus.readModel(MODEL.COMMON),
-  );
-  logger.info(
-    `SunSpec: Found device ${manufacturer} ${product} with serial number ${serialNumber} and software version ${swVersion}`,
-  );
-
-  // SMA = N <> Fronius = N - 2
-  const nbOfMPPT = (await this.modbus.readRegisterAsInt16(REGISTER.NB_OF_MPTT)) - (manufacturer === 'Fronius' ? 2 : 0);
-
   this.devices = [];
 
-  // AC device
-  this.devices.push({
-    manufacturer,
-    product,
-    serialNumber,
-    swVersion,
-    valueModel: this.modbus.getValueModel(),
-  });
+  const promises = this.modbuses.map(async (modbus) => {
+    const { manufacturer, product, swVersion, serialNumber } = ModelFactory.createModel(
+      await modbus.readModel(MODEL.COMMON),
+    );
+    logger.info(
+      `SunSpec: Found device ${manufacturer} ${product} with serial number ${serialNumber} and software version ${swVersion}`,
+    );
 
-  // One par DC (MPPT) device
-  for (let i = 0; i < nbOfMPPT; i += 1) {
+    // SMA = N <> Fronius = N - 2
+    const nbOfMPPT = (await modbus.readRegisterAsInt16(REGISTER.NB_OF_MPPT)) - (manufacturer === 'Fronius' ? 2 : 0);
+
+    // AC device
     this.devices.push({
       manufacturer,
       product,
       serialNumber,
       swVersion,
-      mppt: i + 1,
+      valueModel: modbus.getValueModel(),
+      modbus,
     });
-  }
 
-  this.gladys.event.emit(EVENTS.WEBSOCKET.SEND_ALL, {
+    // One par DC (MPPT) device
+    for (let i = 0; i < nbOfMPPT; i += 1) {
+      this.devices.push({
+        manufacturer,
+        product,
+        serialNumber,
+        swVersion,
+        mppt: i + 1,
+        modbus,
+      });
+    }
+  });
+  await Promise.all(promises);
+
+  this.eventManager.emit(EVENTS.WEBSOCKET.SEND_ALL, {
     type: WEBSOCKET_MESSAGE_TYPES.SUNSPEC.STATUS_CHANGE,
   });
 }

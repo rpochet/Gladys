@@ -4,7 +4,7 @@ const { expect } = require('chai');
 const proxyquire = require('proxyquire');
 const { EVENTS, WEBSOCKET_MESSAGE_TYPES } = require('../../../../utils/constants');
 
-const { fake, assert } = sinon;
+const { fake, assert, stub } = sinon;
 
 const ScanNetwork = proxyquire('../../../../services/sunspec/lib/sunspec.scanNetwork', {
   './utils/sunspec.ModelFactory': {},
@@ -13,6 +13,7 @@ const ScanNetwork = proxyquire('../../../../services/sunspec/lib/sunspec.scanNet
 describe('SunSpec scanNetwork', () => {
   // PREPARE
   let gladys;
+  let modbus;
   let sunspecManager;
 
   beforeEach(() => {
@@ -22,42 +23,32 @@ describe('SunSpec scanNetwork', () => {
       },
     };
 
+    modbus = {
+      readModel: stub()
+        .onFirstCall()
+        .returns({
+          readUInt16BE: stub()
+            .onFirstCall()
+            .returns(1),
+          subarray: stub()
+            .onFirstCall()
+            .returns('manufacturer')
+            .onSecondCall()
+            .returns('product')
+            .onThirdCall()
+            .returns('options')
+            .onCall(3)
+            .returns('swVersion')
+            .onCall(4)
+            .returns('serialNumber'),
+        }),
+      readRegisterAsInt16: fake.returns(1),
+      getValueModel: fake.returns(201),
+    };
+
     sunspecManager = {
-      gladys,
-      modbus: {
-        readModel: sinon
-          .stub()
-          .onFirstCall()
-          .returns({
-            readUInt16BE: sinon
-              .stub()
-              .onFirstCall()
-              .returns(1),
-            subarray: sinon
-              .stub()
-              .onFirstCall()
-              .returns('manufacturer')
-              .onSecondCall()
-              .returns('product')
-              .onThirdCall()
-              .returns('options')
-              .onCall(3)
-              .returns('swVersion')
-              .onCall(4)
-              .returns('serialNumber'),
-          }),
-        readRegisterAsInt16: fake.returns(1),
-        getValueModel: fake.returns(201),
-      },
-      devices: [
-        {
-          manufacturer: 'manufacturer',
-          product: 'product',
-          serialNumber: 'serialNumber',
-          swVersion: 'swVersion',
-          mppt: 1,
-        },
-      ],
+      eventManager: gladys.event,
+      modbuses: [modbus],
     };
   });
 
@@ -69,6 +60,7 @@ describe('SunSpec scanNetwork', () => {
     await ScanNetwork.call(sunspecManager);
     expect(sunspecManager.devices.length).eql(2);
     expect(sunspecManager.devices[0]).to.deep.eq({
+      modbus,
       manufacturer: 'manufacturer',
       product: 'product',
       serialNumber: 'serialNumber',
@@ -76,6 +68,7 @@ describe('SunSpec scanNetwork', () => {
       valueModel: 201,
     });
     expect(sunspecManager.devices[1]).to.deep.eq({
+      modbus,
       manufacturer: 'manufacturer',
       product: 'product',
       serialNumber: 'serialNumber',

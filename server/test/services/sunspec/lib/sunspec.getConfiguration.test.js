@@ -1,6 +1,8 @@
 const { expect } = require('chai');
 const sinon = require('sinon');
 
+const { stub } = sinon;
+
 const SunSpecManager = require('../../../../services/sunspec/lib');
 const ModbusTCPMock = require('./utils/ModbusTCPMock.test');
 
@@ -16,25 +18,27 @@ describe('SunSpec getConfiguration', () => {
       variable: {},
     };
 
-    sunSpecManager = new SunSpecManager(gladys, ModbusTCPMock, SERVICE_ID);
+    sunSpecManager = new SunSpecManager(gladys, ModbusTCPMock, null, SERVICE_ID);
+    sunSpecManager.ipMasks = [
+      {
+        ip: '192.168.1.0/24',
+      },
+    ];
   });
 
   it('get config from service', async () => {
-    gladys.variable.getValue = sinon
-      .stub()
+    gladys.variable.getValue = stub()
       .onFirstCall()
-      .returns('sunspecUrl')
-      .onSecondCall()
       .returns('0')
-      .onThirdCall()
+      .onSecondCall()
       .returns('bdpvUsername')
-      .onCall(3)
+      .onThirdCall()
       .returns('bdpvApiKey');
 
     const configuration = await sunSpecManager.getConfiguration();
 
     expect(configuration).deep.eq({
-      sunspecUrl: 'sunspecUrl',
+      ipMasks: sunSpecManager.ipMasks,
       bdpvActive: false,
       bdpvUsername: 'bdpvUsername',
       bdpvApiKey: 'bdpvApiKey',

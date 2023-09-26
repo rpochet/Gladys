@@ -18,22 +18,26 @@ describe('SunSpec getStatus', () => {
   beforeEach(() => {
     gladys = {};
 
-    sunSpecManager = new SunSpecManager(gladys, ModbusTCPMock, SERVICE_ID);
+    sunSpecManager = new SunSpecManager(gladys, ModbusTCPMock, null, SERVICE_ID);
   });
 
   it('should connected', async () => {
     sunSpecManager.connected = true;
+    sunSpecManager.sunspecIps = ['192.168.1.xx'];
     const status = await sunSpecManager.getStatus();
     expect(status).to.deep.equals({
       connected: true,
+      sunspecIps: ['192.168.1.xx'],
     });
   });
 
   it('should not connected', async () => {
     sunSpecManager.connected = false;
+    sunSpecManager.sunspecIps = ['192.168.1.xx'];
     const status = await sunSpecManager.getStatus();
     expect(status).to.deep.equals({
       connected: false,
+      sunspecIps: ['192.168.1.xx'],
     });
   });
 });

@@ -973,6 +973,7 @@ const WEBSOCKET_MESSAGE_TYPES = {
   SUNSPEC: {
     CONNECTED: 'sunspec.connected',
     STATUS_CHANGE: 'sunspec.status-change',
+    SCANNING: 'sunspec.scanning',
   },
   OVERKIZ: {
     CONNECTED: 'overkiz.connected',
