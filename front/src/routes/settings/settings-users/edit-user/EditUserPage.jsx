@@ -1,6 +1,7 @@
 import { Text } from 'preact-i18n';
 import { Link } from 'preact-router/match';
 import ResetPassword from './ResetPassword';
+import PresenceSettings from './PresenceSettings';
 import Profile from '../../../../components/user/profile';
 
 const UserPage = ({ children, ...props }) => (
@@ -46,6 +47,15 @@ const UserPage = ({ children, ...props }) => (
           </h3>
         </div>
         <div class="card-body">{props.newUser && <ResetPassword userSelector={props.newUser.selector} />}</div>
+      </div>
+      <div class="card">
+        <div class="card-header">
+          <h3 class="card-title">
+            {' '}
+            <Text id="usersSettings.editUser.presenceSettings" />
+          </h3>
+        </div>
+        <div class="card-body">{props.newUser && <PresenceSettings userSelector={props.newUser.selector} />}</div>
       </div>
     </div>
   </div>

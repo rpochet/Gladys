@@ -1750,7 +1750,8 @@
       "resetPassword": "Réinitialiser le mot de passe",
       "editPreferences": "Editer les préférences",
       "resetPasswordButton": "Réinitialiser",
-      "success": "Profil enregistré avec succès !"
+      "success": "Profil enregistré avec succès !",
+      "presenceSettings": "Presence settings"
     }
   },
   "sessionsSettings": {

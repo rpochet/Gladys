@@ -1,5 +1,6 @@
 const fs = require('fs');
 const path = require('path');
+const Joi = require('joi');
 const passwordUtils = require('../utils/password');
 const { addSelector } = require('../utils/addSelector');
 const { AVAILABLE_LANGUAGES_LIST, USER_ROLE_LIST } = require('../utils/constants');
@@ -8,6 +9,13 @@ const MAX_SIZE_PROFILE_PICTURE = 80 * 1024; // 80 ko
 const DEFAULT_PROFILE_PICTURE = fs.readFileSync(
   path.resolve(__dirname, '../config/default-profile-picture.b64'),
   'utf8',
+);
+
+const deviceFeaturesSchema = Joi.array().items(
+  Joi.object().keys({
+    device_features: Joi.string(),
+    house: Joi.string(),
+  }),
 );
 
 module.exports = (sequelize, DataTypes) => {
@@ -118,6 +126,18 @@ module.exports = (sequelize, DataTypes) => {
       last_house_changed: {
         allowNull: true,
         type: DataTypes.DATE,
+      },
+      presence_device_features: {
+        allowNull: true,
+        type: DataTypes.JSON,
+        validate: {
+          isEven(value) {
+            const result = deviceFeaturesSchema.validate(value);
+            if (result.error) {
+              throw new Error(result.error.details[0].message);
+            }
+          },
+        },
       },
     },
     {},

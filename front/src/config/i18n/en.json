@@ -1748,7 +1748,8 @@
       "resetPassword": "Reset password",
       "editPreferences": "Edit preferences",
       "resetPasswordButton": "Reset password",
-      "success": "User saved with success !"
+      "success": "User saved with success !",
+      "presenceSettings": "Presence settings"
     }
   },
   "sessionsSettings": {
