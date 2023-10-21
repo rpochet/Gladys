@@ -55,7 +55,7 @@ const UserPage = ({ children, ...props }) => (
             <Text id="usersSettings.editUser.presenceSettings" />
           </h3>
         </div>
-        <div class="card-body">{props.newUser && <PresenceSettings userSelector={props.newUser.selector} />}</div>
+        <div class="card-body">{props.newUser && <PresenceSettings {...props} />}</div>
       </div>
     </div>
   </div>

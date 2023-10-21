@@ -1,9 +1,11 @@
 import { Component } from 'preact';
 import { connect } from 'unistore/preact';
 import Select from 'react-select';
+import get from 'get-value';
 import { Text, Localizer } from 'preact-i18n';
 import update from 'immutability-helper';
-import { DEVICE_FEATURE_CATEGORIES, DEVICE_FEATURE_TYPES } from '../../../../../../server/utils/constants';
+import { DEVICE_FEATURE_CATEGORIES } from '../../../../../../server/utils/constants';
+import { RequestStatus } from '../../../../utils/consts';
 
 class PresenceSettings extends Component {
   getOptions = async () => {
@@ -29,33 +31,28 @@ class PresenceSettings extends Component {
         }
       });
       await this.setState({ houseOptions, devicesOptions });
-      this.refreshSelectedOptions(this.props);
     } catch (e) {
       console.error(e);
     }
   };
   handleHouseChange = selectedOption => {
-    const newValue = {};
     if (selectedOption && selectedOption.value) {
-      newValue[selectedOption.value] = [];
-    }
-    this.setState(prevState => {
-      const newDevicesState = update(prevState.devices, {
-        $push: [
-          {
-            house: selectedOption.value,
-            device_features: []
+      const houseOption = this.state.houseOptions.find(option => option.value === selectedOption.value);
+      this.setState(prevState => {
+        const newState = update(prevState, {
+          devices: {
+            $merge: {
+              house: selectedOption.value,
+              device_features: []
+            }
+          },
+          selectedHouse: {
+            $set: houseOption
           }
-        ]
+        });
+        return newState;
       });
-
-      const newState = update(prevState, {
-        devices: {
-          $set: newDevicesState
-        }
-      });
-      return newState;
-    });
+    }
   };
   handleDeviceChange = selectedOptions => {
     let newValue;
@@ -66,10 +63,11 @@ class PresenceSettings extends Component {
       newValue = [];
     }
     this.setState(prevState => {
-      const newState = update(prevState.devices, {
-        [this.props.houseIndex]: {
-          device_features: {
-            $set: newValue
+      const newState = update(prevState, {
+        devices: {
+          $merge: {
+            house: prevState.selectedHouse.value,
+            device_features: newValue
           }
         }
       });
@@ -87,33 +85,42 @@ class PresenceSettings extends Component {
       return newState;
     });
   };
-  refreshSelectedOptions = nextProps => {
-    let selectedHouse = '';
-    let selectedDevices = [];
-    if (nextProps.house && this.state.house) {
-      const houseOption = this.state.house.find(option => option.value === nextProps.house);
-      if (houseOption) {
-        selectedHouse = houseOption;
-      }
-      this.props.houseIndex = 0;
-    }
-    if (nextProps.device_features && this.state.devices) {
-      const devices = [];
-      nextProps.device_features.forEach(deviceFeature => {
-        const featureOption = this.state.devices.find(option => option.value === deviceFeature);
-        if (featureOption) {
-          devices.push(featureOption);
+  updateUser = async () => {
+    const data = update(this.props.newUser, {
+      presence_device_features: {
+        $merge: {
+          devices: this.state.devices,
+          minutes: this.state.minutes
         }
+      }
+    });
+    this.context.store.setState({
+      UserPatchStatus: RequestStatus.Getting
+    });
+    try {
+      await this.props.httpClient.patch(`/api/v1/user/${data.selector}`, data);
+      this.context.store.setState({
+        UserPatchStatus: RequestStatus.Success
       });
-      selectedDevices = devices;
+    } catch (e) {
+      console.error(e);
+      const status = get(e, 'response.status');
+      if (status === 409) {
+        this.context.store.setState({
+          UserPatchError: e.response.data,
+          UserPatchStatus: RequestStatus.ConflictError
+        });
+      } else {
+        this.context.store.setState({
+          UserPatchStatus: RequestStatus.Error
+        });
+      }
     }
-    this.setState({ selectedHouse, selectedDevices });
   };
   constructor(props) {
     super(props);
-    this.props = props;
     this.state = {
-      devices: [],
+      devices: {},
       minutes: null
     };
   }
@@ -126,9 +133,6 @@ class PresenceSettings extends Component {
       });
     }
     this.getOptions();
-  }
-  componentWillReceiveProps(nextProps) {
-    this.refreshSelectedOptions(nextProps);
   }
   render(props, { houseOptions, selectedHouse, devicesOptions, selectedDevices }) {
     return (
@@ -179,6 +183,11 @@ class PresenceSettings extends Component {
               </span>
             </div>
           </div>
+        </div>
+        <div class="form-group">
+          <button onClick={this.updateUser} class="btn btn-success">
+            <Text id="profile.saveButton" />
+          </button>
         </div>
       </div>
     );
