@@ -25,6 +25,7 @@ const System = require('./system');
 const Variable = require('./variable');
 const services = require('../services');
 const Weather = require('./weather');
+const { EVENTS } = require('../utils/constants');
 
 /**
  * @description Start a new Gladys instance.
@@ -56,13 +57,13 @@ function Gladys(params = {}) {
   const area = new Area(event);
   const dashboard = new Dashboard();
   const stateManager = new StateManager(event);
+  const session = new Session(params.jwtSecret, cache);
   const system = new System(db.sequelize, event, config, job);
   const http = new Http(system);
-  const house = new House(event, stateManager);
+  const house = new House(event, stateManager, session);
   const room = new Room(brain);
   const service = new Service(services, stateManager);
   const message = new MessageHandler(event, brain, service, stateManager, variable);
-  const session = new Session(params.jwtSecret, cache);
   const user = new User(session, stateManager, variable);
   const location = new Location(user, event);
   const device = new Device(event, message, stateManager, service, room, variable, job);
@@ -163,6 +164,10 @@ function Gladys(params = {}) {
         scheduler.init();
       }
       gateway.init();
+
+      event.emit(EVENTS.TRIGGERS.CHECK, {
+        type: EVENTS.SYSTEM.START,
+      });
     },
   };
 

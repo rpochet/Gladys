@@ -10,6 +10,9 @@ const StateManager = require('../../../lib/state');
 
 const event = new EventEmitter();
 
+// We are slowly moving this file to
+// the "triggers" folder to have smaller test files
+
 describe('scene.checkTrigger', () => {
   let sceneManager;
 
@@ -439,6 +442,39 @@ describe('scene.checkTrigger', () => {
       type: EVENTS.AREA.USER_LEFT,
       area: 'area-1',
       user: 'tony',
+    });
+    return new Promise((resolve, reject) => {
+      sceneManager.queue.start(() => {
+        try {
+          assert.calledOnce(device.setValue);
+          resolve();
+        } catch (e) {
+          reject(e);
+        }
+      });
+    });
+  });
+
+  it('should execute scene with system start trigger', async () => {
+    sceneManager.addScene({
+      selector: 'my-scene',
+      active: true,
+      actions: [
+        [
+          {
+            type: ACTIONS.LIGHT.TURN_OFF,
+            devices: ['light-1'],
+          },
+        ],
+      ],
+      triggers: [
+        {
+          type: EVENTS.SYSTEM.START,
+        },
+      ],
+    });
+    sceneManager.checkTrigger({
+      type: EVENTS.SYSTEM.START,
     });
     return new Promise((resolve, reject) => {
       sceneManager.queue.start(() => {
