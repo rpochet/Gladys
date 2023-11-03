@@ -22,7 +22,7 @@ async function scanDevices() {
           ...device,
           property: name,
         });
-        if (this.stateManager.get('deviceFeatureByExternalId', externalId)) {
+        if (this.gladys.stateManager.get('deviceFeatureByExternalId', externalId)) {
           this.eventManager.emit(EVENTS.DEVICE.NEW_STATE, {
             device_feature_external_id: externalId,
             state: value,
@@ -42,7 +42,7 @@ async function scanDevices() {
         ...device,
         property: PROPERTY.DCA,
       });
-      if (this.stateManager.get('deviceFeatureByExternalId', externalId)) {
+      if (this.gladys.stateManager.get('deviceFeatureByExternalId', externalId)) {
         this.eventManager.emit(EVENTS.DEVICE.NEW_STATE, {
           device_feature_external_id: externalId,
           state: DCA,
@@ -52,7 +52,7 @@ async function scanDevices() {
         ...device,
         property: PROPERTY.DCV,
       });
-      if (this.stateManager.get('deviceFeatureByExternalId', externalId)) {
+      if (this.gladys.stateManager.get('deviceFeatureByExternalId', externalId)) {
         this.eventManager.emit(EVENTS.DEVICE.NEW_STATE, {
           device_feature_external_id: externalId,
           state: DCV,
@@ -62,7 +62,7 @@ async function scanDevices() {
         ...device,
         property: PROPERTY.DCW,
       });
-      if (this.stateManager.get('deviceFeatureByExternalId', externalId)) {
+      if (this.gladys.stateManager.get('deviceFeatureByExternalId', externalId)) {
         this.eventManager.emit(EVENTS.DEVICE.NEW_STATE, {
           device_feature_external_id: externalId,
           state: DCW,
@@ -72,7 +72,7 @@ async function scanDevices() {
         ...device,
         property: PROPERTY.DCWH,
       });
-      if (this.stateManager.get('deviceFeatureByExternalId', externalId)) {
+      if (this.gladys.stateManager.get('deviceFeatureByExternalId', externalId)) {
         this.eventManager.emit(EVENTS.DEVICE.NEW_STATE, {
           device_feature_external_id: externalId,
           state: DCWH,
