@@ -60,7 +60,6 @@ class Session {
       console.error('Error', e);
     };
     this.ws.onclose = e => {
-      console.error(e);
       this.websocketConnected = false;
       if (e.reason === ERROR_MESSAGES.INVALID_ACCESS_TOKEN) {
         delete this.user.access_token;
@@ -69,6 +68,8 @@ class Session {
         setTimeout(() => {
           this.connect();
         }, 1000);
+      } else if (e.code || e.reason) {
+        console.error(e);
       }
     };
   }
