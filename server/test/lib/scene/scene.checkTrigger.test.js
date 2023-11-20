@@ -26,6 +26,14 @@ describe('scene.checkTrigger', () => {
 
   const brain = {};
 
+  const service = {
+    getService: fake.returns({
+      device: {
+        subscribe: fake.returns(null),
+      },
+    }),
+  };
+
   beforeEach(() => {
     const house = {
       get: fake.resolves([]),
@@ -48,7 +56,7 @@ describe('scene.checkTrigger', () => {
     stateManager.setState('deviceById', 'light-1', device);
     stateManager.setState('deviceFeature', 'light-1-binary', deviceFeature);
 
-    sceneManager = new SceneManager(stateManager, event, device, {}, {}, house, {}, {}, {}, scheduler, brain);
+    sceneManager = new SceneManager(stateManager, event, device, {}, {}, house, {}, {}, {}, scheduler, brain, service);
   });
 
   afterEach(() => {
