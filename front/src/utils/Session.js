@@ -35,7 +35,7 @@ class Session {
   }
 
   connect() {
-    const websocketUrl = window.location.origin.replace('http', 'ws') + '/ws';
+    const websocketUrl = window.location.origin.replace('https', 'ws').replace('http', 'ws') + '/ws';
     if (this.ws && this.ws.close) {
       this.ws.close();
     }
