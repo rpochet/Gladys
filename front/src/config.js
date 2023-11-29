@@ -1,3 +1,5 @@
+console.log(process.env);
+
 const local = {
   gladysGatewayApiUrl: process.env.GLADYS_GATEWAY_API_URL || 'https://api.gladysgateway.com',
   localApiUrl: process.env.LOCAL_API_URL || 'http://localhost:1443',
